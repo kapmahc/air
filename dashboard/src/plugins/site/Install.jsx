@@ -1,7 +1,6 @@
 import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import { Form } from 'antd'
-import { FormattedMessage } from 'react-intl'
 import { push } from 'react-router-redux'
 import { connect } from 'react-redux'
 

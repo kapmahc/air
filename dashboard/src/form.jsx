@@ -1,6 +1,6 @@
 import React from 'react'
-import {FormattedMessage} from 'react-intl'
 import { Form, Button } from 'antd'
+import i18n from 'i18next'
 
 const FormItem = Form.Item
 
@@ -31,7 +31,7 @@ export const tailFormItemLayout = {
 export const Submit = () => (
   <FormItem {...tailFormItemLayout}>
     <Button type="primary" htmlType="submit" size="large">
-      <FormattedMessage id="buttons.submit"/>
+      {i18n.t('buttons.submit')}
     </Button>
   </FormItem>
 )

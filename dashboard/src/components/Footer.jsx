@@ -1,12 +1,12 @@
 import React from 'react'
 import { Layout } from 'antd'
-import {FormattedMessage} from 'react-intl'
+import i18n from 'i18next'
 
 const { Footer } = Layout
 
 const Widget = () => (
   <Footer style={{ textAlign: 'center' }}>
-    &copy;<FormattedMessage id="site.copyright"/>
+    &copy;{i18n.t('site.copyright')}
   </Footer>
 )
 

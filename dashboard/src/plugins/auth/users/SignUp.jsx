@@ -1,28 +1,34 @@
 import React, {Component} from 'react'
 import PropTypes from 'prop-types'
-import { FormattedMessage } from 'react-intl'
 import { push } from 'react-router-redux'
 import { connect } from 'react-redux'
-import { Form, Input, Tooltip, Icon, Cascader, Select, Row, Col, Checkbox, Button, AutoComplete } from 'antd'
+import { Form, Input, message} from 'antd'
+import i18n from 'i18next'
 
 import Layout from '../NonSignIn'
-import {Submit, formItemLayout, tailFormItemLayout} from '../../../form'
+import {Submit, formItemLayout} from '../../../form'
 import {post} from '../../../ajax'
 
 const FormItem = Form.Item
-const Option = Select.Option
-const AutoCompleteOption = AutoComplete.Option
 
 class WidgetF extends Component {
   state = {
-    confirmDirty: false,
-    autoCompleteResult: [],
+    confirmDirty: false
   };
   handleSubmit = (e) => {
     e.preventDefault();
+    const {push} = this.props
     this.props.form.validateFieldsAndScroll((err, values) => {
       if (!err) {
-        console.log('Received values of form: ', values);
+        var data = new URLSearchParams()
+        data.append('name',values.name)
+        data.append('email',values.email)
+        data.append('password',values.password)
+        data.append('passwordConfirmation', values.passwordConfirmation)
+        post('/users/sign-up', data).then((rst) => {
+          message.success(i18n.t('auth.messages.email-for-confirm'));
+          push('/users/sign-in')
+        }).catch(message.error)
       }
     });
   }
@@ -33,59 +39,46 @@ class WidgetF extends Component {
   checkPassword = (rule, value, callback) => {
     const form = this.props.form;
     if (value && value !== form.getFieldValue('password')) {
-      callback('Two passwords that you enter is inconsistent!');
+      callback(i18n.t('helpers.passwordConfirmation'));
     } else {
       callback();
     }
   }
-  checkConfirm = (rule, value, callback) => {
+  checkPasswordConfirmation = (rule, value, callback) => {
     const form = this.props.form;
     if (value && this.state.confirmDirty) {
-      form.validateFields(['confirm'], { force: true });
+      form.validateFields(['passwordConfirmation'], { force: true });
     }
     callback();
   }
 
-  handleWebsiteChange = (value) => {
-    let autoCompleteResult;
-    if (!value) {
-      autoCompleteResult = [];
-    } else {
-      autoCompleteResult = ['.com', '.org', '.net'].map(domain => `${value}${domain}`);
-    }
-    this.setState({ autoCompleteResult });
-  }
-
   render() {
     const { getFieldDecorator } = this.props.form;
-    const { autoCompleteResult } = this.state;
-
-
-    const prefixSelector = getFieldDecorator('prefix', {
-      initialValue: '86',
-    })(
-      <Select className="icp-selector">
-        <Option value="86">+86</Option>
-      </Select>
-    );
-
-    const websiteOptions = autoCompleteResult.map((website) => {
-      return <AutoCompleteOption key={website}>{website}</AutoCompleteOption>;
-    });
 
     return (
     <Layout title="auth.users.sign-up.title">
       <Form onSubmit={this.handleSubmit}>
         <FormItem
           {...formItemLayout}
-          label={<FormattedMessage id="attributes.email"/>}
+          label={i18n.t('attributes.fullName')}
+          hasFeedback
+        >
+          {getFieldDecorator('name', {
+            rules: [{ required: true, message: i18n.t('helpers.not-empty') }],
+          })(
+            <Input />
+          )}
+        </FormItem>
+        <FormItem
+          {...formItemLayout}
+          label={i18n.t('attributes.email')}
           hasFeedback
         >
           {getFieldDecorator('email', {
             rules: [{
-              type: 'email', message: 'The input is not valid E-mail!',
+              type: 'email', message: i18n.t('helpers.bad-email'),
             }, {
-              required: true, message: 'Please input your E-mail!',
+              required: true, message: i18n.t('helpers.not-empty'),
             }],
           })(
             <Input />
@@ -93,14 +86,14 @@ class WidgetF extends Component {
         </FormItem>
         <FormItem
           {...formItemLayout}
-          label="Password"
+          label={i18n.t('attributes.password')}
           hasFeedback
         >
           {getFieldDecorator('password', {
             rules: [{
-              required: true, message: 'Please input your password!',
+              required: true, message: i18n.t('helpers.not-empty'),
             }, {
-              validator: this.checkConfirm,
+              validator: this.checkPasswordConfirmation,
             }],
           })(
             <Input type="password" />
@@ -108,43 +101,17 @@ class WidgetF extends Component {
         </FormItem>
         <FormItem
           {...formItemLayout}
-          label="Confirm Password"
+          label={i18n.t('attributes.passwordConfirmation')}
           hasFeedback
         >
-          {getFieldDecorator('confirm', {
+          {getFieldDecorator('passwordConfirmation', {
             rules: [{
-              required: true, message: 'Please confirm your password!',
+              required: true, message: i18n.t('helpers.not-empty'),
             }, {
               validator: this.checkPassword,
             }],
           })(
             <Input type="password" onBlur={this.handleConfirmBlur} />
-          )}
-        </FormItem>
-        <FormItem
-          {...formItemLayout}
-          label={(
-            <span>
-              Nickname&nbsp;
-              <Tooltip title="What do you want other to call you?">
-                <Icon type="question-circle-o" />
-              </Tooltip>
-            </span>
-          )}
-          hasFeedback
-        >
-          {getFieldDecorator('nickname', {
-            rules: [{ required: true, message: 'Please input your nickname!', whitespace: true }],
-          })(
-            <Input />
-          )}
-        </FormItem>
-
-        <FormItem {...tailFormItemLayout} style={{ marginBottom: 8 }}>
-          {getFieldDecorator('agreement', {
-            valuePropName: 'checked',
-          })(
-            <Checkbox>I have read the <a href="">agreement</a></Checkbox>
           )}
         </FormItem>
         <Submit />
@@ -161,16 +128,7 @@ class WidgetF extends Component {
 //
 //   handleSubmit = e => {
 //     e.preventDefault()
-//     const {push} = this.props
-//     var data = new URLSearchParams()
-//     data.append('name',this.state.name)
-//     data.append('email',this.state.email)
-//     data.append('password',this.state.password)
-//     data.append('passwordConfirmation',this.state.passwordConfirmation)
-//     post('/users/sign-up', data).then((rst) => {
-//       alert(rst.message)
-//       push('/users/sign-in')
-//     }).catch(alert)
+
 //   }
 //   render() {
 //     const {name, email, password, passwordConfirmation} = this.state;

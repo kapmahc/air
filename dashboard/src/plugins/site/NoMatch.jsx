@@ -1,6 +1,5 @@
 import React from 'react'
 import {Grid, Card, Image} from 'semantic-ui-react'
-import {FormattedMessage} from 'react-intl'
 
 import fail from '../../images/fail.png'
 import Layout from '../../layouts/Application'

@@ -4,10 +4,15 @@ import { createStore, combineReducers, applyMiddleware } from 'redux'
 import { Provider } from 'react-redux'
 import createHistory from 'history/createBrowserHistory'
 import { ConnectedRouter, routerReducer, routerMiddleware } from 'react-router-redux'
-import { IntlProvider, addLocaleData } from 'react-intl'
+import moment from 'moment'
+import {LocaleProvider} from 'antd'
 
 import reducers from './reducers'
 import plugins from './plugins'
+import detectLocale from './intl'
+
+const locale = detectLocale()
+moment.locale(locale.moment)
 
 const history = createHistory()
 
@@ -21,17 +26,16 @@ const store = createStore(
   applyMiddleware(middleware)
 )
 
-function main(user) {
-  addLocaleData(user.data)
+function main() {  
   ReactDOM.render(
     <Provider store={store}>
-      <IntlProvider locale={user.locale} messages={user.messages}>
+      <LocaleProvider locale={locale.antd}>
         <ConnectedRouter history={history}>
           <div>
             {plugins.routes}
           </div>
         </ConnectedRouter>
-      </IntlProvider>
+      </LocaleProvider>
     </Provider>,
     document.getElementById('root')
   );
