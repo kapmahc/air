@@ -1,83 +1,65 @@
 package site
 
-import "github.com/gin-gonic/gin"
+import (
+	"github.com/gin-gonic/gin"
+	"github.com/kapmahc/air/web"
+)
 
 // Mount mount web points
 func (p *Plugin) Mount(rt *gin.Engine) {
-	// rt.GET("/locales/{lang}", p.getLocales)
-	// rt.GET("/site/info", p.getSiteInfo)
-	// rt.POST("/install", p.mustDatabaseEmpty, p.postInstall)
-	//
-	// rt.Group(func(r *h2o.Router) {
-	// 	r.GET("/users", p.indexAdminUsers)
-	//
-	// 	r.GET("/locales", p.getAdminLocales)
-	// 	r.POST("/locales", p.postAdminLocales)
-	// 	r.DELETE("/locales/{:code}", p.deleteAdminLocales)
-	//
-	// }, "/admin", p.Jwt.MustAdminMiddleware)
-	//
-	// rt.Group(func(r *h2o.Router) {
-	// 	r.GET("/status", p.getAdminSiteStatus)
-	// 	r.POST("/info", p.postAdminSiteInfo)
-	// 	r.POST("/author", p.postAdminSiteAuthor)
-	// 	r.GET("/seo", p.getAdminSiteSeo)
-	// 	r.POST("/seo", p.postAdminSiteSeo)
-	// 	r.GET("/smtp", p.getAdminSiteSMTP)
-	// 	r.POST("/smtp", p.postAdminSiteSMTP)
-	// }, "/site", p.Jwt.MustAdminMiddleware)
-	//
-	// rt.Crud(
-	// 	"/notices",
-	// 	[]h2o.HandlerFunc{p.indexNotices},
-	// 	[]h2o.HandlerFunc{p.Jwt.MustAdminMiddleware, p.createNotice},
-	// 	[]h2o.HandlerFunc{p.showNotice},
-	// 	[]h2o.HandlerFunc{p.Jwt.MustAdminMiddleware, p.updateNotice},
-	// 	[]h2o.HandlerFunc{p.Jwt.MustAdminMiddleware, p.destroyNotice},
-	// )
-	//
-	// rt.Crud(
-	// 	"/leave-words",
-	// 	[]h2o.HandlerFunc{p.Jwt.MustAdminMiddleware, p.indexLeaveWords},
-	// 	[]h2o.HandlerFunc{p.createLeaveWord},
-	// 	nil,
-	// 	nil,
-	// 	[]h2o.HandlerFunc{p.Jwt.MustAdminMiddleware, p.destroyLeaveWord},
-	// )
-	//
-	// rt.Crud(
-	// 	"/friend-links",
-	// 	[]h2o.HandlerFunc{p.indexFriendLinks},
-	// 	[]h2o.HandlerFunc{p.Jwt.MustAdminMiddleware, p.createFriendLink},
-	// 	[]h2o.HandlerFunc{p.showFriendLink},
-	// 	[]h2o.HandlerFunc{p.Jwt.MustAdminMiddleware, p.updateFriendLink},
-	// 	[]h2o.HandlerFunc{p.Jwt.MustAdminMiddleware, p.destroyFriendLink},
-	// )
-	//
-	// rt.Crud(
-	// 	"/links",
-	// 	[]h2o.HandlerFunc{p.indexLinks},
-	// 	[]h2o.HandlerFunc{p.Jwt.MustAdminMiddleware, p.createLink},
-	// 	[]h2o.HandlerFunc{p.showLink},
-	// 	[]h2o.HandlerFunc{p.Jwt.MustAdminMiddleware, p.updateLink},
-	// 	[]h2o.HandlerFunc{p.Jwt.MustAdminMiddleware, p.destroyLink},
-	// )
-	//
-	// rt.Crud(
-	// 	"/cards",
-	// 	[]h2o.HandlerFunc{p.indexCards},
-	// 	[]h2o.HandlerFunc{p.Jwt.MustAdminMiddleware, p.createCard},
-	// 	[]h2o.HandlerFunc{p.showCard},
-	// 	[]h2o.HandlerFunc{p.Jwt.MustAdminMiddleware, p.updateCard},
-	// 	[]h2o.HandlerFunc{p.Jwt.MustAdminMiddleware, p.destroyCard},
-	// )
-	//
-	// rt.Crud(
-	// 	"/posts",
-	// 	[]h2o.HandlerFunc{p.indexPosts},
-	// 	[]h2o.HandlerFunc{p.Jwt.MustAdminMiddleware, p.createPost},
-	// 	[]h2o.HandlerFunc{p.showPost},
-	// 	[]h2o.HandlerFunc{p.Jwt.MustAdminMiddleware, p.updatePost},
-	// 	[]h2o.HandlerFunc{p.Jwt.MustAdminMiddleware, p.destroyPost},
-	// )
+	rt.GET("/locales/:lang", web.Wrap(p.getLocales))
+	rt.GET("/site/info", web.Wrap(p.getSiteInfo))
+	rt.POST("/install", web.Wrap(p.mustDatabaseEmpty), web.Wrap(p.postInstall))
+
+	ag := rt.Group("/admin", web.Wrap(p.Jwt.MustAdminMiddleware))
+
+	ag.GET("/users", web.Wrap(p.indexAdminUsers))
+
+	ag.GET("/locales", web.Wrap(p.getAdminLocales))
+	ag.POST("/locales", web.Wrap(p.postAdminLocales))
+	ag.DELETE("/locales/:code", web.Wrap(p.deleteAdminLocales))
+
+	asg := ag.Group("/site")
+	asg.GET("/status", web.Wrap(p.getAdminSiteStatus))
+	asg.POST("/info", web.Wrap(p.postAdminSiteInfo))
+	asg.POST("/author", web.Wrap(p.postAdminSiteAuthor))
+	asg.GET("/seo", web.Wrap(p.getAdminSiteSeo))
+	asg.POST("/seo", web.Wrap(p.postAdminSiteSeo))
+	asg.GET("/smtp", web.Wrap(p.getAdminSiteSMTP))
+	asg.POST("/smtp", web.Wrap(p.postAdminSiteSMTP))
+
+	rt.GET("/notices", web.Wrap(p.indexNotices))
+	rt.GET("/notices/:id", web.Wrap(p.showNotice))
+	rt.POST("/notices", web.Wrap(p.Jwt.MustAdminMiddleware), web.Wrap(p.createNotice))
+	rt.POST("/notices/:id", web.Wrap(p.Jwt.MustAdminMiddleware), web.Wrap(p.updateNotice))
+	rt.DELETE("/notices/:id", web.Wrap(p.Jwt.MustAdminMiddleware), web.Wrap(p.destroyNotice))
+
+	rt.GET("/leave-words", web.Wrap(p.indexLeaveWords))
+	rt.POST("/leave-words", web.Wrap(p.Jwt.MustAdminMiddleware), web.Wrap(p.createLeaveWord))
+	rt.DELETE("/leave-words/:id", web.Wrap(p.Jwt.MustAdminMiddleware), web.Wrap(p.destroyLeaveWord))
+
+	rt.GET("/friend-links", web.Wrap(p.indexFriendLinks))
+	rt.GET("/friend-links/:id", web.Wrap(p.showFriendLink))
+	rt.POST("/friend-links", web.Wrap(p.Jwt.MustAdminMiddleware), web.Wrap(p.createFriendLink))
+	rt.POST("/friend-links/:id", web.Wrap(p.Jwt.MustAdminMiddleware), web.Wrap(p.updateFriendLink))
+	rt.DELETE("/friend-links/:id", web.Wrap(p.Jwt.MustAdminMiddleware), web.Wrap(p.destroyFriendLink))
+
+	rt.GET("/links", web.Wrap(p.indexLinks))
+	rt.GET("/links/:id", web.Wrap(p.showLink))
+	rt.POST("/links", web.Wrap(p.Jwt.MustAdminMiddleware), web.Wrap(p.createLink))
+	rt.POST("/links/:id", web.Wrap(p.Jwt.MustAdminMiddleware), web.Wrap(p.updateLink))
+	rt.DELETE("/links/:id", web.Wrap(p.Jwt.MustAdminMiddleware), web.Wrap(p.destroyLink))
+
+	rt.GET("/cards", web.Wrap(p.indexCards))
+	rt.GET("/cards/:id", web.Wrap(p.showCard))
+	rt.POST("/cards", web.Wrap(p.Jwt.MustAdminMiddleware), web.Wrap(p.createCard))
+	rt.POST("/cards/:id", web.Wrap(p.Jwt.MustAdminMiddleware), web.Wrap(p.updateCard))
+	rt.DELETE("/cards/:id", web.Wrap(p.Jwt.MustAdminMiddleware), web.Wrap(p.destroyCard))
+
+	rt.GET("/posts", web.Wrap(p.indexPosts))
+	rt.GET("/posts/:id", web.Wrap(p.showPost))
+	rt.POST("/posts", web.Wrap(p.Jwt.MustAdminMiddleware), web.Wrap(p.createPost))
+	rt.POST("/posts/:id", web.Wrap(p.Jwt.MustAdminMiddleware), web.Wrap(p.updatePost))
+	rt.DELETE("/posts/:id", web.Wrap(p.Jwt.MustAdminMiddleware), web.Wrap(p.destroyPost))
+
 }

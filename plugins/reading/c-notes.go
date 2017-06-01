@@ -9,7 +9,7 @@ import (
 	"github.com/kapmahc/air/web/i18n"
 )
 
-func (p *Plugin) myNotes(c *gin.Context) error {
+func (p *Plugin) getMyNotes(c *gin.Context) error {
 
 	user := c.MustGet(auth.CurrentUser).(*auth.User)
 	isa := c.MustGet(auth.IsAdmin).(bool)

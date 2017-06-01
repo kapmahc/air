@@ -2,24 +2,22 @@ package forms
 
 import (
 	"github.com/gin-gonic/gin"
+	"github.com/kapmahc/air/web"
 )
 
 // Mount mount web points
 func (p *Plugin) Mount(rt *gin.Engine) {
-	// rt.Group(func(r *h2o.Router) {
-	// 	r.Crud(
-	// 		"",
-	// 		[]h2o.HandlerFunc{p.indexForms},
-	// 		[]h2o.HandlerFunc{p.Jwt.MustAdminMiddleware, p.createForm},
-	// 		[]h2o.HandlerFunc{p.showForm},
-	// 		[]h2o.HandlerFunc{p.Jwt.MustAdminMiddleware, p.updateForm},
-	// 		[]h2o.HandlerFunc{p.Jwt.MustAdminMiddleware, p.destroyForm},
-	// 	)
-	//
-	// 	r.POST("/{id}/apply", p.postFormApply)
-	// 	r.POST("/{id}/cancel", p.postFormCancel)
-	// 	r.GET("/{id}/export", p.Jwt.MustAdminMiddleware, p.getFormExport)
-	// 	r.GET("/{id}/report", p.Jwt.MustAdminMiddleware, p.getFormReport)
-	// }, "/forms")
+	ag := rt.Group("/forms", web.Wrap(p.Jwt.MustAdminMiddleware))
+	ag.POST("/", web.Wrap(p.createForm))
+	ag.POST("/:id", web.Wrap(p.updateForm))
+	ag.DELETE("/:id", web.Wrap(p.destroyForm))
+	ag.GET("/:id/export", web.Wrap(p.getFormExport))
+	ag.GET("/:id/report", web.Wrap(p.getFormReport))
+
+	ng := rt.Group("/forms")
+	ng.GET("/", web.Wrap(p.indexForms))
+	ng.GET("/:id", web.Wrap(p.showForm))
+	ng.POST("/:id/apply", web.Wrap(p.postFormApply))
+	ng.POST("/:id/cancel", web.Wrap(p.postFormCancel))
 
 }
