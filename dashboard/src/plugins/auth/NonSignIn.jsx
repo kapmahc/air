@@ -12,9 +12,7 @@ const Widget = ({title, children}) => (
     <Row>
       <Col span={18} offset={3}>
         <h2 style={{margin: '16px 0'}}>{i18n.t(title)}</h2>
-
         {children}
-
         <ul style={{margin: '16px 0'}}>
           {
             NonSignInLinks.map((l, i) => <li key={i}><Icon type={l.icon} /><Link style={{margin: '6px'}} to={l.href}>{i18n.t(l.label)}</Link></li>)
