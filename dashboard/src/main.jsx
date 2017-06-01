@@ -4,6 +4,7 @@ import { createStore, combineReducers, applyMiddleware } from 'redux'
 import { Provider } from 'react-redux'
 import createHistory from 'history/createBrowserHistory'
 import { ConnectedRouter, routerReducer, routerMiddleware } from 'react-router-redux'
+import { Switch } from 'react-router-dom'
 import moment from 'moment'
 import {LocaleProvider} from 'antd'
 
@@ -26,14 +27,14 @@ const store = createStore(
   applyMiddleware(middleware)
 )
 
-function main() {  
+function main() {
   ReactDOM.render(
     <Provider store={store}>
       <LocaleProvider locale={locale.antd}>
         <ConnectedRouter history={history}>
-          <div>
+          <Switch>
             {plugins.routes}
-          </div>
+          </Switch>
         </ConnectedRouter>
       </LocaleProvider>
     </Provider>,

@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import PropTypes from 'prop-types'
-import { Layout, Menu, Breadcrumb, Icon } from 'antd'
+import { Layout, Row, Menu, Breadcrumb, Icon } from 'antd'
 import {Link} from 'react-router-dom'
 import i18n from 'i18next'
 
@@ -21,7 +21,7 @@ class Widget extends Component {
             <Breadcrumb.Item>
               <Link to="/">{i18n.t('header.home')}</Link>
             </Breadcrumb.Item>
-            {breadcrumb.map((l, i) => <Breadcrumb.Item key={i}><Link to={l.href}>{i18n.t(l.label)}</Link></Breadcrumb.Item>)}                        
+            {breadcrumb.map((l, i) => <Breadcrumb.Item key={i}><Link to={l.href}>{i18n.t(l.label)}</Link></Breadcrumb.Item>)}
           </Breadcrumb>
           <Layout style={{ padding: '24px 0', background: '#fff' }}>
             <Sider
@@ -57,7 +57,7 @@ class Widget extends Component {
               </Menu>
             </Sider>
             <Content style={{ padding: '0 24px', minHeight: 280 }}>
-              {children}
+              <Row>{children}</Row>              
             </Content>
           </Layout>
         </Content>
