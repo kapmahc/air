@@ -8,7 +8,9 @@ import Layout from '../../layouts/Application'
 import {NonSignInLinks} from '../../constants'
 
 const Widget = ({title, children}) => (
-  <Layout>
+  <Layout
+    breadcrumb = {[]}
+    >
     <Row>
       <Col span={18} offset={3}>
         <h2 style={{margin: '16px 0'}}>{i18n.t(title)}</h2>

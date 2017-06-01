@@ -19,7 +19,7 @@ class WidgetF extends Component {
     e.preventDefault();
     const {push} = this.props
     this.props.form.validateFieldsAndScroll((err, values) => {
-      if (!err) {                      
+      if (!err) {
         post('/users/sign-up', values).then((rst) => {
           message.success(i18n.t('auth.messages.email-for-confirm'));
           push('/users/sign-in')
