@@ -10,16 +10,16 @@ import (
 )
 
 type fmInstall struct {
-	Title                string `form:"title" validate:"required"`
-	SubTitle             string `form:"subTitle" validate:"required"`
-	Email                string `form:"email" validate:"required,email"`
-	Password             string `form:"password" validate:"min=6,max=32"`
-	PasswordConfirmation string `form:"passwordConfirmation" validate:"eqfield=Password"`
+	Title                string `json:"title" binding:"required"`
+	SubTitle             string `json:"subTitle" binding:"required"`
+	Email                string `json:"email" binding:"required,email"`
+	Password             string `json:"password" binding:"min=6,max=32"`
+	PasswordConfirmation string `json:"passwordConfirmation" binding:"eqfield=Password"`
 }
 
 func (p *Plugin) postInstall(c *gin.Context) error {
 	var fm fmInstall
-	if err := c.Bind(&fm); err != nil {
+	if err := c.BindJSON(&fm); err != nil {
 		return err
 	}
 

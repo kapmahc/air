@@ -50,9 +50,9 @@ func (p *Plugin) indexNotes(c *gin.Context) error {
 }
 
 type fmNoteNew struct {
-	Type   string `form:"type" validate:"required,max=8"`
-	Body   string `form:"body" validate:"required,max=2000"`
-	BookID uint   `form:"bookId"`
+	Type   string `json:"type" binding:"required,max=8"`
+	Body   string `json:"body" binding:"required,max=2000"`
+	BookID uint   `json:"bookId"`
 }
 
 func (p *Plugin) createNote(c *gin.Context) error {
@@ -60,7 +60,7 @@ func (p *Plugin) createNote(c *gin.Context) error {
 	user := c.MustGet(auth.CurrentUser).(*auth.User)
 
 	var fm fmNoteNew
-	if err := c.Bind(&fm); err != nil {
+	if err := c.BindJSON(&fm); err != nil {
 		return err
 	}
 	item := Note{
@@ -87,15 +87,15 @@ func (p *Plugin) showNote(c *gin.Context) error {
 }
 
 type fmNoteEdit struct {
-	Type string `form:"type" validate:"required,max=8"`
-	Body string `form:"body" validate:"required,max=2000"`
+	Type string `json:"type" binding:"required,max=8"`
+	Body string `json:"body" binding:"required,max=2000"`
 }
 
 func (p *Plugin) updateNote(c *gin.Context) error {
 	note := c.MustGet("item").(*Note)
 
 	var fm fmNoteEdit
-	if err := c.Bind(&fm); err != nil {
+	if err := c.BindJSON(&fm); err != nil {
 		return err
 	}
 

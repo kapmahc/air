@@ -48,17 +48,17 @@ func (p *Plugin) indexArticles(c *gin.Context) error {
 }
 
 type fmArticle struct {
-	Title   string   `form:"title" validate:"required,max=255"`
-	Summary string   `form:"summary" validate:"required,max=500"`
-	Type    string   `form:"type" validate:"required,max=8"`
-	Body    string   `form:"body" validate:"required,max=2000"`
-	Tags    []string `form:"tags"`
+	Title   string   `json:"title" binding:"required,max=255"`
+	Summary string   `json:"summary" binding:"required,max=500"`
+	Type    string   `json:"type" binding:"required,max=8"`
+	Body    string   `json:"body" binding:"required,max=2000"`
+	Tags    []string `json:"tags"`
 }
 
 func (p *Plugin) createArticle(c *gin.Context) error {
 	user := c.MustGet(auth.CurrentUser).(*auth.User)
 	var fm fmArticle
-	if err := c.Bind(&fm); err != nil {
+	if err := c.BindJSON(&fm); err != nil {
 		return err
 	}
 
@@ -110,7 +110,7 @@ func (p *Plugin) showArticle(c *gin.Context) error {
 func (p *Plugin) updateArticle(c *gin.Context) error {
 	a := c.MustGet("item").(*Article)
 	var fm fmArticle
-	if err := c.Bind(&fm); err != nil {
+	if err := c.BindJSON(&fm); err != nil {
 		return err
 	}
 

@@ -8,16 +8,16 @@ import (
 )
 
 type fmSiteInfo struct {
-	Title       string `form:"title"`
-	SubTitle    string `form:"subTitle"`
-	Keywords    string `form:"keywords"`
-	Description string `form:"description"`
-	Copyright   string `form:"copyright"`
+	Title       string `json:"title"`
+	SubTitle    string `json:"subTitle"`
+	Keywords    string `json:"keywords"`
+	Description string `json:"description"`
+	Copyright   string `json:"copyright"`
 }
 
 func (p *Plugin) postAdminSiteInfo(c *gin.Context) error {
 	var fm fmSiteInfo
-	if err := c.Bind(&fm); err != nil {
+	if err := c.BindJSON(&fm); err != nil {
 		return err
 	}
 
@@ -40,13 +40,13 @@ func (p *Plugin) postAdminSiteInfo(c *gin.Context) error {
 }
 
 type fmSiteAuthor struct {
-	Name  string `form:"name"`
-	Email string `form:"email"`
+	Name  string `json:"name"`
+	Email string `json:"email"`
 }
 
 func (p *Plugin) postAdminSiteAuthor(c *gin.Context) error {
 	var fm fmSiteAuthor
-	if err := c.Bind(&fm); err != nil {
+	if err := c.BindJSON(&fm); err != nil {
 		return err
 	}
 
@@ -90,13 +90,13 @@ func (p *Plugin) getAdminSiteSeo(c *gin.Context) error {
 }
 
 type fmSiteSeo struct {
-	GoogleVerifyCode string `form:"googleVerifyCode"`
-	BaiduVerifyCode  string `form:"baiduVerifyCode"`
+	GoogleVerifyCode string `json:"googleVerifyCode"`
+	BaiduVerifyCode  string `json:"baiduVerifyCode"`
 }
 
 func (p *Plugin) postAdminSiteSeo(c *gin.Context) error {
 	var fm fmSiteSeo
-	if err := c.Bind(&fm); err != nil {
+	if err := c.BindJSON(&fm); err != nil {
 		return err
 	}
 
@@ -113,12 +113,12 @@ func (p *Plugin) postAdminSiteSeo(c *gin.Context) error {
 }
 
 type fmSiteSMTP struct {
-	Host                 string `form:"host"`
-	Port                 int    `form:"port"`
-	Ssl                  string `form:"ssl"`
-	Username             string `form:"username"`
-	Password             string `form:"password" validate:"min=6,max=32"`
-	PasswordConfirmation string `form:"passwordConfirmation" validate:"eqfield=Password"`
+	Host                 string `json:"host"`
+	Port                 int    `json:"port"`
+	Ssl                  string `json:"ssl"`
+	Username             string `json:"username"`
+	Password             string `json:"password" binding:"min=6,max=32"`
+	PasswordConfirmation string `json:"passwordConfirmation" binding:"eqfield=Password"`
 }
 
 func (p *Plugin) getAdminSiteSMTP(c *gin.Context) error {
@@ -141,7 +141,7 @@ func (p *Plugin) getAdminSiteSMTP(c *gin.Context) error {
 
 func (p *Plugin) postAdminSiteSMTP(c *gin.Context) error {
 	var fm fmSiteSMTP
-	if err := c.Bind(&fm); err != nil {
+	if err := c.BindJSON(&fm); err != nil {
 		return err
 	}
 	val := map[string]interface{}{

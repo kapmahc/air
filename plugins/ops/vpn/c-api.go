@@ -9,13 +9,13 @@ import (
 )
 
 type fmSignIn struct {
-	Email    string `form:"username" validate:"required,email"`
-	Password string `form:"password" validate:"min=6,max=32"`
+	Email    string `json:"username" binding:"required,email"`
+	Password string `json:"password" binding:"min=6,max=32"`
 }
 
 func (p *Plugin) apiAuth(c *gin.Context) error {
 	var fm fmSignIn
-	if err := c.Bind(&fm); err != nil {
+	if err := c.BindJSON(&fm); err != nil {
 		return err
 	}
 	lng := c.MustGet(i18n.LOCALE).(string)
@@ -32,18 +32,18 @@ func (p *Plugin) apiAuth(c *gin.Context) error {
 }
 
 type fmStatus struct {
-	Email       string  `form:"common_name" validate:"required,email"`
-	TrustedIP   string  `form:"trusted_ip" validate:"required"`
-	TrustedPort uint    `form:"trusted_port" validate:"required"`
-	RemoteIP    string  `form:"ifconfig_pool_remote_ip" validate:"required"`
-	RemotePort  uint    `form:"remote_port_1" validate:"required"`
-	Received    float64 `form:"bytes_received" validate:"required"`
-	Send        float64 `form:"bytes_sent" validate:"required"`
+	Email       string  `json:"common_name" binding:"required,email"`
+	TrustedIP   string  `json:"trusted_ip" binding:"required"`
+	TrustedPort uint    `json:"trusted_port" binding:"required"`
+	RemoteIP    string  `json:"ifconfig_pool_remote_ip" binding:"required"`
+	RemotePort  uint    `json:"remote_port_1" binding:"required"`
+	Received    float64 `json:"bytes_received" binding:"required"`
+	Send        float64 `json:"bytes_sent" binding:"required"`
 }
 
 func (p *Plugin) apiConnect(c *gin.Context) error {
 	var fm fmStatus
-	if err := c.Bind(&fm); err != nil {
+	if err := c.BindJSON(&fm); err != nil {
 		return err
 	}
 	var user User
@@ -73,7 +73,7 @@ func (p *Plugin) apiConnect(c *gin.Context) error {
 
 func (p *Plugin) apiDisconnect(c *gin.Context) error {
 	var fm fmStatus
-	if err := c.Bind(&fm); err != nil {
+	if err := c.BindJSON(&fm); err != nil {
 		return err
 	}
 	var user User

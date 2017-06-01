@@ -16,17 +16,17 @@ func (p *Plugin) indexCards(c *gin.Context) error {
 }
 
 type fmCard struct {
-	Loc       string `form:"loc" validate:"required,max=32"`
-	Title     string `form:"title" validate:"required,max=255"`
-	Summary   string `form:"summary" validate:"required"`
-	Href      string `form:"href" validate:"required,max=255"`
-	Logo      string `form:"logo" validate:"required,max=255"`
-	SortOrder int    `form:"sortOrder"`
+	Loc       string `json:"loc" binding:"required,max=32"`
+	Title     string `json:"title" binding:"required,max=255"`
+	Summary   string `json:"summary" binding:"required"`
+	Href      string `json:"href" binding:"required,max=255"`
+	Logo      string `json:"logo" binding:"required,max=255"`
+	SortOrder int    `json:"sortOrder"`
 }
 
 func (p *Plugin) createCard(c *gin.Context) error {
 	var fm fmCard
-	if err := c.Bind(&fm); err != nil {
+	if err := c.BindJSON(&fm); err != nil {
 		return err
 	}
 
@@ -58,7 +58,7 @@ func (p *Plugin) showCard(c *gin.Context) error {
 
 func (p *Plugin) updateCard(c *gin.Context) error {
 	var fm fmCard
-	if err := c.Bind(&fm); err != nil {
+	if err := c.BindJSON(&fm); err != nil {
 		return err
 	}
 	if err := p.Db.Model(&Card{}).

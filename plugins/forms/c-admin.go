@@ -73,7 +73,7 @@ func (p *Plugin) _parseFields(l, s string) ([]Field, error) {
 
 func (p *Plugin) createForm(c *gin.Context) error {
 	var fm fmForm
-	if err := c.Bind(&fm); err != nil {
+	if err := c.BindJSON(&fm); err != nil {
 		return err
 	}
 	lng := c.MustGet(i18n.LOCALE).(string)
@@ -154,17 +154,17 @@ func (p *Plugin) showForm(c *gin.Context) error {
 }
 
 type fmForm struct {
-	Title    string `form:"title" validate:"required,max=255"`
-	Deadline string `form:"deadline" validate:"required"`
-	Body     string `form:"body" validate:"required"`
-	Type     string `form:"type" validate:"required,max=8"`
-	Fields   string `form:"fields" validate:"required"`
+	Title    string `json:"title" binding:"required,max=255"`
+	Deadline string `json:"deadline" binding:"required"`
+	Body     string `json:"body" binding:"required"`
+	Type     string `json:"type" binding:"required,max=8"`
+	Fields   string `json:"fields" binding:"required"`
 }
 
 func (p *Plugin) updateForm(c *gin.Context) error {
 	item := c.MustGet("item").(*Form)
 	var fm fmForm
-	if err := c.Bind(&fm); err != nil {
+	if err := c.BindJSON(&fm); err != nil {
 		return err
 	}
 	lng := c.MustGet(i18n.LOCALE).(string)

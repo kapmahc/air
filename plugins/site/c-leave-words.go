@@ -16,13 +16,13 @@ func (p *Plugin) indexLeaveWords(c *gin.Context) error {
 }
 
 type fmLeaveWord struct {
-	Body string `form:"body" validate:"required,max=2048"`
-	Type string `form:"type" validate:"required,max=16"`
+	Body string `json:"body" binding:"required,max=2048"`
+	Type string `json:"type" binding:"required,max=16"`
 }
 
 func (p *Plugin) createLeaveWord(c *gin.Context) error {
 	var fm fmLeaveWord
-	if err := c.Bind(&fm); err != nil {
+	if err := c.BindJSON(&fm); err != nil {
 		return err
 	}
 

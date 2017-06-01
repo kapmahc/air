@@ -27,13 +27,13 @@ func (p *Plugin) deleteAdminLocales(c *gin.Context) error {
 }
 
 type fmLocale struct {
-	Code    string `form:"code" validate:"required,max=255"`
-	Message string `form:"message" validate:"required"`
+	Code    string `json:"code" binding:"required,max=255"`
+	Message string `json:"message" binding:"required"`
 }
 
 func (p *Plugin) postAdminLocales(c *gin.Context) error {
 	var fm fmLocale
-	if err := c.Bind(&fm); err != nil {
+	if err := c.BindJSON(&fm); err != nil {
 		return err
 	}
 	lng := c.MustGet(i18n.LOCALE).(string)

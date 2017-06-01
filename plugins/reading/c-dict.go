@@ -7,13 +7,13 @@ import (
 )
 
 type fmDict struct {
-	Keywords string `form:"keywords" validate:"required,max=255"`
+	Keywords string `json:"keywords" binding:"required,max=255"`
 }
 
 func (p *Plugin) postDict(c *gin.Context) error {
 
 	var fm fmDict
-	if err := c.Bind(&fm); err != nil {
+	if err := c.BindJSON(&fm); err != nil {
 		return err
 	}
 	rst := gin.H{}

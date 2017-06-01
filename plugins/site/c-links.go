@@ -16,15 +16,15 @@ func (p *Plugin) indexLinks(c *gin.Context) error {
 }
 
 type fmLink struct {
-	Label     string `form:"label" validate:"required,max=255"`
-	Href      string `form:"href" validate:"required,max=255"`
-	Loc       string `form:"loc" validate:"required,max=32"`
-	SortOrder int    `form:"sortOrder"`
+	Label     string `json:"label" binding:"required,max=255"`
+	Href      string `json:"href" binding:"required,max=255"`
+	Loc       string `json:"loc" binding:"required,max=32"`
+	SortOrder int    `json:"sortOrder"`
 }
 
 func (p *Plugin) createLink(c *gin.Context) error {
 	var fm fmLink
-	if err := c.Bind(&fm); err != nil {
+	if err := c.BindJSON(&fm); err != nil {
 		return err
 	}
 	item := Link{
@@ -51,7 +51,7 @@ func (p *Plugin) showLink(c *gin.Context) error {
 
 func (p *Plugin) updateLink(c *gin.Context) error {
 	var fm fmLink
-	if err := c.Bind(&fm); err != nil {
+	if err := c.BindJSON(&fm); err != nil {
 		return err
 	}
 	if err := p.Db.Model(&Link{}).

@@ -8,8 +8,8 @@ import (
 )
 
 type fmAttachmentNew struct {
-	Type string `form:"type" validate:"required,max=255"`
-	ID   uint   `form:"id"`
+	Type string `json:"type" binding:"required,max=255"`
+	ID   uint   `json:"id"`
 }
 
 func (p *Plugin) createAttachment(c *gin.Context) error {
@@ -49,13 +49,13 @@ func (p *Plugin) createAttachment(c *gin.Context) error {
 }
 
 type fmAttachmentEdit struct {
-	Title string `form:"title" validate:"required,max=255"`
+	Title string `json:"title" binding:"required,max=255"`
 }
 
 func (p *Plugin) updateAttachment(c *gin.Context) error {
 	a := c.MustGet("item").(*Attachment)
 	var fm fmAttachmentEdit
-	if err := c.Bind(&fm); err != nil {
+	if err := c.BindJSON(&fm); err != nil {
 		return err
 	}
 	if err := p.Db.Model(a).Update("title", fm.Title).Error; err != nil {

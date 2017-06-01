@@ -18,14 +18,14 @@ func (p *Plugin) _parseValues(f *Field) []interface{} {
 }
 
 type fmApply struct {
-	Username string `form:"username" validate:"required,max=255"`
-	Email    string `form:"email" validate:"required,max=255"`
-	Phone    string `form:"phone" validate:"required,max=255"`
+	Username string `json:"username" binding:"required,max=255"`
+	Email    string `json:"email" binding:"required,max=255"`
+	Phone    string `json:"phone" binding:"required,max=255"`
 }
 
 func (p *Plugin) postFormApply(c *gin.Context) error {
 	var fm fmApply
-	if err := c.Bind(&fm); err != nil {
+	if err := c.BindJSON(&fm); err != nil {
 		return err
 	}
 	item := c.MustGet("item").(*Form)

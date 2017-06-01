@@ -16,13 +16,13 @@ func (p *Plugin) indexTags(c *gin.Context) error {
 }
 
 type fmTag struct {
-	Name string `form:"name" validate:"required,max=255"`
+	Name string `json:"name" binding:"required,max=255"`
 }
 
 func (p *Plugin) createTag(c *gin.Context) error {
 
 	var fm fmTag
-	if err := c.Bind(&fm); err != nil {
+	if err := c.BindJSON(&fm); err != nil {
 		return err
 	}
 	t := Tag{Name: fm.Name}
@@ -56,7 +56,7 @@ func (p *Plugin) updateTag(c *gin.Context) error {
 	}
 
 	var fm fmTag
-	if err := c.Bind(&fm); err != nil {
+	if err := c.BindJSON(&fm); err != nil {
 		return err
 	}
 

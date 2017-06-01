@@ -32,13 +32,13 @@ func (p *Plugin) indexAliases(c *gin.Context) error {
 }
 
 type fmAlias struct {
-	Source      string `form:"source" validate:"required,max=255"`
-	Destination string `form:"destination" validate:"required,max=255"`
+	Source      string `json:"source" binding:"required,max=255"`
+	Destination string `json:"destination" binding:"required,max=255"`
 }
 
 func (p *Plugin) createAlias(c *gin.Context) error {
 	var fm fmAlias
-	if err := c.Bind(&fm); err != nil {
+	if err := c.BindJSON(&fm); err != nil {
 		return err
 	}
 
@@ -69,7 +69,7 @@ func (p *Plugin) showAlias(c *gin.Context) error {
 
 func (p *Plugin) updateAlias(c *gin.Context) error {
 	var fm fmAlias
-	if err := c.Bind(&fm); err != nil {
+	if err := c.BindJSON(&fm); err != nil {
 		return err
 	}
 	var item Alias

@@ -8,12 +8,12 @@ import (
 )
 
 type fmCancel struct {
-	Who string `form:"who" validate:"required,max=255"`
+	Who string `json:"who" binding:"required,max=255"`
 }
 
 func (p *Plugin) postFormCancel(c *gin.Context) error {
 	var fm fmCancel
-	if err := c.Bind(&fm); err != nil {
+	if err := c.BindJSON(&fm); err != nil {
 		return err
 	}
 

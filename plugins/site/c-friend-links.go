@@ -17,14 +17,14 @@ func (p *Plugin) indexFriendLinks(c *gin.Context) error {
 }
 
 type fmFriendLink struct {
-	Title string `form:"title" validate:"required,max=255"`
-	Home  string `form:"home" validate:"required,max=255"`
-	Logo  string `form:"logo" validate:"required,max=255"`
+	Title string `json:"title" binding:"required,max=255"`
+	Home  string `json:"home" binding:"required,max=255"`
+	Logo  string `json:"logo" binding:"required,max=255"`
 }
 
 func (p *Plugin) createFriendLink(c *gin.Context) error {
 	var fm fmFriendLink
-	if err := c.Bind(&fm); err != nil {
+	if err := c.BindJSON(&fm); err != nil {
 		return err
 	}
 	item := FriendLink{
@@ -50,7 +50,7 @@ func (p *Plugin) showFriendLink(c *gin.Context) error {
 
 func (p *Plugin) updateFriendLink(c *gin.Context) error {
 	var fm fmFriendLink
-	if err := c.Bind(&fm); err != nil {
+	if err := c.BindJSON(&fm); err != nil {
 		return err
 	}
 	if err := p.Db.Model(&FriendLink{}).

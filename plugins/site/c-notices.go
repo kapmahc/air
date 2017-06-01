@@ -17,13 +17,13 @@ func (p *Plugin) indexNotices(c *gin.Context) error {
 }
 
 type fmNotice struct {
-	Body string `form:"body" validate:"required"`
-	Type string `form:"type" validate:"required,max=8"`
+	Body string `json:"body" binding:"required"`
+	Type string `json:"type" binding:"required,max=8"`
 }
 
 func (p *Plugin) createNotice(c *gin.Context) error {
 	var fm fmNotice
-	if err := c.Bind(&fm); err != nil {
+	if err := c.BindJSON(&fm); err != nil {
 		return err
 	}
 	item := Notice{
@@ -47,7 +47,7 @@ func (p *Plugin) showNotice(c *gin.Context) error {
 
 func (p *Plugin) updateNotice(c *gin.Context) error {
 	var fm fmNotice
-	if err := c.Bind(&fm); err != nil {
+	if err := c.BindJSON(&fm); err != nil {
 		return err
 	}
 	if err := p.Db.Model(&Notice{}).

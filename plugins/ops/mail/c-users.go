@@ -30,18 +30,18 @@ func (p *Plugin) indexUsers(c *gin.Context) error {
 }
 
 type fmUserNew struct {
-	FullName             string `form:"fullName" validate:"required,max=255"`
-	Email                string `form:"email" validate:"required,email"`
-	Password             string `form:"password" validate:"min=6,max=32"`
-	PasswordConfirmation string `form:"passwordConfirmation" validate:"eqfield=Password"`
-	Enable               bool   `form:"enable"`
-	DomainID             uint   `form:"domainId"`
+	FullName             string `json:"fullName" binding:"required,max=255"`
+	Email                string `json:"email" binding:"required,email"`
+	Password             string `json:"password" binding:"min=6,max=32"`
+	PasswordConfirmation string `json:"passwordConfirmation" binding:"eqfield=Password"`
+	Enable               bool   `json:"enable"`
+	DomainID             uint   `json:"domainId"`
 }
 
 func (p *Plugin) createUser(c *gin.Context) error {
 
 	var fm fmUserNew
-	if err := c.Bind(&fm); err != nil {
+	if err := c.BindJSON(&fm); err != nil {
 		return err
 	}
 	user := User{
@@ -70,14 +70,14 @@ func (p *Plugin) showUser(c *gin.Context) error {
 }
 
 type fmUserEdit struct {
-	FullName string `form:"fullName" validate:"required,max=255"`
-	Enable   bool   `form:"enable"`
+	FullName string `json:"fullName" binding:"required,max=255"`
+	Enable   bool   `json:"enable"`
 }
 
 func (p *Plugin) updateUser(c *gin.Context) error {
 
 	var fm fmUserEdit
-	if err := c.Bind(&fm); err != nil {
+	if err := c.BindJSON(&fm); err != nil {
 		return err
 	}
 
@@ -98,14 +98,14 @@ func (p *Plugin) updateUser(c *gin.Context) error {
 }
 
 type fmUserResetPassword struct {
-	Password             string `form:"password" validate:"min=6,max=32"`
-	PasswordConfirmation string `form:"passwordConfirmation" validate:"eqfield=Password"`
+	Password             string `json:"password" binding:"min=6,max=32"`
+	PasswordConfirmation string `json:"passwordConfirmation" binding:"eqfield=Password"`
 }
 
 func (p *Plugin) postResetUserPassword(c *gin.Context) error {
 
 	var fm fmUserResetPassword
-	if err := c.Bind(&fm); err != nil {
+	if err := c.BindJSON(&fm); err != nil {
 		return err
 	}
 
@@ -128,16 +128,16 @@ func (p *Plugin) postResetUserPassword(c *gin.Context) error {
 }
 
 type fmUserChangePassword struct {
-	Email                string `form:"email" validate:"required,email"`
-	CurrentPassword      string `form:"currentPassword" validate:"required"`
-	NewPassword          string `form:"newPassword" validate:"min=6,max=32"`
-	PasswordConfirmation string `form:"passwordConfirmation" validate:"eqfield=NewPassword"`
+	Email                string `json:"email" binding:"required,email"`
+	CurrentPassword      string `json:"currentPassword" binding:"required"`
+	NewPassword          string `json:"newPassword" binding:"min=6,max=32"`
+	PasswordConfirmation string `json:"passwordConfirmation" binding:"eqfield=NewPassword"`
 }
 
 func (p *Plugin) postChangeUserPassword(c *gin.Context) error {
 	lng := c.MustGet(i18n.LOCALE).(string)
 	var fm fmUserChangePassword
-	if err := c.Bind(&fm); err != nil {
+	if err := c.BindJSON(&fm); err != nil {
 		return err
 	}
 	var user User

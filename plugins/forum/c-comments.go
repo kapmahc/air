@@ -49,9 +49,9 @@ func (p *Plugin) indexComments(c *gin.Context) error {
 }
 
 type fmCommentAdd struct {
-	Body      string `form:"body" validate:"required,max=800"`
-	Type      string `form:"type" validate:"required,max=8"`
-	ArticleID uint   `form:"articleId" validate:"required"`
+	Body      string `json:"body" binding:"required,max=800"`
+	Type      string `json:"type" binding:"required,max=8"`
+	ArticleID uint   `json:"articleId" binding:"required"`
 }
 
 func (p *Plugin) createComment(c *gin.Context) error {
@@ -59,7 +59,7 @@ func (p *Plugin) createComment(c *gin.Context) error {
 	user := c.MustGet(auth.CurrentUser).(*auth.User)
 
 	var fm fmCommentAdd
-	if err := c.Bind(&fm); err != nil {
+	if err := c.BindJSON(&fm); err != nil {
 		return err
 	}
 	cm := Comment{
@@ -87,15 +87,15 @@ func (p *Plugin) showComment(c *gin.Context) error {
 }
 
 type fmCommentEdit struct {
-	Body string `form:"body" validate:"required,max=800"`
-	Type string `form:"type" validate:"required,max=8"`
+	Body string `json:"body" binding:"required,max=800"`
+	Type string `json:"type" binding:"required,max=8"`
 }
 
 func (p *Plugin) updateComment(c *gin.Context) error {
 	cm := c.MustGet("item").(*Comment)
 
 	var fm fmCommentEdit
-	if err := c.Bind(&fm); err != nil {
+	if err := c.BindJSON(&fm); err != nil {
 		return err
 	}
 	if err := p.Db.Model(cm).Updates(map[string]interface{}{

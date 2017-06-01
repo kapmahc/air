@@ -17,13 +17,13 @@ func (p *Plugin) indexDomains(c *gin.Context) error {
 }
 
 type fmDomain struct {
-	Name string `form:"name" validate:"required,max=255"`
+	Name string `json:"name" binding:"required,max=255"`
 }
 
 func (p *Plugin) createDomain(c *gin.Context) error {
 
 	var fm fmDomain
-	if err := c.Bind(&fm); err != nil {
+	if err := c.BindJSON(&fm); err != nil {
 		return err
 	}
 
@@ -47,7 +47,7 @@ func (p *Plugin) showDomain(c *gin.Context) error {
 
 func (p *Plugin) updateDomain(c *gin.Context) error {
 	var fm fmDomain
-	if err := c.Bind(&fm); err != nil {
+	if err := c.BindJSON(&fm); err != nil {
 		return err
 	}
 

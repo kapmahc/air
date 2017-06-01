@@ -49,15 +49,15 @@ func (p *Plugin) postUsersSignUp(c *gin.Context) error {
 }
 
 type fmSignIn struct {
-	Email      string `form:"email" validate:"required,email"`
-	Password   string `form:"password" validate:"required"`
-	RememberMe bool   `form:"rememberMe"`
+	Email      string `json:"email" binding:"required,email"`
+	Password   string `json:"password" binding:"required"`
+	RememberMe bool   `json:"rememberMe"`
 }
 
 func (p *Plugin) postUsersSignIn(c *gin.Context) error {
 	l := c.MustGet(i18n.LOCALE).(string)
 	var fm fmSignIn
-	if err := c.Bind(&fm); err != nil {
+	if err := c.BindJSON(&fm); err != nil {
 		return err
 	}
 
@@ -82,7 +82,7 @@ func (p *Plugin) postUsersSignIn(c *gin.Context) error {
 }
 
 type fmEmail struct {
-	Email string `form:"email" validate:"required,email"`
+	Email string `json:"email" binding:"required,email"`
 }
 
 func (p *Plugin) getUsersConfirm(c *gin.Context) error {
@@ -105,7 +105,7 @@ func (p *Plugin) getUsersConfirm(c *gin.Context) error {
 func (p *Plugin) postUsersConfirm(c *gin.Context) error {
 	l := c.MustGet(i18n.LOCALE).(string)
 	var fm fmEmail
-	if err := c.Bind(&fm); err != nil {
+	if err := c.BindJSON(&fm); err != nil {
 		return err
 	}
 	user, err := p.Dao.GetByEmail(fm.Email)
@@ -145,7 +145,7 @@ func (p *Plugin) postUsersUnlock(c *gin.Context) error {
 	l := c.MustGet(i18n.LOCALE).(string)
 
 	var fm fmEmail
-	if err := c.Bind(&fm); err != nil {
+	if err := c.BindJSON(&fm); err != nil {
 		return err
 	}
 	user, err := p.Dao.GetByEmail(fm.Email)
@@ -163,7 +163,7 @@ func (p *Plugin) postUsersUnlock(c *gin.Context) error {
 func (p *Plugin) postUsersForgotPassword(c *gin.Context) error {
 	l := c.MustGet(i18n.LOCALE).(string)
 	var fm fmEmail
-	if err := c.Bind(&fm); err != nil {
+	if err := c.BindJSON(&fm); err != nil {
 		return err
 	}
 	var user *User
@@ -178,16 +178,16 @@ func (p *Plugin) postUsersForgotPassword(c *gin.Context) error {
 }
 
 type fmResetPassword struct {
-	Token                string `form:"token" validate:"required"`
-	Password             string `form:"password" validate:"min=6,max=32"`
-	PasswordConfirmation string `form:"passwordConfirmation" validate:"eqfield=Password"`
+	Token                string `json:"token" binding:"required"`
+	Password             string `json:"password" binding:"min=6,max=32"`
+	PasswordConfirmation string `json:"passwordConfirmation" binding:"eqfield=Password"`
 }
 
 func (p *Plugin) postUsersResetPassword(c *gin.Context) error {
 	l := c.MustGet(i18n.LOCALE).(string)
 
 	var fm fmResetPassword
-	if err := c.Bind(&fm); err != nil {
+	if err := c.BindJSON(&fm); err != nil {
 		return err
 	}
 	user, err := p.parseToken(l, fm.Token, actResetPassword)
@@ -215,15 +215,15 @@ func (p *Plugin) getUsersInfo(c *gin.Context) error {
 }
 
 type fmInfo struct {
-	Name string `form:"name" validate:"required,max=255"`
-	// Home string `form:"home" validate:"max=255"`
-	// Logo string `form:"logo" validate:"max=255"`
+	Name string `json:"name" binding:"required,max=255"`
+	// Home string `json:"home" binding:"max=255"`
+	// Logo string `json:"logo" binding:"max=255"`
 }
 
 func (p *Plugin) postUsersInfo(c *gin.Context) error {
 	user := c.MustGet(CurrentUser).(*User)
 	var fm fmInfo
-	if err := c.Bind(&fm); err != nil {
+	if err := c.BindJSON(&fm); err != nil {
 		return err
 	}
 
@@ -239,9 +239,9 @@ func (p *Plugin) postUsersInfo(c *gin.Context) error {
 }
 
 type fmChangePassword struct {
-	CurrentPassword      string `form:"currentPassword" validate:"required"`
-	NewPassword          string `form:"newPassword" validate:"min=6,max=32"`
-	PasswordConfirmation string `form:"passwordConfirmation" validate:"eqfield=NewPassword"`
+	CurrentPassword      string `json:"currentPassword" binding:"required"`
+	NewPassword          string `json:"newPassword" binding:"min=6,max=32"`
+	PasswordConfirmation string `json:"passwordConfirmation" binding:"eqfield=NewPassword"`
 }
 
 func (p *Plugin) postUsersChangePassword(c *gin.Context) error {
@@ -249,7 +249,7 @@ func (p *Plugin) postUsersChangePassword(c *gin.Context) error {
 
 	user := c.MustGet(CurrentUser).(*User)
 	var fm fmChangePassword
-	if err := c.Bind(&fm); err != nil {
+	if err := c.BindJSON(&fm); err != nil {
 		return err
 	}
 	if !p.Hmac.Chk([]byte(fm.CurrentPassword), user.Password) {
