@@ -10,9 +10,9 @@ import {NonSignInLinks} from '../../constants'
 const Widget = ({title, children}) => (
   <Layout>
     <Row>
-      <Col span={12} offset={6}>
-        <h3 style={{margin: '16px 0'}}><FormattedMessage id={title}/></h3>
-
+      <Col span={18} offset={3}>
+        <h2 style={{margin: '16px 0'}}><FormattedMessage id={title}/></h2>
+          
         {children}
 
         <ul style={{margin: '16px 0'}}>
