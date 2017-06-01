@@ -11,16 +11,16 @@ import (
 )
 
 type fmSignUp struct {
-	Name                 string `form:"name" validate:"required,max=255"`
-	Email                string `form:"email" validate:"required,email"`
-	Password             string `form:"password" validate:"min=6,max=32"`
-	PasswordConfirmation string `form:"passwordConfirmation" validate:"eqfield=Password"`
+	Name                 string `json:"name" binding:"required,max=255"`
+	Email                string `json:"email" binding:"required,email"`
+	Password             string `json:"password" binding:"min=6,max=32"`
+	PasswordConfirmation string `json:"passwordConfirmation" binding:"eqfield=Password"`
 }
 
 func (p *Plugin) postUsersSignUp(c *gin.Context) error {
 	l := c.MustGet(i18n.LOCALE).(string)
 	var fm fmSignUp
-	if err := c.Bind(&fm); err != nil {
+	if err := c.BindJSON(&fm); err != nil {
 		return err
 	}
 

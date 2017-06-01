@@ -19,13 +19,8 @@ class WidgetF extends Component {
     e.preventDefault();
     const {push} = this.props
     this.props.form.validateFieldsAndScroll((err, values) => {
-      if (!err) {
-        var data = new URLSearchParams()
-        data.append('name',values.name)
-        data.append('email',values.email)
-        data.append('password',values.password)
-        data.append('passwordConfirmation', values.passwordConfirmation)
-        post('/users/sign-up', data).then((rst) => {
+      if (!err) {                      
+        post('/users/sign-up', values).then((rst) => {
           message.success(i18n.t('auth.messages.email-for-confirm'));
           push('/users/sign-in')
         }).catch(message.error)
@@ -121,38 +116,11 @@ class WidgetF extends Component {
   }
 }
 
-// class Widget extends Component{
-//   state = { name: '', email: '', password: '', passwordConfirmation: '' }
-//
-//   handleChange = (e, { name, value }) => this.setState({ [name]: value })
-//
-//   handleSubmit = e => {
-//     e.preventDefault()
-
-//   }
-//   render() {
-//     const {name, email, password, passwordConfirmation} = this.state;
-//     return (
-//       <Layout title="auth.users.sign-up.title">
-//         <Form onSubmit={this.handleSubmit}>
-//           <Form.Input name='name' value={name} onChange={this.handleChange} required label={<FormattedMessage id="attributes.fullName"/>} />
-//           <Form.Input name='email' value={email} onChange={this.handleChange} required type="email" label={<FormattedMessage id="attributes.email"/>} />
-//           <Form.Input name='password' value={password} onChange={this.handleChange} required type="password" label={<FormattedMessage id="attributes.password"/>} />
-//           <Form.Input name='passwordConfirmation' value={passwordConfirmation} onChange={this.handleChange} required type="password" label={<FormattedMessage id="attributes.passwordConfirmation"/>} />
-//           <Submit />
-//         </Form>
-//       </Layout>
-//     )
-//   }
-// }
-
-
 WidgetF.propTypes = {
   push: PropTypes.func.isRequired
 }
 
 const Widget = Form.create()(WidgetF);
-
 
 export default connect(
   state => ({}),

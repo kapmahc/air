@@ -31,8 +31,8 @@ export const _delete = (path) => {
 
 export const post = (path, body) => {
   var data = options('post')
-  data.body = body
+  data.body = JSON.stringify(body)
   // https://github.github.io/fetch/#options
-  data.headers['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8'
+  // data.headers['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8'
   return fetch(api(path), data).then(parse)
 }
