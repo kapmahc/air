@@ -3,7 +3,7 @@ import Layout from '../../layouts/Application'
 
 const Widget = () => (
   <Layout>
-    <div className="sixteen wide column">
+    <div>
       home
       <hr/>
     </div>

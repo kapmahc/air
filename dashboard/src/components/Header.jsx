@@ -1,31 +1,33 @@
 import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { Menu, Icon } from 'semantic-ui-react'
 import { FormattedMessage } from 'react-intl'
+import { Layout, Menu, Icon } from 'antd'
 
 import {signOut, toggleSideBar} from '../actions'
 
+const { Header } = Layout
+const SubMenu = Menu.SubMenu
+const MenuItemGroup = Menu.ItemGroup
 
 class Widget extends Component {
-  state = { activeItem: 'home'}
-
-  handleItemClick = (e, { name }) => this.setState({ activeItem: name })
-
   render() {
-    const { activeItem } = this.state
-    const {toggleSideBar} = this.props
     return (
-      <Menu inverted fixed="top" color="teal">
-        <Menu.Item icon onClick={toggleSideBar}>
-          <Icon name="content"/>
-          &nbsp;
-          <FormattedMessage id="site.subTitle"/>          
-        </Menu.Item>
-        <Menu.Item name='home' active={activeItem === 'home'} onClick={this.handleItemClick} />
-        <Menu.Item name='messages' active={activeItem === 'messages'} onClick={this.handleItemClick} />
-        <Menu.Item name='friends' active={activeItem === 'friends'} onClick={this.handleItemClick} />
-      </Menu>
+      <Header className="header" >
+        <div className="logo" />
+        <Menu
+          theme="dark"
+          mode="horizontal"
+          defaultSelectedKeys={['home']}
+          style={{ lineHeight: '64px' }}
+        >
+          <Menu.Item key="home">
+            <FormattedMessage id="site.subTitle"/>
+          </Menu.Item>
+          <Menu.Item key="2">nav 2</Menu.Item>
+          <Menu.Item key="3">nav 3</Menu.Item>          
+        </Menu>
+      </Header>
     )
   }
 }

@@ -1,27 +1,27 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import {Grid, Header, Divider, List} from 'semantic-ui-react'
 import {FormattedMessage} from 'react-intl'
 import {Link} from 'react-router-dom'
+import { Row, Col, Icon } from 'antd'
 
 import Layout from '../../layouts/Application'
 import {NonSignInLinks} from '../../constants'
 
 const Widget = ({title, children}) => (
   <Layout>
-    <Grid.Row centered columns={2}>
-      <Grid.Column>
-        <Header><FormattedMessage id={title}/></Header>
-        <Divider />
+    <Row>
+      <Col span={12} offset={6}>
+        <h3 style={{margin: '16px 0'}}><FormattedMessage id={title}/></h3>
+
         {children}
-        <br />
-        <List>
+
+        <ul style={{margin: '16px 0'}}>
           {
-            NonSignInLinks.map((l, i) => <List.Item key={i} icon={l.icon} content={<Link to={l.href}><FormattedMessage id={l.label} /></Link>} />)
+            NonSignInLinks.map((l, i) => <li key={i}><Icon type={l.icon} /><Link style={{margin: '6px'}} to={l.href}><FormattedMessage id={l.label} /></Link></li>)
           }
-        </List>
-      </Grid.Column>
-    </Grid.Row>
+        </ul>
+      </Col>
+    </Row>
   </Layout>
 )
 

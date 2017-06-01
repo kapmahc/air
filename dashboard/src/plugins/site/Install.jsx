@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import PropTypes from 'prop-types'
-import { Form } from 'semantic-ui-react'
+import { Form } from 'antd'
 import { FormattedMessage } from 'react-intl'
 import { push } from 'react-router-redux'
 import { connect } from 'react-redux'
@@ -8,6 +8,8 @@ import { connect } from 'react-redux'
 import Layout from '../auth/NonSignIn'
 import {Submit} from '../../form'
 import {post} from '../../ajax'
+
+const FormItem = Form.Item
 
 class Widget extends Component{
   state = { title: '', subTitle: '', name: '', email: '', password: '', passwordConfirmation: '' }

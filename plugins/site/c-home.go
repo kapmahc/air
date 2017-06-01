@@ -9,7 +9,7 @@ import (
 
 func (p *Plugin) getLocales(c *gin.Context) error {
 	lang := c.Param("lang")
-	items, err := p.I18n.All(lang) //p.I18n.Store.All(lang)
+	items, err := p.I18n.Store.All(lang) // p.I18n.All(lang) //
 	if err != nil {
 		return err
 	}
