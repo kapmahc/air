@@ -7,6 +7,8 @@ import (
 	"github.com/streadway/amqp"
 )
 
+var _ job.Queue = &Queue{}
+
 // New new queue
 func New(name, host string, port int, user, password, virtual string) job.Queue {
 	return &Queue{

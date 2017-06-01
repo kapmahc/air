@@ -4,7 +4,10 @@ import (
 	"time"
 
 	_redis "github.com/garyburd/redigo/redis"
+	"github.com/kapmahc/air/web/cache"
 )
+
+var _ cache.Store = &Store{}
 
 // Store cache by redis
 type Store struct {

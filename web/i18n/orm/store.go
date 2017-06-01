@@ -1,6 +1,11 @@
 package orm
 
-import "github.com/jinzhu/gorm"
+import (
+	"github.com/jinzhu/gorm"
+	"github.com/kapmahc/air/web/i18n"
+)
+
+var _ i18n.Store = &Store{}
 
 // Store gorm-store
 type Store struct {

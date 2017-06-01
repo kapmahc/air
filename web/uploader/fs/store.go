@@ -10,25 +10,27 @@ import (
 	"github.com/kapmahc/air/web/uploader"
 )
 
-// NewFileSystemStore new file-system uploader store
-func NewFileSystemStore(root, home string) (uploader.Store, error) {
+var _ uploader.Store = &Store{}
+
+// New new file-system uploader store
+func New(root, home string) (uploader.Store, error) {
 	err := os.MkdirAll(root, 0755)
-	return &FileSystemStore{home: home, root: root}, err
+	return &Store{home: home, root: root}, err
 }
 
-// FileSystemStore file-system storage
-type FileSystemStore struct {
+// Store file-system storage
+type Store struct {
 	home string
 	root string
 }
 
 // Remove remove file
-func (p *FileSystemStore) Remove(url string) error {
+func (p *Store) Remove(url string) error {
 	return os.Remove(path.Join(p.root, url[len(p.home)+1:]))
 }
 
 // Save save file to file-system
-func (p *FileSystemStore) Save(fh *multipart.FileHeader) (string, int64, error) {
+func (p *Store) Save(fh *multipart.FileHeader) (string, int64, error) {
 	name := uuid.New().String() + path.Ext(fh.Filename)
 	src, err := fh.Open()
 	if err != nil {
