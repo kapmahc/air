@@ -11,7 +11,7 @@ const { Header } = Layout
 class Widget extends Component {
   render() {
     return (
-      <Header className="header" >
+      <Header className="header" style={{overflow: 'hidden'}}>
         <div className="logo" />
         <Menu
           theme="dark"
@@ -24,6 +24,8 @@ class Widget extends Component {
           </Menu.Item>
           <Menu.Item key="2">nav 2</Menu.Item>
           <Menu.Item key="3">nav 3</Menu.Item>
+          <Menu.Item key="4">nav 2</Menu.Item>
+          <Menu.Item key="9">nav 2</Menu.Item>
         </Menu>
       </Header>
     )

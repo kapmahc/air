@@ -5,7 +5,7 @@ import i18n from 'i18next'
 const { Footer } = Layout
 
 const Widget = () => (
-  <Footer style={{ textAlign: 'center' }}>
+  <Footer style={{overflow: 'hidden', textAlign: 'center' }}>
     &copy;{i18n.t('site.copyright')}
   </Footer>
 )
