@@ -1,48 +1,68 @@
 import React, {Component} from 'react'
 import PropTypes from 'prop-types'
-import { Form } from 'semantic-ui-react'
 import { push } from 'react-router-redux'
 import { connect } from 'react-redux'
+import { Form, Input, message} from 'antd'
+import i18n from 'i18next'
 
 import Layout from '../NonSignIn'
-import {Submit} from '../../../form'
+import {Submit, formItemLayout} from '../../../form'
 import {post} from '../../../ajax'
 
-class Widget extends Component{
-  state = { email: '' }
+const FormItem = Form.Item
 
-  handleChange = (e, { name, value }) => this.setState({ [name]: value })
-
-  handleSubmit = e => {
-    e.preventDefault()
+class WidgetF extends Component {
+  state = {
+    confirmDirty: false
+  };
+  handleSubmit = (e) => {
+    e.preventDefault();
     const {push, action} = this.props
-    var data = new URLSearchParams()
-    data.append('email',this.state.email)
-    post(`/users/${action}`, data).then((rst) => {
-      alert(rst.message)
-      push('/users/sign-in')
-    }).catch(alert)
+    this.props.form.validateFieldsAndScroll((err, values) => {
+      if (!err) {
+        post(`/users/${action}`, values).then((rst) => {
+          message.success(i18n.t(`auth.messages.email-for-${action}`));
+          push('/users/sign-in')
+        }).catch(message.error)
+      }
+    });
   }
+
   render() {
-    const {email} = this.state;
-    const {action} = this.props;
+    const { action } = this.props
+    const { getFieldDecorator } = this.props.form;
+
     return (
-      <Layout title={`auth.users.${action}.title`}>
-        <Form onSubmit={this.handleSubmit}>
-          <Form.Input name='email' value={email} onChange={this.handleChange} required type="email" label={<FormattedMessage id="attributes.email"/>} />
-          <Submit />
-        </Form>
-      </Layout>
-    )
+    <Layout title={i18n.t(`auth.users.${action}.title`)}>
+      <Form onSubmit={this.handleSubmit}>
+        <FormItem
+          {...formItemLayout}
+          label={i18n.t('attributes.email')}
+          hasFeedback
+        >
+          {getFieldDecorator('email', {
+            rules: [{
+              type: 'email', message: i18n.t('helpers.bad-email'),
+            }, {
+              required: true, message: i18n.t('helpers.not-empty'),
+            }],
+          })(
+            <Input />
+          )}
+        </FormItem>
+        <Submit />
+      </Form>
+    </Layout>
+    );
   }
 }
 
-
-Widget.propTypes = {
+WidgetF.propTypes = {
   push: PropTypes.func.isRequired,
   action: PropTypes.string.isRequired,
 }
 
+const Widget = Form.create()(WidgetF);
 
 export default connect(
   state => ({}),

@@ -9,5 +9,5 @@ export const NonSignInLinks=[
   {icon: 'retweet', href: '/users/forgot-password', label: 'auth.users.forgot-password.title'},
   {icon: 'check-circle-o', href: '/users/confirm', label: 'auth.users.confirm.title'},
   {icon: 'unlock', href: '/users/unlock', label: 'auth.users.unlock.title'},
-  {icon: 'question-circle-o', href: '/', label: 'site.leave-words.new.title'},
+  {icon: 'question-circle-o', href: '/leave-words/new', label: 'site.leave-words.new.title'},
 ]

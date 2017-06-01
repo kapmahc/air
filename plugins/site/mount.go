@@ -34,8 +34,8 @@ func (p *Plugin) Mount(rt *gin.Engine) {
 	rt.POST("/notices/:id", web.Wrap(p.Jwt.MustAdminMiddleware), web.Wrap(p.updateNotice))
 	rt.DELETE("/notices/:id", web.Wrap(p.Jwt.MustAdminMiddleware), web.Wrap(p.destroyNotice))
 
-	rt.GET("/leave-words", web.Wrap(p.indexLeaveWords))
-	rt.POST("/leave-words", web.Wrap(p.Jwt.MustAdminMiddleware), web.Wrap(p.createLeaveWord))
+	rt.GET("/leave-words", web.Wrap(p.Jwt.MustAdminMiddleware), web.Wrap(p.indexLeaveWords))
+	rt.POST("/leave-words", web.Wrap(p.createLeaveWord))
 	rt.DELETE("/leave-words/:id", web.Wrap(p.Jwt.MustAdminMiddleware), web.Wrap(p.destroyLeaveWord))
 
 	rt.GET("/friend-links", web.Wrap(p.indexFriendLinks))

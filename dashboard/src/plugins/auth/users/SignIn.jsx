@@ -32,7 +32,7 @@ class WidgetF extends Component {
     const { getFieldDecorator } = this.props.form;
     return (
       <Layout title="auth.users.sign-in.title">
-        <Form onSubmit={this.handleSubmit} className="login-form">
+        <Form onSubmit={this.handleSubmit}>
           <FormItem
             {...formItemLayout}
             label={i18n.t('attributes.email')}
