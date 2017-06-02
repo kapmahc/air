@@ -7,22 +7,12 @@ import { connect } from 'react-redux'
 
 import Footer from '../components/Footer'
 import Header from '../components/Header'
-import {NonSignInLinks, LANGUAGES, TOKEN} from '../constants'
-import {signIn} from '../actions'
+import {NonSignInLinks, LANGUAGES} from '../constants'
 
 const { SubMenu } = Menu
 const { Content, Sider } = Layout
 
 class Widget extends Component {
-  componentDidMount () {
-    const {user, signIn} = this.props
-    if (!user.uid) {
-      const token = sessionStorage.getItem(TOKEN)
-      if(token){
-        signIn(token)
-      }
-    }
-  }
   render () {
     const {children, breadcrumb, user} = this.props
     return (
@@ -44,7 +34,7 @@ class Widget extends Component {
               <Menu
                 mode="inline"
                 defaultSelectedKeys={['1']}
-                defaultOpenKeys={['quick']}
+                defaultOpenKeys={['quick', 'personalBar']}
                 style={{ height: '100%' }}
               >
                 {/* nav-bar */}
@@ -89,11 +79,10 @@ Widget.propTypes = {
   children: PropTypes.node.isRequired,
   breadcrumb: PropTypes.array.isRequired,
   user: PropTypes.object.isRequired,
-  signIn: PropTypes.func.isRequired,
 }
 
 
 export default connect(
   state => ({user: state.currentUser}),
-  {signIn},
+  {},
 )(Widget)
