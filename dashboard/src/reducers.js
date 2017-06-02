@@ -5,7 +5,7 @@ import jwtDecode from 'jwt-decode'
 const currentUser = (state={}, action) => {
   switch(action.type){
     case USERS_SIGN_IN:
-      try{
+      try{        
         return jwtDecode(action.token)
       }catch(e){
         console.error(e)

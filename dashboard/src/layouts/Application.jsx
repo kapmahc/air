@@ -3,16 +3,28 @@ import PropTypes from 'prop-types'
 import { Layout, Row, Menu, Breadcrumb, Icon } from 'antd'
 import {Link} from 'react-router-dom'
 import i18n from 'i18next'
+import { connect } from 'react-redux'
 
 import Footer from '../components/Footer'
 import Header from '../components/Header'
+import {NonSignInLinks, LANGUAGES, TOKEN} from '../constants'
+import {signIn} from '../actions'
 
 const { SubMenu } = Menu
 const { Content, Sider } = Layout
 
 class Widget extends Component {
+  componentDidMount () {
+    const {user, signIn} = this.props
+    if (!user.uid) {
+      const token = sessionStorage.getItem(TOKEN)
+      if(token){
+        signIn(token)
+      }
+    }
+  }
   render () {
-    const {children, breadcrumb} = this.props
+    const {children, breadcrumb, user} = this.props
     return (
       <Layout>
         <Header />
@@ -25,7 +37,6 @@ class Widget extends Component {
           </Breadcrumb>
           <Layout style={{ padding: '24px 0', background: '#fff' }}>
             <Sider
-
               breakpoint="lg"
               collapsedWidth="0"
               style={{ background: '#fff' }}
@@ -33,31 +44,37 @@ class Widget extends Component {
               <Menu
                 mode="inline"
                 defaultSelectedKeys={['1']}
-                defaultOpenKeys={['sub1']}
+                defaultOpenKeys={['quick']}
                 style={{ height: '100%' }}
               >
-                <SubMenu key="sub1" title={<span><Icon type="user" />subnav 1</span>}>
-                  <Menu.Item key="1">option1</Menu.Item>
-                  <Menu.Item key="2">option2</Menu.Item>
-                  <Menu.Item key="3">option3</Menu.Item>
-                  <Menu.Item key="4">option4</Menu.Item>
-                </SubMenu>
-                <SubMenu key="sub2" title={<span><Icon type="laptop" />subnav 2</span>}>
-                  <Menu.Item key="5">option5</Menu.Item>
-                  <Menu.Item key="6">option6</Menu.Item>
-                  <Menu.Item key="7">option7</Menu.Item>
-                  <Menu.Item key="8">option8</Menu.Item>
-                </SubMenu>
-                <SubMenu key="sub3" title={<span><Icon type="notification" />subnav 3</span>}>
+                {/* nav-bar */}
+                <SubMenu key="quick" title={<span><Icon type="home" />{i18n.t('nav-bar.title')}</span>}>
                   <Menu.Item key="9">option9</Menu.Item>
                   <Menu.Item key="10">option10</Menu.Item>
                   <Menu.Item key="11">option11</Menu.Item>
                   <Menu.Item key="12">option12</Menu.Item>
                 </SubMenu>
+                {/* language bar */}
+                <SubMenu key="languageBar" title={<span><Icon type="global" />{i18n.t('language-bar.switch')}</span>}>
+                  {LANGUAGES.map((l)=><Menu.Item key={`language-bar.${l}`}><a href={`?locale=${l}`}>{i18n.t(`languages.${l}`)}</a></Menu.Item>)}
+                </SubMenu>
+                {/* personal bar */}
+                {
+                  user.uid ?
+                    <SubMenu key="personalBar" title={<span><Icon type="user" />{i18n.t('personal-bar.welcome', {name: user.name})}</span>}>
+                      <Menu.Item key="1">option1</Menu.Item>
+                      <Menu.Item key="2">option2</Menu.Item>
+                      <Menu.Item key="3">option3</Menu.Item>
+                      <Menu.Item key="4">option4</Menu.Item>
+                    </SubMenu> :
+                    <SubMenu key="personalBar" title={<span><Icon type="user" />{i18n.t('personal-bar.sign-in-or-up')}</span>}>
+                      {NonSignInLinks.map((l) => <Menu.Item key={l.href}><Link to={l.href}>{i18n.t(l.label)}</Link></Menu.Item>)}
+                    </SubMenu>
+                }
               </Menu>
             </Sider>
             <Content style={{ padding: '0 24px', minHeight: 280 }}>
-              <Row>{children}</Row>              
+              <Row>{children}</Row>
             </Content>
           </Layout>
         </Content>
@@ -71,6 +88,12 @@ class Widget extends Component {
 Widget.propTypes = {
   children: PropTypes.node.isRequired,
   breadcrumb: PropTypes.array.isRequired,
+  user: PropTypes.object.isRequired,
+  signIn: PropTypes.func.isRequired,
 }
 
-export default Widget
+
+export default connect(
+  state => ({user: state.currentUser}),
+  {signIn},
+)(Widget)
