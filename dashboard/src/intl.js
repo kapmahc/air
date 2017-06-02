@@ -11,17 +11,20 @@ export default () => {
     case 'zh-Hans':
       return {
         moment: 'zh-cn',
-        antd: null
+        antd: null,
+        timeago: 'zh_CN',
       }
     case 'zh-Hant':
       return {
         moment: 'zh-tw',
-        antd: zhTW
+        antd: zhTW,
+        timeago: 'zh_TW',
       }
     default:
       return {
         moment: 'en',
-        antd: enUS
+        antd: enUS,
+        timeago: 'en',
       }
   }
 }

@@ -268,7 +268,7 @@ func (p *Plugin) getUsersLogs(c *gin.Context) error {
 	user := c.MustGet(CurrentUser).(*User)
 	var logs []Log
 	if err := p.Db.
-		Select([]string{"ip", "message", "created_at"}).
+		Select([]string{"id", "ip", "message", "created_at"}).
 		Where("user_id = ?", user.ID).
 		Order("id DESC").Limit(120).
 		Find(&logs).Error; err != nil {
