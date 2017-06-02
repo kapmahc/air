@@ -1,46 +1,57 @@
 import React, {Component} from 'react'
-import PropTypes from 'prop-types'
-import { push } from 'react-router-redux'
-import { connect } from 'react-redux'
 import { Form, Input, message} from 'antd'
 import i18n from 'i18next'
 
-import Layout from '../NonSignIn'
+import Layout from '../../../layouts/Dashboard'
 import {Submit, formItemLayout} from '../../../form'
-import {post} from '../../../ajax'
+import {post, get} from '../../../ajax'
 
 const FormItem = Form.Item
 
-class WidgetF extends Component {  
+class WidgetF extends Component {
+  componentDidMount () {
+    const {setFieldsValue} = this.props.form
+    get('/users/info').then(
+      function (rst){
+        setFieldsValue({name: rst.name, email: rst.email})
+      }
+    )
+  }
+
   handleSubmit = (e) => {
     e.preventDefault();
-    const {push, action} = this.props
     this.props.form.validateFieldsAndScroll((err, values) => {
       if (!err) {
-        post(`/users/${action}`, values).then((rst) => {
-          message.success(i18n.t(`auth.messages.email-for-${action}`));
-          push('/users/sign-in')
+        post('/users/info', values).then((rst) => {
+          message.success(i18n.t('success'));
         }).catch(message.error)
       }
     });
   }
 
   render() {
-    const { action } = this.props
     const { getFieldDecorator } = this.props.form;
 
     return (
-    <Layout href={`/users/${action}`} title={`auth.users.${action}.title`}>
+    <Layout  breadcrumb={[{label: 'auth.users.info.title', href: '/users/info'}]}>
       <Form onSubmit={this.handleSubmit}>
         <FormItem
           {...formItemLayout}
           label={i18n.t('attributes.email')}
-          hasFeedback
         >
           {getFieldDecorator('email', {
+            rules: [],
+          })(
+            <Input readOnly disabled/>
+          )}
+        </FormItem>
+        <FormItem
+          {...formItemLayout}
+          label={i18n.t('attributes.fullName')}
+          hasFeedback
+        >
+          {getFieldDecorator('name', {
             rules: [{
-              type: 'email', message: i18n.t('helpers.bad-email'),
-            }, {
               required: true, message: i18n.t('helpers.not-empty'),
             }],
           })(
@@ -54,14 +65,6 @@ class WidgetF extends Component {
   }
 }
 
-WidgetF.propTypes = {
-  push: PropTypes.func.isRequired,
-  action: PropTypes.string.isRequired,
-}
-
 const Widget = Form.create()(WidgetF);
 
-export default connect(
-  state => ({}),
-  {push},
-)(Widget)
+export default Widget

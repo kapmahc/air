@@ -6,6 +6,8 @@ import SignUp from './users/SignUp'
 import EmailForm from './users/EmailForm'
 import ResetPassword from './users/ResetPassword'
 import Logs from './users/Logs'
+import Info from './users/Info'
+import ChangePassword from './users/ChangePassword'
 
 const ForgotPassword = () => <EmailForm action="forgot-password"/>
 const Confirm = () => <EmailForm action="confirm"/>
@@ -20,6 +22,8 @@ export default {
         icon: 'info-circle-o',
         items: [
           {href:'/users/logs', label:'auth.users.logs.title'},
+          {href:'/users/info', label:'auth.users.info.title'},
+          {href:'/users/change-password', label:'auth.users.change-password.title'},
         ],
       })
     }
@@ -34,6 +38,8 @@ export default {
     <Route key="auth.users.reset-password" path="/users/reset-password/:token" component={ResetPassword}/>,
 
     <Route key="auth.users.logs" path="/users/logs" component={Logs} />,
+    <Route key="auth.users.info" path="/users/info" component={Info} />,
+    <Route key="auth.users.change-password" path="/users/change-password" component={ChangePassword} />,
 
   ],
 }
