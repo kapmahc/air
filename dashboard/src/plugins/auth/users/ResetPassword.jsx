@@ -52,7 +52,7 @@ class WidgetF extends Component {
     const { getFieldDecorator } = this.props.form;
 
     return (
-    <Layout title="auth.users.reset-password.title">
+    <Layout href="/users/reset-password" title="auth.users.reset-password.title">
       <Form onSubmit={this.handleSubmit}>
         <FormItem
           {...formItemLayout}

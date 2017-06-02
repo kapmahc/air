@@ -52,7 +52,7 @@ class WidgetF extends Component {
     const { getFieldDecorator } = this.props.form;
 
     return (
-    <Layout title="site.install.title">
+    <Layout href="/install" title="site.install.title">
       <Form onSubmit={this.handleSubmit}>
         <FormItem
           {...formItemLayout}

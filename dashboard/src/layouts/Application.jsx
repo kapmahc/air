@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import PropTypes from 'prop-types'
-import { Layout, Row, Menu, Breadcrumb, Icon } from 'antd'
+import { Layout, Menu, Breadcrumb, Icon } from 'antd'
 import {Link} from 'react-router-dom'
 import i18n from 'i18next'
 import { connect } from 'react-redux'
@@ -69,7 +69,7 @@ class Widget extends Component {
                 </Menu>
               </Sider>
               <Content style={{ padding: '0 24px', minHeight: 280 }}>
-                <Row>{children}</Row>
+                {children}
               </Content>
             </Layout>
           </Content>

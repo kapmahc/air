@@ -5,6 +5,7 @@ import SignIn from './users/SignIn'
 import SignUp from './users/SignUp'
 import EmailForm from './users/EmailForm'
 import ResetPassword from './users/ResetPassword'
+import Logs from './users/Logs'
 
 const ForgotPassword = () => <EmailForm action="forgot-password"/>
 const Confirm = () => <EmailForm action="confirm"/>
@@ -30,6 +31,9 @@ export default {
     <Route key="auth.users.forgot-password" path="/users/forgot-password" component={ForgotPassword} />,
     <Route key="auth.users.confirm" path="/users/confirm" component={Confirm} />,
     <Route key="auth.users.unlock" path="/users/unlock" component={Unlock} />,
-    <Route key="auth.users.reset-password" path="/users/reset-password/:token" component={ResetPassword}/>
+    <Route key="auth.users.reset-password" path="/users/reset-password/:token" component={ResetPassword}/>,
+
+    <Route key="auth.users.logs" path="/users/logs" component={Logs} />,
+
   ],
 }
