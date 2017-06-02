@@ -10,13 +10,12 @@ const plugins = {
   site
 }
 
-export default {
-  // dashboard: Object.keys(engines).map((k, i) => {
-  //   return engines[k].dashboard
-  // }, []),
-  // navLinks: Object.keys(engines).reduce((a, k) => {
-  //   return a.concat(engines[k].navLinks)
-  // }, []),
+export default {  
+  dashboard(user) {
+    return Object.keys(plugins).reduce((a, k) => {
+      return a.concat(plugins[k].dashboard(user))
+    }, [])
+  },
   routes: Object.keys(plugins).reduce((p, k) => {
     return p.concat(plugins[k].routes)
   }, [])

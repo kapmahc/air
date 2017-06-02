@@ -7,6 +7,8 @@ const { Footer } = Layout
 const Widget = () => (
   <Footer style={{overflow: 'hidden', textAlign: 'center' }}>
     &copy;{i18n.t('site.copyright')}
+    &middot; <a>nav 1</a>
+    &middot; <a>nav 2</a> 
   </Footer>
 )
 

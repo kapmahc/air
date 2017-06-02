@@ -11,9 +11,18 @@ const Confirm = () => <EmailForm action="confirm"/>
 const Unlock = () => <EmailForm action="unlock"/>
 
 export default {
-  dashboard: {
-    label: 'auth.dashboard.title',
-    items: {href:'/users/logs', label:'auth.users.logs.title'}
+  dashboard(user) {
+    var items = []
+    if (user.uid){
+      items.push({
+        label: 'auth.dashboard.title',
+        icon: 'info-circle-o',
+        items: [
+          {href:'/users/logs', label:'auth.users.logs.title'},
+        ],
+      })
+    }
+    return items
   },
   routes: [
     <Route key="auth.users.sign-in" path="/users/sign-in" component={SignIn} />,

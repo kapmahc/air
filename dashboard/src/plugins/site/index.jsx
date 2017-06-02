@@ -8,10 +8,18 @@ import NoMatch from './NoMatch'
 import NewLeaveWord from './leave-words/New'
 
 export default {
-  dashboard: {
-    label: 'site.dashboard.title',
-    admin: true,
-    items: {href:'/site/info', label:'site.admin.info.title'}
+  dashboard (user) {
+    var items = []
+    if(user.uid && user.admin){
+      items.push({
+        label: 'site.dashboard.title',
+        icon: 'setting',
+        items: [
+          {href:'/site/info', label:'site.admin.info.title'},
+        ]
+      })
+    }
+    return items
   },
   routes: [
     <Route key="site.home" exact path="/" component={Home}/>,
