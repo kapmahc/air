@@ -12,24 +12,24 @@ type fmAttachmentNew struct {
 	ID   uint   `json:"id"`
 }
 
-func (p *Plugin) createAttachment(c *gin.Context) error {
+func (p *Plugin) _writeAttachment(c *gin.Context, k string) (*Attachment, error) {
 	user := c.MustGet(CurrentUser).(*User)
 
-	file, header, err := c.Request.FormFile("file")
+	file, header, err := c.Request.FormFile(k)
 	if err != nil {
-		return err
+		return nil, err
 	}
 
 	url, size, err := p.Uploader.Save(header)
 	if err != nil {
-		return err
+		return nil, err
 	}
 
 	// http://golang.org/pkg/net/http/#DetectContentType
 	buf := make([]byte, 512)
 	file.Seek(0, 0)
 	if _, err = file.Read(buf); err != nil {
-		return err
+		return nil, err
 	}
 
 	a := Attachment{
@@ -42,7 +42,15 @@ func (p *Plugin) createAttachment(c *gin.Context) error {
 		ResourceID:   DefaultResourceID,   //fm.ID,
 	}
 	if err := p.Db.Create(&a).Error; err != nil {
-		return err
+		return nil, err
+	}
+	return &a, nil
+}
+
+func (p *Plugin) createAttachment(c *gin.Context) error {
+	a, e := p._writeAttachment(c, "file")
+	if e != nil {
+		return e
 	}
 	c.JSON(http.StatusOK, a)
 	return nil
