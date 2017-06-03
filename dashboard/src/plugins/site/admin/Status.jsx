@@ -2,7 +2,6 @@ import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import i18n from 'i18next'
 import {Row, Col, Card} from 'antd'
-// import TimeAgo from 'timeago-react'
 
 import Layout from '../../../layouts/Dashboard'
 import {get} from '../../../ajax'
