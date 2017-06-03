@@ -1,16 +1,18 @@
 import React, {Component} from 'react'
-import { Form, Input, message} from 'antd'
+import { Form, Input, message, Select, Switch} from 'antd'
 import i18n from 'i18next'
 
 import Layout from '../../../layouts/Dashboard'
 import {Submit, formItemLayout} from '../../../form'
-import {post} from '../../../ajax'
+import {post, get} from '../../../ajax'
 
 const FormItem = Form.Item
+const Option = Select.Option
 
 class WidgetF extends Component {
   state = {
-    confirmDirty: false
+    confirmDirty: false,
+    ports: [],
   };
   handleConfirmBlur = (e) => {
     const value = e.target.value;
@@ -18,7 +20,7 @@ class WidgetF extends Component {
   }
   checkPassword = (rule, value, callback) => {
     const form = this.props.form;
-    if (value && value !== form.getFieldValue('newPassword')) {
+    if (value && value !== form.getFieldValue('password')) {
       callback(i18n.t('helpers.passwordConfirmation'));
     } else {
       callback();
@@ -31,13 +33,27 @@ class WidgetF extends Component {
     }
     callback();
   }
+  componentDidMount () {
+    const {setFieldsValue} = this.props.form
+    get('/admin/site/smtp').then(
+      function (rst){
+        setFieldsValue({
+          username: rst.smtp.username,
+          host: rst.smtp.host,
+          port: rst.smtp.port.toString(),
+          ssl: rst.smtp.ssl,
+        })
+        this.setState({ports: rst.ports})
+      }.bind(this)
+    )
+  }
+
   handleSubmit = (e) => {
     e.preventDefault();
     this.props.form.validateFieldsAndScroll((err, values) => {
       if (!err) {
-        post('/users/change-password', values).then((rst) => {
-          const {setFieldsValue} = this.props.form
-          setFieldsValue({currentPassword: '', newPassword:'', passwordConfirmation:''})
+        var data = Object.assign(values, {port: parseInt(values.port, 10)})
+        post('/admin/site/smtp', data).then((rst) => {
           message.success(i18n.t('success'));
         }).catch(message.error)
       }
@@ -48,27 +64,65 @@ class WidgetF extends Component {
     const { getFieldDecorator } = this.props.form;
 
     return (
-    <Layout  breadcrumb={[{label: 'auth.users.change-password.title', href: '/users/change-password'}]}>
+    <Layout  breadcrumb={[{label: 'site.admin.smtp.title', href: '/admin/site/smtp'}]}>
       <Form onSubmit={this.handleSubmit}>
         <FormItem
           {...formItemLayout}
-          label={i18n.t('attributes.currentPassword')}
+          label={i18n.t('attributes.host')}
           hasFeedback
         >
-          {getFieldDecorator('currentPassword', {
+          {getFieldDecorator('host', {
             rules: [{
               required: true, message: i18n.t('helpers.not-empty'),
             }],
           })(
-            <Input type="password" />
+            <Input />
           )}
         </FormItem>
         <FormItem
           {...formItemLayout}
-          label={i18n.t('attributes.newPassword')}
+          label={i18n.t('attributes.port')}
           hasFeedback
         >
-          {getFieldDecorator('newPassword', {
+          {getFieldDecorator('port', {
+            rules: [{
+              required: true, message: i18n.t('helpers.not-empty'),
+            }],
+          })(
+            <Select>
+              {this.state.ports.map((p)=><Option key={p} value={p.toString()}>{p}</Option>)}
+            </Select>
+          )}
+        </FormItem>
+        <FormItem
+          {...formItemLayout}
+          label={i18n.t('attributes.ssl')}
+        >
+          {getFieldDecorator('ssl', { valuePropName: 'checked' })(
+            <Switch />
+          )}
+        </FormItem>
+        <FormItem
+          {...formItemLayout}
+          label={i18n.t('site.admin.smtp.sender')}
+          hasFeedback
+        >
+          {getFieldDecorator('username', {
+            rules: [{
+              type: 'email', message: i18n.t('helpers.bad-email'),
+            }, {
+              required: true, message: i18n.t('helpers.not-empty'),
+            }],
+          })(
+            <Input />
+          )}
+        </FormItem>
+        <FormItem
+          {...formItemLayout}
+          label={i18n.t('attributes.password')}
+          hasFeedback
+        >
+          {getFieldDecorator('password', {
             rules: [{
               required: true, message: i18n.t('helpers.not-empty'),
             }, {

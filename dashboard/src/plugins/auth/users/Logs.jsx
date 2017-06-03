@@ -38,7 +38,7 @@ class Widget extends Component{
     return (
       <Layout breadcrumb={[{label: 'auth.users.logs.title', href: '/users/logs'}]}>
         <Row>
-          <Col offset={1} span={22}>
+          <Col xs={{span: 24}} sm={{offset:1, span:22}}>
             <Table bordered rowKey="id" columns={columns} dataSource={this.state.items} />
           </Col>
         </Row>

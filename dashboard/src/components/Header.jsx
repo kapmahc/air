@@ -17,7 +17,7 @@ class Widget extends Component {
       case 'users.sign-out':
         const {signOut} = this.props
         confirm({
-          title: i18n.t('are-you-sure'),          
+          title: i18n.t('are-you-sure'),
           onOk() {
             sessionStorage.removeItem(TOKEN)
             signOut()
@@ -29,6 +29,7 @@ class Widget extends Component {
     }
   }
   componentDidMount () {
+    document.title = `${i18n.t('site.title')} | ${i18n.t('site.subTitle')}`
     const {user, signIn} = this.props
     if (!user.uid) {
       const token = sessionStorage.getItem(TOKEN)

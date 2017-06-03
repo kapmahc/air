@@ -115,7 +115,7 @@ func (p *Plugin) postAdminSiteSeo(c *gin.Context) error {
 type fmSiteSMTP struct {
 	Host                 string `json:"host"`
 	Port                 int    `json:"port"`
-	Ssl                  string `json:"ssl"`
+	Ssl                  bool   `json:"ssl"`
 	Username             string `json:"username"`
 	Password             string `json:"password" binding:"min=6,max=32"`
 	PasswordConfirmation string `json:"passwordConfirmation" binding:"eqfield=Password"`
@@ -149,7 +149,7 @@ func (p *Plugin) postAdminSiteSMTP(c *gin.Context) error {
 		"port":     fm.Port,
 		"username": fm.Username,
 		"password": fm.Password,
-		"ssl":      fm.Ssl == "on",
+		"ssl":      fm.Ssl,
 	}
 	if err := p.Settings.Set("site.smtp", val, true); err != nil {
 		return err
