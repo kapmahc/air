@@ -20,7 +20,15 @@ export default {
           {href: 'site.admin.info'},
           {href: 'site.admin.author'},
           {href: 'site.admin.seo'},
-          {href: 'site.admin.smtp'}
+          {href: 'site.admin.smtp'},
+          {href: 'site.admin.users.index'},
+          {href: 'site.admin.locales.index'},
+          {href: 'site.admin.posts.index'},
+          {href: 'site.admin.notices.index'},
+          {href: 'site.admin.leave-words.index'},
+          {href: 'site.admin.links.index'},
+          {href: 'site.admin.cards.index'},
+          {href: 'site.admin.friend-links.index'}
         ]
       })
     }

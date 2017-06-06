@@ -1,5 +1,5 @@
 <template>
-  <dashboard-layout title="site.admin.status.title">
+  <dashboard-layout title="site.admin.status.title" admin>
     <el-col :md="{span: 10, offset: 1}">
       <h4>{{$t('site.admin.status.routes')}}</h4>
       <el-table :data="item.routes" border stripe style="width: 100%">

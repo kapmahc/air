@@ -1,5 +1,5 @@
 <template>
-  <dashboard-layout title="site.admin.seo.title">
+  <dashboard-layout title="site.admin.seo.title" admin>
     <el-col :md="{span:16, offset:1}">
       <el-form ref="form" :model="form" :rules="rules" label-width="120px">
         <el-form-item :label="$t('site.admin.seo.googleVerifyCode')" prop="googleVerifyCode">

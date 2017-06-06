@@ -1,5 +1,5 @@
 <template>
-  <dashboard-layout title="site.admin.author.title">
+  <dashboard-layout title="site.admin.author.title" admin>
     <el-col :md="{span:16, offset:1}">
       <el-form ref="form" :model="form" :rules="rules" label-width="80px">
         <el-form-item :label="$t('attributes.email')" prop="email">

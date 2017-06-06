@@ -1,5 +1,5 @@
 <template>
-  <dashboard-layout title="site.admin.smtp.title">
+  <dashboard-layout title="site.admin.smtp.title" admin>
     <el-col :md="{span:16, offset:1}">
       <el-form ref="form" :model="form" :rules="rules" label-width="80px">
         <el-form-item :label="$t('attributes.host')" prop="host">
