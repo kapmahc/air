@@ -6,20 +6,19 @@
     </span>
 
     {{$t('footer.other-languages')}}:
-    <el-button type="text" key="l" v-on:click="setLocale(l)" v-for="l in languages">
+    <el-button type="text" key="l" v-on:click="setLocale(l)" v-for="l in info.languages">
       {{$t(`languages.${l}`)}}
     </el-button>
   </footer>
 </template>
 
 <script>
-import {LANGUAGES, load as setLocale} from '@/i18n'
+import {load as setLocale} from '@/i18n'
 import {get} from '@/ajax'
 
 export default {
   data () {
     return {
-      languages: LANGUAGES
     }
   },
   created () {

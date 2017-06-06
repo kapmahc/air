@@ -25,7 +25,6 @@
 
 <script>
 import {get, post} from '@/ajax'
-import {LANGUAGES} from '@/i18n'
 
 export default {
   data () {
@@ -50,7 +49,7 @@ export default {
         'sitemap.xml.gz',
         `google${this.form.googleVerifyCode}.html`,
         `baidu_verify_${this.form.baiduVerifyCode}.html`
-      ].concat(LANGUAGES.map((l) => `rss-${l}.atom`))
+      ].concat(this.$store.state.siteInfo.languages.map((l) => `rss-${l}.atom`))
     }
   },
   methods: {
