@@ -19,6 +19,7 @@ type fmCard struct {
 	Loc       string `json:"loc" binding:"required,max=32"`
 	Title     string `json:"title" binding:"required,max=255"`
 	Summary   string `json:"summary" binding:"required"`
+	Type      string `json:"type" binding:"required"`
 	Href      string `json:"href" binding:"required,max=255"`
 	Logo      string `json:"logo" binding:"required,max=255"`
 	SortOrder int    `json:"sortOrder"`
@@ -35,6 +36,7 @@ func (p *Plugin) createCard(c *gin.Context) error {
 		Logo:      fm.Logo,
 		Href:      fm.Href,
 		Summary:   fm.Summary,
+		Type:      fm.Type,
 		SortOrder: fm.SortOrder,
 		Loc:       fm.Loc,
 		Action:    "buttons.view",
@@ -70,6 +72,7 @@ func (p *Plugin) updateCard(c *gin.Context) error {
 			"sort_order": fm.SortOrder,
 			"loc":        fm.Loc,
 			"summary":    fm.Summary,
+			"type":       fm.Type,
 		}).Error; err != nil {
 		return err
 	}

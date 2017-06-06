@@ -63,6 +63,7 @@ type Card struct {
 	Loc       string `json:"loc"`
 	Title     string `json:"title"`
 	Summary   string `json:"summary"`
+	Type      string `json:"type"`
 	Href      string `json:"href"`
 	Logo      string `json:"logo"`
 	SortOrder int    `json:"sortOrder"`

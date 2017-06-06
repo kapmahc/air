@@ -9,7 +9,7 @@ import AdminSiteSmtp from './admin/Smtp'
 import AdminSiteStatus from './admin/Status'
 import AdminLocales from './admin/Locales'
 import AdminUsers from './admin/Users'
-import AdminCards from './admin/Cards'
+// import AdminCards from './admin/Cards'
 import AdminLinks from './admin/Links'
 import AdminPosts from './admin/Posts'
 import AdminNotices from './admin/Notices'
@@ -61,7 +61,7 @@ export default {
     { path: '/admin/posts', name: 'site.admin.posts.index', component: AdminPosts },
     { path: '/admin/notices', name: 'site.admin.notices.index', component: AdminNotices },
     { path: '/admin/links', name: 'site.admin.links.index', component: AdminLinks },
-    { path: '/admin/cards', name: 'site.admin.cards.index', component: AdminCards },
+    { path: '/admin/cards', name: 'site.admin.cards.index', component: AdminLinks },
     { path: '/admin/leave-words', name: 'site.admin.leave-words.index', component: AdminLeaveWords },
     { path: '/admin/friend-links', name: 'site.admin.friend-links.index', component: AdminFriendLinks },
 

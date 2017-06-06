@@ -1,6 +1,6 @@
 <template>
   <dashboard-layout>
-    <el-col :md="{span: 8}" :key="i" v-for="(d, i) in dashboard">
+    <el-col :md="{span: 8}" :key="i" v-for="(d, i) in dashboard"  style="padding: 16px;">
       <el-card>
         <div slot="header">
           {{$t(d.label)}}
