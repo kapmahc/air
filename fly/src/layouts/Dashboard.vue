@@ -13,14 +13,14 @@
         </el-menu>
       </el-col>
       <el-col :md="{span: 20}">
-        <h2 v-if="title">{{$t(title)}}</h2>
-        <el-row :gutter="20" style="padding: 16px;">
+        <h2 v-if="title" style="padding-left: 20px;">{{$t(title)}}</h2>
+        <el-row>
           <slot />
         </el-row>
       </el-col>
     </el-row>
     <el-row>
-      <hr class="line" style="margin-top: 0;"/>
+      <hr class="line"/>
       <app-footer />
     </el-row>
   </div>
@@ -40,7 +40,14 @@ import AppError from '@/components/Error'
 import SignOut from '@/components/SignOut'
 
 export default {
-  props: ['title', 'admin'],
+  props: {
+    title: {
+      type: String
+    },
+    admin: {
+      type: Boolean
+    }
+  },
   data () {
     return {
     }

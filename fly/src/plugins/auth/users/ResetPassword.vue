@@ -2,10 +2,10 @@
   <non-sign-in-layout title="auth.users.reset-password.title">
     <el-form ref="form" :model="form" :rules="rules" label-width="80px">
       <el-form-item :label="$t('attributes.password')" prop="password">
-        <el-input type="password" v-model="form.password"></el-input>
+        <el-input type="password" v-model="form.password" />
       </el-form-item>
       <el-form-item :label="$t('attributes.passwordConfirmation')" prop="passwordConfirmation">
-        <el-input type="password" v-model="form.passwordConfirmation"></el-input>
+        <el-input type="password" v-model="form.passwordConfirmation" />
       </el-form-item>
       <el-form-item>
         <el-button type="primary" @click="submitForm('form')">{{$t("buttons.submit")}}</el-button>

@@ -2,7 +2,7 @@
   <non-sign-in-layout title="site.leave-words.new.title">
     <el-form ref="form" :model="form" :rules="rules" label-width="80px">
       <el-form-item :label="$t('attributes.content')" prop="body">
-        <el-input type="textarea" v-model="form.body"></el-input>
+        <el-input type="textarea" v-model="form.body" />
       </el-form-item>
       <el-form-item>
         <el-button type="primary" @click="submitForm('form')">{{$t("buttons.submit")}}</el-button>

@@ -2,7 +2,7 @@
   <non-sign-in-layout :title="`auth.users.${action}.title`">
     <el-form ref="form" :model="form" :rules="rules" label-width="80px">
       <el-form-item :label="$t('attributes.email')" prop="email">
-        <el-input v-model="form.email"></el-input>
+        <el-input v-model="form.email" />
       </el-form-item>
       <el-form-item>
         <el-button type="primary" @click="submitForm('form')">{{$t("buttons.submit")}}</el-button>

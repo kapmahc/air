@@ -2,6 +2,9 @@ import UsersSignIn from './users/SignIn'
 import UsersSignUp from './users/SignUp'
 import EmailForm from './users/EmailForm'
 import ResetPassword from './users/ResetPassword'
+import Logs from './users/Logs'
+import Info from './users/Info'
+import ChangePassword from './users/ChangePassword'
 
 export default {
   dashboard (user) {
@@ -27,8 +30,8 @@ export default {
     { path: '/users/unlock', name: 'auth.users.unlock', component: {template: '<EmailForm action="unlock" />', components: {EmailForm}} },
     { path: '/users/reset-password/:token', name: 'auth.users.reset-password', component: ResetPassword },
 
-    { path: '/users/logs', name: 'auth.users.logs', component: ResetPassword },
-    { path: '/users/info', name: 'auth.users.info', component: ResetPassword },
-    { path: '/users/change-password', name: 'auth.users.change-password', component: ResetPassword }
+    { path: '/users/logs', name: 'auth.users.logs', component: Logs },
+    { path: '/users/info', name: 'auth.users.info', component: Info },
+    { path: '/users/change-password', name: 'auth.users.change-password', component: ChangePassword }
   ]
 }

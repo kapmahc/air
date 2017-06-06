@@ -5,8 +5,9 @@
       <slot />
       <ul class="list-group">
         <li v-for="l in links" key="l">
+          <fa-icon :name="l.icon" />
           <router-link :to="{name: l.href}">
-            <fa-icon :name="l.icon" />&nbsp;{{$t(`${l.href}.title`)}}
+            {{$t(`${l.href}.title`)}}
           </router-link>
         </li>
       </ul>

@@ -2,19 +2,19 @@
   <non-sign-in-layout title="site.install.title">
     <el-form ref="form" :model="form" :rules="rules" label-width="80px">
       <el-form-item :label="$t('site.attributes.title')" prop="title">
-        <el-input v-model="form.title"></el-input>
+        <el-input v-model="form.title" />
       </el-form-item>
       <el-form-item :label="$t('site.attributes.subTitle')" prop="subTitle">
-        <el-input v-model="form.subTitle"></el-input>
+        <el-input v-model="form.subTitle" />
       </el-form-item>
       <el-form-item :label="$t('attributes.email')" prop="email">
-        <el-input v-model="form.email"></el-input>
+        <el-input v-model="form.email" />
       </el-form-item>
       <el-form-item :label="$t('attributes.password')" prop="password">
-        <el-input type="password" v-model="form.password"></el-input>
+        <el-input type="password" v-model="form.password" />
       </el-form-item>
       <el-form-item :label="$t('attributes.passwordConfirmation')" prop="passwordConfirmation">
-        <el-input type="password" v-model="form.passwordConfirmation"></el-input>
+        <el-input type="password" v-model="form.passwordConfirmation" />
       </el-form-item>
       <el-form-item>
         <el-button type="primary" @click="submitForm('form')">{{$t("buttons.submit")}}</el-button>
