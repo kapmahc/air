@@ -1,17 +1,16 @@
 <template>
   <application-layout>
-    <div class="row">
-      <div class="offset-2 col-8">
-        <h2>{{$t(title)}}</h2>
-        <hr />
-        <slot />
-        <div class="list-group block">
-          <router-link v-if="l" class="list-group-item list-group-item-action" v-for="l in links" v-bind:key="l" :to="{name: l.href}">
+    <el-col :md="{span: 12, offset:6}">
+      <h2>{{$t(title)}}</h2>
+      <slot />
+      <ul style="list-style-type: none;">
+        <li v-for="l in links" key="l" style="padding: 3px;">
+          <router-link :to="{name: l.href}">
             <fa-icon :name="l.icon" />&nbsp;{{$t(`${l.href}.title`)}}
           </router-link>
-        </div>
-      </div>
-    </div>
+        </li>
+      </ul>
+    </el-col>
   </application-layout>
 </template>
 

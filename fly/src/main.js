@@ -1,8 +1,8 @@
 import Vue from 'vue'
 Vue.config.productionTip = false
 
-import BootstrapVue from 'bootstrap-vue'
-Vue.use(BootstrapVue)
+import ElementUI from 'element-ui'
+Vue.use(ElementUI)
 
 import './main.css'
 import './components'

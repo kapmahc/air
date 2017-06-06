@@ -1,25 +1,17 @@
 <template>
-  <b-nav-item-dropdown right v-if="user">
-    <template slot="text">
-      {{$t('personal-bar.welcome', {name: user.name})}}
-    </template>
-    <b-dropdown-item :to="{name: 'site.dashboard'}">
-      {{$t('personal-bar.dashboard')}}
-    </b-dropdown-item>
-    <b-dropdown-divider />
-    <b-dropdown-item v-on:click="onSignOut">
+  <el-submenu index="personal-bar" v-if="user">
+    <template slot="title">{{$t('personal-bar.welcome', {name: user.name})}}</template>
+    <el-menu-item index="to-site.dashboard">{{$t('personal-bar.dashboard')}}</el-menu-item>
+    <el-menu-item index="personal.sign-out" v-on:click="onSignOut">
       {{$t('personal-bar.sign-out')}}
-    </b-dropdown-item>
-  </b-nav-item-dropdown>
-  <b-nav-item-dropdown right v-else="user">
-    <template slot="text">
-      {{$t('personal-bar.sign-in-or-up')}}
-    </template>
-    <b-dropdown-item v-if="l" v-for="(l, i) in links" :key="i" :to="{name: l.href}">
+    </el-menu-item>
+  </el-submenu>
+  <el-submenu index="personal-bar" v-else>
+    <template slot="title">{{$t('personal-bar.sign-in-or-up')}}</template>
+    <el-menu-item :index="`to-${l.href}`" :route="{name: l.href}" v-for="(l, i) in links" :key="i">
       {{$t(`${l.href}.title`)}}
-    </b-dropdown-item>
-    <b-dropdown-divider v-else />
-  </b-nav-item-dropdown>
+    </el-menu-item>
+  </el-submenu>
 </template>
 
 <script>
@@ -50,7 +42,7 @@ export default {
           sessionStorage.clear()
           this.$store.commit('signOut')
           this.$router.push({name: 'site.home'})
-        }.bind(this)).catch(alert)
+        }.bind(this)).catch(this.$message.error)
       }
     }
   }

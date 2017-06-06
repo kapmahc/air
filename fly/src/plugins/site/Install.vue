@@ -1,31 +1,26 @@
 <template>
   <non-sign-in-layout title="site.install.title">
-    <form>
-      <div class="form-group">
-        <label>{{$t('site.attributes.title')}}</label>
-        <b-form-input v-model="title" type="text"/>
-      </div>
-      <div class="form-group">
-        <label>{{$t('site.attributes.subTitle')}}</label>
-        <b-form-input v-model="subTitle" type="text" />
-      </div>
-      <div class="form-group">
-        <label>{{$t('attributes.email')}}</label>
-        <b-form-input v-model="email" type="email" />
-        <small class="form-text text-muted">{{$t('helpers.email')}}</small>
-      </div>
-      <div class="form-group">
-        <label>{{$t('attributes.password')}}</label>
-        <b-form-input v-model="password" type="password"/>
-        <small class="form-text text-muted">{{$t('helpers.password')}}</small>
-      </div>
-      <div class="form-group">
-        <label>{{$t('attributes.passwordConfirmation')}}</label>
-        <b-form-input v-model="passwordConfirmation" type="password"/>
-        <small class="form-text text-muted">{{$t('helpers.passwordConfirmation')}}</small>
-      </div>
-      <b-button v-on:click="onSubmit" variant="primary">{{$t('buttons.submit')}}</b-button>
-    </form>
+    <el-form ref="form" :model="form" :rules="rules" label-width="80px">
+      <el-form-item :label="$t('site.attributes.title')" prop="title">
+        <el-input v-model="form.title"></el-input>
+      </el-form-item>
+      <el-form-item :label="$t('site.attributes.subTitle')" prop="subTitle">
+        <el-input v-model="form.subTitle"></el-input>
+      </el-form-item>
+      <el-form-item :label="$t('attributes.email')" prop="email">
+        <el-input v-model="form.email"></el-input>
+      </el-form-item>
+      <el-form-item :label="$t('attributes.password')" prop="password">
+        <el-input type="password" v-model="form.password"></el-input>
+      </el-form-item>
+      <el-form-item :label="$t('attributes.passwordConfirmation')" prop="passwordConfirmation">
+        <el-input type="password" v-model="form.passwordConfirmation"></el-input>
+      </el-form-item>
+      <el-form-item>
+        <el-button type="primary" @click="submitForm('form')">{{$t("buttons.submit")}}</el-button>
+        <el-button @click="resetForm('form')">{{$t("buttons.reset")}}</el-button>
+      </el-form-item>
+    </el-form>
   </non-sign-in-layout>
 </template>
 
@@ -35,28 +30,62 @@ import {post} from '@/ajax'
 export default {
   data () {
     return {
-      title: '',
-      subTitle: '',
-      email: '',
-      password: '',
-      passwordConfirmation: ''
+      form: {
+        title: '',
+        subTitle: '',
+        email: '',
+        password: '',
+        passwordConfirmation: ''
+      }
+    }
+  },
+  computed: {
+    rules () {
+      var password2 = (rule, value, callback) => {
+        if (value !== this.form.password) {
+          callback(new Error(this.$i18n.t('helpers.passwordConfirmation')))
+        } else {
+          callback()
+        }
+      }
+      return {
+        email: [
+          { required: true, message: this.$t('helpers.not-empty'), trigger: 'change' },
+          { type: 'email', message: this.$t('helpers.bad-email'), trigger: 'change' }
+        ],
+        title: [
+          { required: true, message: this.$t('helpers.not-empty'), trigger: 'change' }
+        ],
+        subTitle: [
+          { required: true, message: this.$t('helpers.not-empty'), trigger: 'change' }
+        ],
+        password: [
+            { required: true, message: this.$t('helpers.not-empty'), trigger: 'change' },
+            { min: 6, max: 32, message: this.$t('helpers.password'), trigger: 'change' }
+        ],
+        passwordConfirmation: [
+          { required: true, message: this.$i18n.t('helpers.not-empty'), trigger: 'change' },
+          { validator: password2, trigger: 'change' }
+        ]
+      }
     }
   },
   methods: {
-    onSubmit (e) {
-      e.preventDefault()
-      var data = new URLSearchParams()
-      data.append('title', this.title)
-      data.append('subTitle', this.subTitle)
-      data.append('email', this.email)
-      data.append('name', this.name)
-      data.append('password', this.password)
-      data.append('passwordConfirmation', this.passwordConfirmation)
-      post('/install', data)
-        .then(function (rst) {
-          alert(this.$t('success'))
-          this.$router.push({name: 'auth.users.sign-in'})
-        }.bind(this)).catch(alert)
+    submitForm (formName) {
+      this.$refs[formName].validate((valid) => {
+        if (valid) {
+          post('/install', this.form)
+            .then(function (rst) {
+              this.$message.success(this.$t('success'))
+              this.$router.push({name: 'auth.users.sign-in'})
+            }.bind(this)).catch(this.$message.error)
+        } else {
+          return false
+        }
+      })
+    },
+    resetForm (formName) {
+      this.$refs[formName].resetFields()
     }
   }
 }

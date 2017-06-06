@@ -1,17 +1,18 @@
 <template>
-<non-sign-in-layout title="auth.users.sign-in.title">
-  <form>
-    <div class="form-group">
-      <label>{{$t('attributes.email')}}</label>
-      <b-form-input v-model="email" type="email"/>
-    </div>
-    <div class="form-group">
-      <label>{{$t('attributes.password')}}</label>
-      <b-form-input v-model="password" type="password"/>
-    </div>
-    <b-button v-on:click="onSubmit" variant="primary">{{$t('buttons.submit')}}</b-button>
-  </form>
-</non-sign-in-layout>
+  <non-sign-in-layout title="auth.users.sign-in.title">
+    <el-form ref="form" :model="form" :rules="rules" label-width="80px">
+      <el-form-item :label="$t('attributes.email')" prop="email">
+        <el-input v-model="form.email"></el-input>
+      </el-form-item>
+      <el-form-item :label="$t('attributes.password')" prop="password">
+        <el-input type="password" v-model="form.password"></el-input>
+      </el-form-item>
+      <el-form-item>
+        <el-button type="primary" @click="submitForm('form')">{{$t("buttons.submit")}}</el-button>
+        <el-button @click="resetForm('form')">{{$t("buttons.reset")}}</el-button>
+      </el-form-item>
+    </el-form>
+  </non-sign-in-layout>
 </template>
 
 <script>
@@ -21,23 +22,44 @@ import {TOKEN} from '@/constants'
 export default {
   data () {
     return {
-      email: '',
-      password: ''
+      form: {
+        email: '',
+        password: ''
+      }
+    }
+  },
+  computed: {
+    rules () {
+      return {
+        email: [
+          { required: true, message: this.$t('helpers.not-empty'), trigger: 'change' },
+          { type: 'email', message: this.$t('helpers.bad-email'), trigger: 'change' }
+        ],
+        password: [
+            { required: true, message: this.$t('helpers.not-empty'), trigger: 'change' }
+        ]
+      }
     }
   },
   methods: {
-    onSubmit (e) {
-      e.preventDefault()
-      var data = new URLSearchParams()
-      data.append('email', this.email)
-      data.append('password', this.password)
-      post('/users/sign-in', data)
-        .then(function (rst) {
-          var token = rst.token
-          sessionStorage.setItem(TOKEN, token)
-          this.$store.commit('signIn', token)
-          this.$router.push({name: 'site.dashboard'})
-        }.bind(this)).catch(alert)
+    submitForm (formName) {
+      this.$refs[formName].validate((valid) => {
+        if (valid) {
+          post('/users/sign-in', this.form)
+            .then(function (rst) {
+              var token = rst.token
+              sessionStorage.setItem(TOKEN, token)
+              this.$store.commit('signIn', token)
+              this.$router.push({name: 'site.dashboard'})
+              this.$message.success(this.$t('success'))
+            }.bind(this)).catch(this.$message.error)
+        } else {
+          return false
+        }
+      })
+    },
+    resetForm (formName) {
+      this.$refs[formName].resetFields()
     }
   }
 }

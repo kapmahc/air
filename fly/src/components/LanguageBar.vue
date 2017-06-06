@@ -1,12 +1,10 @@
 <template>
-  <b-nav-item-dropdown right>
-    <template slot="text">
-      {{$t('language-bar.switch')}}
-    </template>
-    <b-dropdown-item v-bind:key="l" v-on:click="setLocale(l)" v-for="l in languages">
+  <el-submenu index="language-bar">
+    <template slot="title">{{$t('language-bar.switch')}}</template>
+    <el-menu-item :index="`language-bar-${l}`"  v-bind:key="l" v-on:click="setLocale(l)" v-for="l in languages">
       {{$t(`languages.${l}`)}}
-    </b-dropdown-item>
-  </b-nav-item-dropdown>
+    </el-menu-item>
+  </el-submenu>
 </template>
 
 <script>

@@ -1,11 +1,17 @@
 <template>
-  <div class="body">
+  <div>
     <app-header />
-    <div class="container">
+    <el-row>
       <slot />
-      <hr />
-      <app-footer />
-    </div>
+    </el-row>
+    <el-row>
+      <el-col :span="24">
+        <hr class="line"/>
+      </el-col>
+      <el-col :md="{span: 22, offset:1}">
+        <app-footer />
+      </el-col>
+    </el-row>
   </div>
 </template>
 
@@ -24,10 +30,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-.body {
-  padding-top: 4rem;
-  padding-bottom: 4rem;
-}
-</style>

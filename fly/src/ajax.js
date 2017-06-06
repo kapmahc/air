@@ -31,45 +31,7 @@ export const _delete = (path) => {
 
 export const post = (path, body) => {
   var data = options('post')
-  data.body = body
+  data.body = JSON.stringify(body)
   // https://github.github.io/fetch/#options
-  data.headers['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8'
   return fetch(api(path), data).then(parse)
 }
-
-/* for jquery */
-
-// import $ from 'jquery'
-//
-// $.ajaxSetup({
-//   beforeSend: function (xhr) {
-//     xhr.setRequestHeader('Authorization', `BEARER ${window.sessionStorage.getItem(TOKEN)}`)
-//   }
-// })
-
-// export const fail = (e) => alert(e.responseText || e.statusText)
-
-// export const get = (path, success, fail) => {
-//   if (!fail) {
-//     fail = _fail
-//   }
-//   $.get(api(path), success).fail(fail)
-// }
-
-// export const _delete = (path, success, fail) => {
-//   if (!fail) {
-//     fail = _fail
-//   }
-//   $.ajax({
-//     url: api(path),
-//     type: 'DELETE',
-//     success
-//   }).fail(fail)
-// }
-
-// export const post = (path, body, success, fail) => {
-//   if (!fail) {
-//     fail = _fail
-//   }
-//   $.post(api(path), body, success).fail(fail)
-// }

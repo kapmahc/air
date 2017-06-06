@@ -1,8 +1,14 @@
-@import "~bootstrap/dist/css/bootstrap.css";
-@import "~bootstrap-vue/dist/bootstrap-vue.css";
+@import "~element-ui/lib/theme-default/index.css";
 @import "~font-awesome/css/font-awesome.css";
 
-.block {
-  padding-top: 1rem;
-  padding-bottom: 2rem;
+body{
+  margin: 0;
+}
+
+hr.line {
+    border: none;
+    height: 1px;
+    /* Set the hr color */
+    color: #333; /* old IE */
+    background-color: #333; /* Modern Browsers */
 }

@@ -1,13 +1,14 @@
 <template>
   <non-sign-in-layout title="site.leave-words.new.title">
-    <form>
-      <div class="form-group">
-        <label>{{$t('attributes.body')}}</label>
-        <b-form-input textarea v-model="body" :rows="6" />
-        <small class="form-text text-muted">{{$t('site.helpers.leave-word.body')}}</small>
-      </div>
-      <b-button v-on:click="onSubmit" variant="primary">{{$t('buttons.submit')}}</b-button>
-    </form>
+    <el-form ref="form" :model="form" :rules="rules" label-width="80px">
+      <el-form-item :label="$t('attributes.content')" prop="body">
+        <el-input type="textarea" v-model="form.body"></el-input>
+      </el-form-item>
+      <el-form-item>
+        <el-button type="primary" @click="submitForm('form')">{{$t("buttons.submit")}}</el-button>
+        <el-button @click="resetForm('form')">{{$t("buttons.reset")}}</el-button>
+      </el-form-item>
+    </el-form>
   </non-sign-in-layout>
 </template>
 
@@ -18,20 +19,35 @@ export default {
   props: ['action'],
   data () {
     return {
-      body: ''
+      form: {
+        body: ''
+      }
+    }
+  },
+  computed: {
+    rules () {
+      return {
+        body: [
+            { required: true, message: this.$t('helpers.not-empty'), trigger: 'change' }
+        ]
+      }
     }
   },
   methods: {
-    onSubmit (e) {
-      e.preventDefault()
-      var data = new URLSearchParams()
-      data.append('body', this.body)
-      data.append('type', 'text')
-      post('/leave-words', data)
-        .then(function (rst) {
-          alert(this.$t('success'))
-          this.body = ''
-        }.bind(this)).catch(alert)
+    submitForm (formName) {
+      this.$refs[formName].validate((valid) => {
+        if (valid) {
+          post('/leave-words', Object.assign(this.form, {type: 'text'}))
+            .then(function (rst) {
+              this.$message.success(this.$t('success'))
+            }.bind(this)).catch(this.$message.error)
+        } else {
+          return false
+        }
+      })
+    },
+    resetForm (formName) {
+      this.$refs[formName].resetFields()
     }
   }
 }
