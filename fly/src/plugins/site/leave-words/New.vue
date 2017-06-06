@@ -3,6 +3,7 @@
     <el-form ref="form" :model="form" :rules="rules" label-width="80px">
       <el-form-item :label="$t('attributes.content')" prop="body">
         <el-input type="textarea" v-model="form.body" />
+        <span>{{$t('site.helpers.leave-word.body')}}</span>
       </el-form-item>
       <el-form-item>
         <el-button type="primary" @click="submitForm('form')">{{$t("buttons.submit")}}</el-button>

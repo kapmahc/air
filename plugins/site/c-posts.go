@@ -18,7 +18,7 @@ func (p *Plugin) indexPosts(c *gin.Context) error {
 
 func (p *Plugin) showPost(c *gin.Context) error {
 	var item Post
-	if err := p.Db.Where("id = ?", c.Param("id")).First(&item).Error; err != nil {
+	if err := p.Db.Where("id = ? OR name = ?", c.Param("id"), c.Query("name")).First(&item).Error; err != nil {
 		return err
 	}
 	c.JSON(http.StatusOK, item)
@@ -26,6 +26,7 @@ func (p *Plugin) showPost(c *gin.Context) error {
 }
 
 type fmPost struct {
+	Name  string `json:"name" binding:"required,max=255"`
 	Title string `json:"title" binding:"required,max=255"`
 	Body  string `json:"body" binding:"required"`
 	Type  string `json:"type" binding:"required,max=8"`
@@ -39,6 +40,7 @@ func (p *Plugin) createPost(c *gin.Context) error {
 	item := Post{
 		Media: web.Media{Type: fm.Type, Body: fm.Body},
 		Title: fm.Title,
+		Name:  fm.Name,
 	}
 	if err := p.Db.Create(&item).Error; err != nil {
 		return err
@@ -58,6 +60,7 @@ func (p *Plugin) updatePost(c *gin.Context) error {
 			"body":  fm.Body,
 			"type":  fm.Type,
 			"title": fm.Title,
+			"name":  fm.Name,
 		}).Error; err != nil {
 		return err
 	}
