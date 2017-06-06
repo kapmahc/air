@@ -1,5 +1,5 @@
 <template>
-  <footer>
+  <footer style="text-align:center">
     &copy; {{ $t("site.copyright") }}
     &middot; <a href="#">Privacy</a>
     &middot; <a href="#">Terms</a>

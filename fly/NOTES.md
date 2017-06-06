@@ -12,3 +12,4 @@ nvm alias default 8.0
 - [vue router](https://router.vuejs.org/en/)
 - [vuex](https://vuex.vuejs.org/en/)
 - [element](http://element.eleme.io/#/en-US/component/installation)
+- [font awesome](http://fontawesome.io/icons/)

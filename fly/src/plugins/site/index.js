@@ -9,10 +9,9 @@ export default {
     if (user && user.admin) {
       items.push({
         label: 'site.dashboard.title',
-        icon: 'settings',
+        icon: 'cogs',
         items: [
           {href: 'site.admin.status'},
-          null,
           {href: 'site.admin.info'}
         ]
       })

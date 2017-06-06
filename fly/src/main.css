@@ -7,8 +7,14 @@ body{
 
 hr.line {
     border: none;
-    height: 1px;
-    /* Set the hr color */
-    color: #333; /* old IE */
-    background-color: #333; /* Modern Browsers */
+    height: 0.8px;
+    background-color: gray; /* Modern Browsers */
+}
+
+ul.list-group {
+  list-style-type: none;
+  padding: 0;
+}
+ul.list-group li{
+  padding: 3px;
 }

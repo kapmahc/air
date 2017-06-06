@@ -1,14 +1,19 @@
 <template>
   <dashboard-layout>
-    <div class="card-columns">
-      <b-card no-block :header="$t(d.label)" :key="i" v-for="(d, i) in dashboard">
-        <b-list-group flush>
-          <b-list-group-item v-if="l" :to="{name: l.href}" :key="j" v-for="(l, j) in d.items">
-            {{$t(`${l.href}.title`)}}
-          </b-list-group-item>
-        </b-list-group>
-      </b-card>
-    </div>
+    <el-col :md="{span: 8}" :key="i" v-for="(d, i) in dashboard">
+      <el-card>
+        <div slot="header">
+          {{$t(d.label)}}
+        </div>
+        <ul class="list-group">
+          <li :key="j" v-for="(l, j) in d.items">
+            <router-link :to="{name: l.href}">
+              {{$t(`${l.href}.title`)}}
+            </router-link>
+          </li>
+        </ul>
+      </el-card>
+    </el-col>
   </dashboard-layout>
 </template>
 

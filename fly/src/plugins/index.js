@@ -2,8 +2,8 @@ import site from './site'
 import auth from './auth'
 
 const plugins = {
-  site,
-  auth
+  auth,
+  site
 }
 
 export default {

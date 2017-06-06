@@ -9,10 +9,9 @@ export default {
     if (user) {
       items.push({
         label: 'auth.dashboard.title',
-        icon: 'personal',
+        icon: 'user',
         items: [
           {href: 'auth.users.logs'},
-          null,
           {href: 'auth.users.info'},
           {href: 'auth.users.change-password'}
         ]
