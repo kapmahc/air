@@ -79,7 +79,7 @@ func (p *Plugin) _networkStatus() (gin.H, error) {
 
 func (p *Plugin) _dbStatus() (gin.H, error) {
 	val := gin.H{
-		"drivers": sql.Drivers(),
+		"drivers": strings.Join(sql.Drivers(), ", "),
 	}
 	switch viper.GetString("database.driver") {
 	case postgresqlDriver:
