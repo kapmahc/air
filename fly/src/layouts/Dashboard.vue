@@ -45,9 +45,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-.body {
-  padding-top: 3.5rem;
-}
-</style>
