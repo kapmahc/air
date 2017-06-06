@@ -5,6 +5,7 @@ import ResetPassword from './users/ResetPassword'
 import Logs from './users/Logs'
 import Info from './users/Info'
 import ChangePassword from './users/ChangePassword'
+import Attachments from './Attachments'
 
 export default {
   dashboard (user) {
@@ -16,7 +17,8 @@ export default {
         items: [
           {href: 'auth.users.logs'},
           {href: 'auth.users.info'},
-          {href: 'auth.users.change-password'}
+          {href: 'auth.users.change-password'},
+          {href: 'auth.attachments.index'}
         ]
       })
     }
@@ -32,6 +34,8 @@ export default {
 
     { path: '/users/logs', name: 'auth.users.logs', component: Logs },
     { path: '/users/info', name: 'auth.users.info', component: Info },
-    { path: '/users/change-password', name: 'auth.users.change-password', component: ChangePassword }
+    { path: '/users/change-password', name: 'auth.users.change-password', component: ChangePassword },
+
+    { path: '/attachments', name: 'auth.attachments.index', component: Attachments }
   ]
 }
