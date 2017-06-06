@@ -5,7 +5,7 @@
         <el-form ref="form" :model="form" :rules="rules" label-width="80px">
         <el-form-item :label="$t('attributes.loc')">
           <el-select v-model="form.loc">
-            <el-option :key="i" :label="i" :value="i" v-for="i in ['top', 'middle', 'bottom']" />
+            <el-option :key="i" :label="i" :value="i" v-for="i in ['carousel', 'zone']" />
           </el-select>
         </el-form-item>
           <el-form-item :label="$t('attributes.title')" prop="title">
@@ -112,7 +112,7 @@ export default {
   },
   methods: {
     handleEdit (form) {
-      this.form = form || {action: '', title: '', logo: '', summary: '', type: '', href: '', loc: 'top', sortOrder: 5}
+      this.form = form || {action: '', title: '', logo: '', summary: '', type: '', href: '', loc: 'carousel', sortOrder: 5}
       this.dialogFormVisible = true
     },
     handleRemove (id) {
