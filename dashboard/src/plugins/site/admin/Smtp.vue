@@ -55,13 +55,28 @@ export default {
   },
   computed: {
     rules () {
+      var password2 = (rule, value, callback) => {
+        if (value !== this.form.password) {
+          callback(new Error(this.$i18n.t('helpers.passwordConfirmation')))
+        } else {
+          callback()
+        }
+      }
       return {
-        email: [
+        username: [
           { required: true, message: this.$t('helpers.not-empty'), trigger: 'change' },
           { type: 'email', message: this.$t('helpers.bad-email'), trigger: 'change' }
         ],
-        name: [
+        host: [
             { required: true, message: this.$t('helpers.not-empty'), trigger: 'change' }
+        ],
+        password: [
+            { required: true, message: this.$t('helpers.not-empty'), trigger: 'change' },
+            { min: 6, max: 32, message: this.$t('helpers.password'), trigger: 'change' }
+        ],
+        passwordConfirmation: [
+          { required: true, message: this.$i18n.t('helpers.not-empty'), trigger: 'change' },
+          { validator: password2, trigger: 'change' }
         ]
       }
     }

@@ -1,13 +1,21 @@
 <template>
-  <dashboard-layout title="site.admin.locales.index.title" admin>
+  <dashboard-layout title="site.admin.friend-links.index.title" admin>
     <el-col :md="{span: 22, offset: 1}">
       <el-dialog :title="$t('buttons.edit')" :visible.sync="dialogFormVisible">
         <el-form ref="form" :model="form" :rules="rules" label-width="80px">
-          <el-form-item :label="$t('site.attributes.locale.code')" prop="code">
-            <el-input v-model="form.code" />
+          <el-form-item :label="$t('attributes.title')" prop="title">
+            <el-input v-model="form.title" />
           </el-form-item>
-          <el-form-item :label="$t('site.attributes.locale.message')" prop="message">
-            <el-input v-model="form.message" />
+          <el-form-item :label="$t('attributes.home')" prop="home">
+            <el-input v-model="form.home" />
+          </el-form-item>
+          <el-form-item :label="$t('attributes.logo')" prop="logo">
+            <el-input v-model="form.logo" />
+          </el-form-item>
+          <el-form-item :label="$t('attributes.sortOrder')">
+            <el-select v-model="form.sortOrder">
+              <el-option :key="i" :label="i" :value="i" v-for="i in 10" />
+            </el-select>
           </el-form-item>
         </el-form>
         <div slot="footer" class="dialog-footer">
@@ -19,13 +27,17 @@
       <el-button @click="handleEdit(null)" type="info" size="mini" icon="plus"/>
 
       <el-table :data="items" border stripe style="width: 100%;">
-        <el-table-column width="320" prop="code" :label="$t('site.attributes.locale.code')" />
-        <el-table-column prop="message" :label="$t('site.attributes.locale.message')" />
+        <el-table-column width="120" prop="sortOrder" :label="$t('attributes.sortOrder')" />
+        <el-table-column :label="$t('attributes.content')">
+          <template scope="scope">
+            <a :href="scope.row.home" target="_blank"><img :title="scope.row.title" :src="scope.row.logo"/></a>
+          </template>
+        </el-table-column>
         <el-table-column width="80" :label="$t('buttons.manage')">
           <template scope="scope">
             <el-button-group>
               <el-button @click="handleEdit(scope.row)" type="info" size="mini" icon="edit" />
-              <el-button @click="handleRemove(scope.row.code)" type="danger" size="mini" icon="delete" />
+              <el-button @click="handleRemove(scope.row.id)" type="danger" size="mini" icon="delete" />
             </el-button-group>
           </template>
         </el-table-column>
@@ -39,14 +51,16 @@ import {get, post, _delete} from '@/ajax'
 
 export default {
   created () {
-    get('/admin/locales').then((rst) => { this.items = Object.entries(rst).map((v) => { return { code: v[0], message: v[1] } }) }).catch(this.$message.error)
+    get('/friend-links').then((rst) => { this.items = rst }).catch(this.$message.error)
   },
   data () {
     return {
       items: [],
       form: {
-        code: '',
-        message: ''
+        home: '',
+        title: '',
+        logo: '',
+        sortOrder: 5
       },
       dialogFormVisible: false
     }
@@ -54,10 +68,13 @@ export default {
   computed: {
     rules () {
       return {
-        code: [
+        title: [
           { required: true, message: this.$t('helpers.not-empty'), trigger: 'change' }
         ],
-        message: [
+        logo: [
+          { required: true, message: this.$t('helpers.not-empty'), trigger: 'change' }
+        ],
+        home: [
           { required: true, message: this.$t('helpers.not-empty'), trigger: 'change' }
         ]
       }
@@ -65,10 +82,10 @@ export default {
   },
   methods: {
     handleEdit (form) {
-      this.form = form || {code: '', message: ''}
+      this.form = form || {title: '', logo: '', home: '', sortOrder: 5}
       this.dialogFormVisible = true
     },
-    handleRemove (code) {
+    handleRemove (id) {
       this.$confirm(
         this.$t('are-you-sure'),
         '',
@@ -79,21 +96,21 @@ export default {
         }
       )
       .then(() => {
-        _delete(`/admin/locales/${code}`).then(function (rst) {
+        _delete(`/friend-links/${id}`).then(function (rst) {
           this.$message.success('success')
-          this.items = this.items.filter((o) => o.code !== code)
+          this.items = this.items.filter((o) => o.id !== id)
         }.bind(this)).catch(this.$message.error)
       })
       .catch(() => {})
     },
     handleSave (formName) {
       this.$refs[formName].validate((valid) => {
-        const code = this.form.code
+        const id = this.form.id
         if (valid) {
-          post('/admin/locales', this.form)
+          post(id ? `/friend-links/${id}` : '/friend-links', this.form)
             .then(function (rst) {
-              this.items = this.items.filter((o) => o.code !== code)
-              this.items.unshift(Object.assign({}, this.form))
+              this.items = this.items.filter((o) => o.id !== id)
+              this.items.unshift(Object.assign({}, id ? this.form : rst))
               this.dialogFormVisible = false
               this.$message.success(this.$t('success'))
             }.bind(this)).catch(this.$message.error)

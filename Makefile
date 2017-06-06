@@ -23,7 +23,7 @@ frontend:
 
 
 clean:
-	-rm -rv $(dist) dist.tar.bz2 dashboard/build
+	-rm -rv $(dist) dist.tar.bz2 dashboard/dist
 
 
 init:

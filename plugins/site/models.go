@@ -79,7 +79,7 @@ type FriendLink struct {
 	web.Model
 
 	Title     string `json:"title"`
-	Home      string `json:"Home"`
+	Home      string `json:"home"`
 	Logo      string `json:"logo"`
 	SortOrder int    `json:"sortOrder"`
 }
