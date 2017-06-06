@@ -22,6 +22,7 @@ type fmCard struct {
 	Type      string `json:"type" binding:"required"`
 	Href      string `json:"href" binding:"required,max=255"`
 	Logo      string `json:"logo" binding:"required,max=255"`
+	Action    string `json:"action" binding:"required,max=32"`
 	SortOrder int    `json:"sortOrder"`
 }
 
@@ -37,9 +38,9 @@ func (p *Plugin) createCard(c *gin.Context) error {
 		Href:      fm.Href,
 		Summary:   fm.Summary,
 		Type:      fm.Type,
+		Action:    fm.Action,
 		SortOrder: fm.SortOrder,
 		Loc:       fm.Loc,
-		Action:    "buttons.view",
 	}
 	if err := p.Db.Create(&item).Error; err != nil {
 		return err
@@ -73,6 +74,7 @@ func (p *Plugin) updateCard(c *gin.Context) error {
 			"loc":        fm.Loc,
 			"summary":    fm.Summary,
 			"type":       fm.Type,
+			"action":     fm.Action,
 		}).Error; err != nil {
 		return err
 	}

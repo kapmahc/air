@@ -21,6 +21,9 @@
           <el-form-item :label="$t('attributes.logo')" prop="logo">
             <el-input v-model="form.logo" />
           </el-form-item>
+          <el-form-item :label="$t('attributes.action')" prop="action">
+            <el-input v-model="form.action" />
+          </el-form-item>
           <el-form-item :label="$t('attributes.sortOrder')">
             <el-select v-model="form.sortOrder">
               <el-option :key="i" :label="i" :value="i" v-for="i in 10" />
@@ -46,7 +49,7 @@
                 {{scope.row.action}}
               </a>
             </h3>
-            <img :src="{{scope.row.logo}}"/>
+            <img :src="scope.row.logo"/>
             <pre><code>{{scope.row.summary}}</code></pre>
           </template>
         </el-table-column>
@@ -80,6 +83,7 @@ export default {
         type: '',
         logo: '',
         loc: '',
+        action: '',
         sortOrder: 0
       },
       dialogFormVisible: false
@@ -88,7 +92,16 @@ export default {
   computed: {
     rules () {
       return {
-        label: [
+        action: [
+          { required: true, message: this.$t('helpers.not-empty'), trigger: 'change' }
+        ],
+        title: [
+          { required: true, message: this.$t('helpers.not-empty'), trigger: 'change' }
+        ],
+        summary: [
+          { required: true, message: this.$t('helpers.not-empty'), trigger: 'change' }
+        ],
+        logo: [
           { required: true, message: this.$t('helpers.not-empty'), trigger: 'change' }
         ],
         href: [
@@ -99,7 +112,7 @@ export default {
   },
   methods: {
     handleEdit (form) {
-      this.form = form || {title: '', logo: '', summary: '', type: '', href: '', loc: 'top', sortOrder: 5}
+      this.form = form || {action: '', title: '', logo: '', summary: '', type: '', href: '', loc: 'top', sortOrder: 5}
       this.dialogFormVisible = true
     },
     handleRemove (id) {
@@ -124,7 +137,7 @@ export default {
       this.$refs[formName].validate((valid) => {
         const id = this.form.id
         if (valid) {
-          post(id ? `/cards/${id}` : '/cards', this.form)
+          post(id ? `/cards/${id}` : '/cards', Object.assign({}, this.form, {type: 'markdown'}))
             .then(function (rst) {
               this.items = this.items.filter((o) => o.id !== id)
               this.items.unshift(Object.assign({}, id ? this.form : rst))
