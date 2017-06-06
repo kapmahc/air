@@ -1,0 +1,5 @@
+@import '~antd/dist/antd.css';
+
+.my-gutter-box {
+  padding: 8px 0;
+}

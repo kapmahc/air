@@ -19,7 +19,7 @@ backend:
 frontend:
 	mkdir -pv $(dist)
 	cd dashboard && npm run build
-	cp -rv dashboard/build $(dist)/public
+	cp -rv dashboard/dist $(dist)/public
 
 
 clean:

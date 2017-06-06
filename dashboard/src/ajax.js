@@ -1,7 +1,7 @@
 import {TOKEN} from './constants'
 
 export const api = (path) => {
-  return `${process.env.REACT_APP_BACKEND}${path}`
+  return `${process.env.API_HOST}${path}`
 }
 // ---------------------------------
 

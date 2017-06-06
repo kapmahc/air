@@ -1,5 +1,20 @@
-@import '~antd/dist/antd.css';
+@import "~element-ui/lib/theme-default/index.css";
+@import "~font-awesome/css/font-awesome.css";
 
-.my-gutter-box {
-  padding: 8px 0;
+body{
+  margin: 0;
+}
+
+hr.line {
+    border: none;
+    height: 0.8px;
+    background-color: gray; /* Modern Browsers */
+}
+
+ul.list-group {
+  list-style-type: none;
+  padding: 0;
+}
+ul.list-group li{
+  padding: 3px;
 }

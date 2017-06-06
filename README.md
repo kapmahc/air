@@ -1,6 +1,6 @@
 # air
 
-A complete open source e-commerce solution by Go language and React(STILL IN DEVELOPMENT).
+A complete open source e-commerce solution by Go language and Vue(STILL IN DEVELOPMENT).
 
 ## Usage
 
@@ -79,6 +79,4 @@ GRANT ALL PRIVILEGES ON DATABASE db-name TO user-name;
 
 ## Documents
 
-- [react](https://facebook.github.io/react/docs/installation.html)
-- [antd](https://ant.design/docs/react/introduce)
 - [gorm](http://jinzhu.me/gorm/)
