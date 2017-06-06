@@ -22,9 +22,9 @@ export default {
       links
     }
   },
-  beforeCreate () {
+  created () {
     var token = sessionStorage.getItem(TOKEN)
-    if (token) {
+    if (!this.user && token) {
       this.$store.commit('signIn', token)
     }
   },

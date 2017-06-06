@@ -8,9 +8,16 @@ import jwtDecode from 'jwt-decode'
 const store = new Vuex.Store({
   state: {
     currentUser: null,
-    siteInfo: null
+    siteInfo: {
+      links: [],
+      cards: [],
+      languages: []
+    }
   },
   mutations: {
+    refresh (state, info) {
+      state.siteInfo = info
+    },
     signIn (state, token) {
       try {
         state.currentUser = jwtDecode(token)

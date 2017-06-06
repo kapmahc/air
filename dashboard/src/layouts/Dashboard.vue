@@ -1,7 +1,6 @@
 <template>
-  <div v-if="user && (user.admin || !admin)">
-    <app-header />
-    <el-row>
+  <application-layout>
+    <el-row v-if="user && (user.admin || !admin)">
       <el-col :md="{span: 4}">
         <el-menu unique-opened @select="handleSelect">
           <el-menu-item index="to-site.home"><fa-icon name="home" /> {{$t("header.home")}}</el-menu-item>
@@ -19,16 +18,12 @@
         </el-row>
       </el-col>
     </el-row>
-    <el-row>
-      <hr class="line"/>
-      <app-footer />
-    </el-row>
-  </div>
 
-  <application-layout v-else >
-    <el-col :md="{span: 8, offset: 8}" style="padding: 8px;">
-      <app-error :title="$t('errors.not-allow')"/>
-    </el-col>
+    <el-row v-else>
+      <el-col :md="{span: 8, offset: 8}" style="padding: 8px;">
+        <app-error :title="$t('errors.not-allow')"/>
+      </el-col>
+    </el-row>
   </application-layout>
 </template>
 

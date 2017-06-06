@@ -1,9 +1,7 @@
 <template>
   <div>
     <app-header />
-    <el-row>
-      <slot />
-    </el-row>
+    <slot />
     <el-row>
       <el-col :span="24">
         <hr class="line"/>

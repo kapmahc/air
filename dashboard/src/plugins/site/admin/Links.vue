@@ -5,7 +5,7 @@
         <el-form ref="form" :model="form" :rules="rules" label-width="80px">
         <el-form-item :label="$t('attributes.loc')">
           <el-select v-model="form.loc">
-            <el-option :key="i" :label="i" :value="i" v-for="i in ['top', 'bottom']" />
+            <el-option :key="i" :label="i" :value="i" v-for="i in ['header', 'footer']" />
           </el-select>
         </el-form-item>
           <el-form-item :label="$t('attributes.label')" prop="label">
