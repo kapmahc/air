@@ -33,6 +33,6 @@ func (p *Plugin) Mount(rt *gin.Engine) {
 	atg.POST("/:id", web.Wrap(p.canEditAttachment), web.Wrap(p.updateAttachment))
 	atg.DELETE("/:id", web.Wrap(p.canEditAttachment), web.Wrap(p.destroyAttachment))
 
-	rt.POST("/antd/attachments", web.Wrap(p.Jwt.MustSignInMiddleware), web.Wrap(p.handleAntdUpload))
+	rt.POST("/upload", web.Wrap(p.Jwt.MustSignInMiddleware), web.Wrap(p.handleAntdUpload))
 
 }

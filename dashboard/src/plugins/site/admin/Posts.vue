@@ -23,7 +23,7 @@
       <el-button @click="handleEdit(null)" type="info" size="mini" icon="plus"/>
 
       <el-table :data="items" border stripe style="width: 100%;">
-        <el-table-column prop="body" :label="$t('attributes.body')">
+        <el-table-column :label="$t('attributes.body')">
           <template scope="scope">
             <h4>{{scope.row.title}}</h4>
             <pre><code>{{scope.row.body}}</code></pre>

@@ -5,7 +5,6 @@ import (
 	"time"
 
 	"github.com/gin-gonic/gin"
-	"github.com/kapmahc/air/web"
 	"github.com/kapmahc/air/web/i18n"
 )
 
@@ -36,11 +35,11 @@ func (p *Plugin) createUser(c *gin.Context) error {
 	if err := c.BindJSON(&fm); err != nil {
 		return err
 	}
-	startUp, err := time.Parse(web.FormatDateInput, fm.StartUp)
+	startUp, err := time.Parse(time.RFC3339, fm.StartUp)
 	if err != nil {
 		return err
 	}
-	shutDown, err := time.Parse(web.FormatDateInput, fm.ShutDown)
+	shutDown, err := time.Parse(time.RFC3339, fm.ShutDown)
 	if err != nil {
 		return err
 	}
@@ -89,11 +88,11 @@ func (p *Plugin) updateUser(c *gin.Context) error {
 		return err
 	}
 
-	startUp, err := time.Parse(web.FormatDateInput, fm.StartUp)
+	startUp, err := time.Parse(time.RFC3339, fm.StartUp)
 	if err != nil {
 		return err
 	}
-	shutDown, err := time.Parse(web.FormatDateInput, fm.ShutDown)
+	shutDown, err := time.Parse(time.RFC3339, fm.ShutDown)
 	if err != nil {
 		return err
 	}

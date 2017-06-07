@@ -3,7 +3,7 @@
     <el-col :md="{span: 22, offset: 1}">
       <el-table :data="items" border stripe style="width: 100%;">
         <el-table-column width="240" prop="createdAt" :label="$t('attributes.createdAt')" />
-        <el-table-column prop="body" :label="$t('attributes.body')" >
+        <el-table-column :label="$t('attributes.body')" >
           <template scope="scope">
             <pre><code>{{scope.row.body}}</code></pre>
           </template>

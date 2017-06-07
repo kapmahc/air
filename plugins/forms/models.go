@@ -17,11 +17,11 @@ const (
 type Form struct {
 	web.Media
 
-	Deadline time.Time
-	Title    string
+	Deadline time.Time `json:"deadline"`
+	Title    string    `json:"title"`
 
-	Fields  []Field
-	Records []Record
+	Fields  []Field  `json:"fields"`
+	Records []Record `json:"records"`
 }
 
 // Expire expire?

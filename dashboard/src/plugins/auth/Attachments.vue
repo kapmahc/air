@@ -59,7 +59,7 @@ export default {
   },
   computed: {
     action () {
-      return api('/antd/attachments')
+      return api('/upload')
     }
   },
   methods: {

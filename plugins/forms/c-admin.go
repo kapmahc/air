@@ -78,7 +78,7 @@ func (p *Plugin) createForm(c *gin.Context) error {
 	}
 	lng := c.MustGet(i18n.LOCALE).(string)
 
-	deadline, err := time.Parse(web.FormatDateInput, fm.Deadline)
+	deadline, err := time.Parse(time.RFC3339, fm.Deadline)
 	if err != nil {
 		return err
 	}
@@ -132,7 +132,7 @@ func (p *Plugin) _buildFields(fm *Form) ([]gin.H, error) {
 	return items, nil
 }
 
-func (p *Plugin) _mustSelectForm(c *gin.Context, l string) error {
+func (p *Plugin) _mustSelectForm(c *gin.Context) error {
 	var item Form
 	if err := p.Db.Where("id = ?", c.Param("id")).First(&item).Error; err != nil {
 		return err
@@ -169,7 +169,7 @@ func (p *Plugin) updateForm(c *gin.Context) error {
 	}
 	lng := c.MustGet(i18n.LOCALE).(string)
 
-	deadline, err := time.Parse(web.FormatDateInput, fm.Deadline)
+	deadline, err := time.Parse(time.RFC3339, fm.Deadline)
 	if err != nil {
 		return err
 	}
