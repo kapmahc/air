@@ -6,13 +6,6 @@ import (
 	"github.com/kapmahc/air/web"
 )
 
-const (
-	// TypeCheckboxs checkboxs
-	TypeCheckboxs = "checkboxs"
-	// TypeRadios radios
-	TypeRadios = "radios"
-)
-
 // Form form
 type Form struct {
 	web.Media

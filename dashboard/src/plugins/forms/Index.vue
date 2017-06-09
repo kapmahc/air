@@ -10,16 +10,12 @@
             <el-input type="textarea" v-model="form.body" />
             <span>{{$t('helpers.markdown')}}</span>
           </el-form-item>
-          <el-form-item :label="$t('attributes.shutDown')">
+          <el-form-item :label="$t('attributes.shutDown')" prop="deadline">
             <el-date-picker
               v-model="form.deadline"
               type="date"
               :picker-options="pickerOptions">
             </el-date-picker>
-          </el-form-item>
-          <el-form-item :label="$t('forms.attributes.form.fields')" prop="fields">
-            <el-input :rows="8" type="textarea" v-model="form.fields" />
-            <span>{{$t('helpers.json')}}</span>
           </el-form-item>
         </el-form>
         <div slot="footer" class="dialog-footer">
@@ -34,12 +30,14 @@
         <el-table-column width="120" prop="deadline" :label="$t('attributes.shutDown')" />
         <el-table-column :label="$t('attributes.body')">
           <template scope="scope">
+            <span>{{scope.row.title}}</span>
             <pre><code>{{scope.row.body}}</code></pre>
           </template>
         </el-table-column>
-        <el-table-column width="80" :label="$t('buttons.manage')">
+        <el-table-column width="120" :label="$t('buttons.manage')">
           <template scope="scope">
             <el-button-group>
+              <el-button @click="handleView(scope.row.id)" type="success" size="mini" icon="document" />
               <el-button @click="handleEdit(scope.row)" type="info" size="mini" icon="edit" />
               <el-button @click="handleRemove(scope.row.id)" type="danger" size="mini" icon="delete" />
             </el-button-group>
@@ -55,7 +53,7 @@ import {get, post, _delete} from '@/ajax'
 
 export default {
   created () {
-    get('/forms').then((rst) => { this.items = rst }).catch(this.$message.error)
+    get('/forms/models').then((rst) => { this.items = rst }).catch(this.$message.error)
   },
   data () {
     return {
@@ -68,7 +66,6 @@ export default {
       form: {
         title: '',
         body: '',
-        fields: '',
         deadline: ''
       },
       dialogFormVisible: false
@@ -83,15 +80,15 @@ export default {
         body: [
           { required: true, message: this.$t('helpers.not-empty'), trigger: 'change' }
         ],
-        fields: [
-          { required: true, message: this.$t('helpers.not-empty'), trigger: 'change' }
+        deadline: [
+          { type: 'date', required: true, message: this.$t('helpers.not-empty'), trigger: 'change' }
         ]
       }
     }
   },
   methods: {
     handleEdit (form) {
-      this.form = form || {title: '', body: '', fields: '[]', deadline: ''}
+      this.form = form ? Object.assign({}, form, {deadline: new Date(form.deadline)}) : {title: '', body: '', deadline: new Date()}
       this.dialogFormVisible = true
     },
     handleRemove (id) {
@@ -105,7 +102,7 @@ export default {
         }
       )
       .then(() => {
-        _delete(`/forms/${id}`).then(function (rst) {
+        _delete(`/forms/models/${id}`).then(function (rst) {
           this.$message.success('success')
           this.items = this.items.filter((o) => o.id !== id)
         }.bind(this)).catch(this.$message.error)
@@ -116,10 +113,10 @@ export default {
       this.$refs[formName].validate((valid) => {
         const id = this.form.id
         if (valid) {
-          post(id ? `/forms/${id}` : '/forms', Object.assign({}, this.form, {type: 'markdown'}))
+          post(id ? `/forms/models/${id}` : '/forms/models', Object.assign({}, this.form, {type: 'markdown'}))
             .then(function (rst) {
               this.items = this.items.filter((o) => o.id !== id)
-              this.items.unshift(Object.assign({}, id ? this.form : rst))
+              this.items.unshift(id ? Object.assign({}, this.form, {deadline: this.form.deadline.toISOString()}) : rst)
               this.dialogFormVisible = false
               this.$message.success(this.$t('success'))
             }.bind(this)).catch(this.$message.error)
@@ -127,6 +124,9 @@ export default {
           return false
         }
       })
+    },
+    handleView (id) {
+      this.$router.push({name: 'forms.show', params: {id}})
     }
   }
 }
