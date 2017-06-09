@@ -10,6 +10,7 @@ func (p *Plugin) Mount(rt *gin.Engine) {
 	rt.GET("/locales/:lang", web.Wrap(p.getLocales))
 	rt.GET("/site/info", web.Wrap(p.getSiteInfo))
 	rt.POST("/install", web.Wrap(p.mustDatabaseEmpty), web.Wrap(p.postInstall))
+	rt.GET("/donates", web.Wrap(p.getDonates))
 
 	ag := rt.Group("/admin", web.Wrap(p.Jwt.MustAdminMiddleware))
 
@@ -18,6 +19,9 @@ func (p *Plugin) Mount(rt *gin.Engine) {
 	ag.GET("/locales", web.Wrap(p.getAdminLocales))
 	ag.POST("/locales", web.Wrap(p.postAdminLocales))
 	ag.DELETE("/locales/:code", web.Wrap(p.deleteAdminLocales))
+
+	ag.GET("/paypal", web.Wrap(p.getAdminPaypal))
+	ag.POST("/paypal", web.Wrap(p.postAdminPaypal))
 
 	asg := ag.Group("/site")
 	asg.GET("/status", web.Wrap(p.getAdminSiteStatus))

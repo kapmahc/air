@@ -2,6 +2,8 @@ import Home from './Home'
 import Dashboard from './Dashboard'
 import Install from './Install'
 import NewLeaveWord from './leave-words/New'
+import Donates from './Donates'
+
 import AdminSiteInfo from './admin/Info'
 import AdminSiteAuthor from './admin/Author'
 import AdminSiteSeo from './admin/Seo'
@@ -15,6 +17,7 @@ import AdminPosts from './admin/Posts'
 import AdminNotices from './admin/Notices'
 import AdminLeaveWords from './admin/LeaveWords'
 import AdminFriendLinks from './admin/FriendLinks'
+import AdminPaypal from './admin/Paypal'
 
 import IndexNotices from './notices/Index'
 import IndexPosts from './posts/Index'
@@ -33,6 +36,7 @@ export default {
           {href: 'site.admin.author'},
           {href: 'site.admin.seo'},
           {href: 'site.admin.smtp'},
+          {href: 'site.admin.paypal'},
           {href: 'site.admin.users.index'},
           {href: 'site.admin.locales.index'},
           {href: 'site.admin.posts.index'},
@@ -51,6 +55,7 @@ export default {
     { path: '/dashboard', name: 'site.dashboard', component: Dashboard },
     { path: '/leave-words/new', name: 'site.leave-words.new', component: NewLeaveWord },
     { path: '/install', name: 'site.install', component: Install },
+    { path: '/donates', name: 'site.donates', component: Donates },
 
     { path: '/notices', name: 'notices.index', component: IndexNotices },
     { path: '/posts', name: 'posts.index', component: IndexPosts },
@@ -64,6 +69,8 @@ export default {
     { path: '/admin/cards', name: 'site.admin.cards.index', component: AdminCards },
     { path: '/admin/leave-words', name: 'site.admin.leave-words.index', component: AdminLeaveWords },
     { path: '/admin/friend-links', name: 'site.admin.friend-links.index', component: AdminFriendLinks },
+
+    { path: '/admin/paypal', name: 'site.admin.paypal', component: AdminPaypal },
 
     { path: '/admin/site/info', name: 'site.admin.info', component: AdminSiteInfo },
     { path: '/admin/site/author', name: 'site.admin.author', component: AdminSiteAuthor },
