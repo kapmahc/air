@@ -50,7 +50,12 @@ func (p *Plugin) postFormApply(c *gin.Context) error {
 		return p.I18n.E(http.StatusForbidden, lng, "forms.errors.already-apply")
 	}
 
-	val, err := json.Marshal(fm.Records)
+	values := make(map[string]interface{})
+	for _, r := range fm.Records {
+		values[r.Name] = r.Value
+	}
+
+	val, err := json.Marshal(values)
 	if err != nil {
 		return err
 	}

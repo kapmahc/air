@@ -13,6 +13,7 @@
         <el-table-column width="160" :label="$t('buttons.manage')">
           <template scope="scope">
             <el-button-group>
+              <el-button @click="handleReport(scope.row.id)" type="success" size="mini" icon="menu" />
               <el-button @click="handleView(scope.row.id)" type="info" size="mini" icon="document" />
               <el-button @click="handleEdit(scope.row.id)" type="warning" size="mini" icon="edit" />
               <el-button @click="handleRemove(scope.row.id)" type="danger" size="mini" icon="delete" />
@@ -60,6 +61,9 @@ export default {
     },
     handleView (id) {
       this.$router.push({name: 'forms.apply', params: {id}})
+    },
+    handleReport (id) {
+      this.$router.push({name: 'forms.report', params: {id}})
     }
   }
 }

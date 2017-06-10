@@ -2,52 +2,53 @@ package forms
 
 import (
 	"encoding/json"
-	"fmt"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
+	"github.com/kapmahc/air/web/i18n"
 )
 
-func (p *Plugin) _exportForm(f *Form) ([]string, [][]string, error) {
-	var header []string
-	for _, f := range f.Fields {
-		header = append(header, f.Label)
-	}
-
-	var items [][]string
-	for _, r := range f.Records {
-		var row []string
-		val := make(map[string]interface{})
-		if err := json.Unmarshal([]byte(r.Value), &val); err != nil {
-			return nil, nil, err
-		}
-		for _, f := range f.Fields {
-			switch f.Name {
-			case "phone":
-				row = append(row, r.Phone)
-			case "email":
-				row = append(row, r.Email)
-			case "username":
-				row = append(row, r.Username)
-			default:
-				row = append(row, fmt.Sprintf("%+v", val[f.Name]))
-			}
-		}
-		items = append(items, row)
-	}
-
-	return header, items, nil
-}
-
 func (p *Plugin) getFormReport(c *gin.Context) error {
-	item := c.MustGet("item").(*Form)
-	header, rows, err := p._exportForm(item)
-	if err != nil {
+	var item Form
+	if err := p.Db.Where("id = ?", c.Param("id")).First(&item).Error; err != nil {
 		return err
 	}
+	if err := p.Db.Model(&item).Association("Fields").Find(&item.Fields).Error; err != nil {
+		return err
+	}
+	if err := p.Db.Model(&item).Association("Records").Find(&item.Records).Error; err != nil {
+		return err
+	}
+	lang := c.MustGet(i18n.LOCALE).(string)
+	headers := []gin.H{
+		gin.H{"name": "username", "label": p.I18n.T(lang, "attributes.fullName")},
+		gin.H{"name": "email", "label": p.I18n.T(lang, "attributes.email")},
+		gin.H{"name": "phone", "label": p.I18n.T(lang, "attributes.phone")},
+	}
+	for _, f := range item.Fields {
+		headers = append(headers, gin.H{"name": f.Name, "label": f.Label})
+	}
+
+	var rows []gin.H
+	for _, r := range item.Records {
+		row := gin.H{
+			"username": r.Username,
+			"email":    r.Email,
+			"phone":    r.Phone,
+		}
+		val := make(map[string]interface{})
+		if err := json.Unmarshal([]byte(r.Value), &val); err != nil {
+			return err
+		}
+		for _, f := range item.Fields {
+			row[f.Name] = val[f.Name]
+		}
+		rows = append(rows, row)
+	}
+
 	c.JSON(http.StatusOK, gin.H{
-		"header": header,
-		"rows":   rows,
+		"headers": headers,
+		"rows":    rows,
 	})
 	return nil
 }

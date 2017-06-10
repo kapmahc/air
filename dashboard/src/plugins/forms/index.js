@@ -22,7 +22,7 @@ export default {
     { path: '/forms', name: 'forms.index', component: Index },
     { path: '/forms/new', name: 'forms.new', component: Edit },
     { path: '/forms/:id/edit', name: 'forms.edit', component: Edit },
-    { path: '/forms/:id/report', name: 'forms.export', component: Report },
+    { path: '/forms/:id/report', name: 'forms.report', component: Report },
     { path: '/forms/:id/apply', name: 'forms.apply', component: Apply },
     { path: '/forms/:id/cancel', name: 'forms.cancel', component: Cancel }
   ]
