@@ -13,6 +13,7 @@
         <el-table-column width="160" :label="$t('buttons.manage')">
           <template scope="scope">
             <el-button-group>
+              <el-button @click="handleExport(scope.row.id)" size="mini" icon="arrow-down" />
               <el-button @click="handleReport(scope.row.id)" type="success" size="mini" icon="menu" />
               <el-button @click="handleView(scope.row.id)" type="info" size="mini" icon="document" />
               <el-button @click="handleEdit(scope.row.id)" type="warning" size="mini" icon="edit" />
@@ -26,7 +27,7 @@
 </template>
 
 <script>
-import {get, _delete} from '@/ajax'
+import {api, options, get, _delete} from '@/ajax'
 
 export default {
   created () {
@@ -64,6 +65,20 @@ export default {
     },
     handleReport (id) {
       this.$router.push({name: 'forms.report', params: {id}})
+    },
+    handleExport (id) {
+      // get().then((rst) => {
+      //   console.log('aaa')
+      // }).catch(this.$message.error)
+      fetch(api(`/forms/${id}/export`), options('GET'))
+        .then(response => response.blob())
+        .then(blob => {
+          var url = window.URL.createObjectURL(blob)
+          var a = document.createElement('a')
+          a.href = url
+          a.download = `form-${id}.ini`
+          a.click()
+        })
     }
   }
 }

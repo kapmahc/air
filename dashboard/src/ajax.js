@@ -10,7 +10,7 @@ const parse = (res) => {
   return res.ok ? res.json() : res.text().then(err => { throw err })
 }
 
-const options = (method) => {
+export const options = (method) => {
   return {
     method: method,
     mode: 'cors',

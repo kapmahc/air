@@ -32,8 +32,17 @@ func (p *Plugin) _exportForm(f *Form) ([]string, [][]string, error) {
 
 // getFormExport csv?
 func (p *Plugin) getFormExport(c *gin.Context) error {
-	item := c.MustGet("item").(*Form)
-	header, rows, err := p._exportForm(item)
+	var item Form
+	if err := p.Db.Where("id = ?", c.Param("id")).First(&item).Error; err != nil {
+		return err
+	}
+	if err := p.Db.Model(&item).Association("Fields").Find(&item.Fields).Error; err != nil {
+		return err
+	}
+	if err := p.Db.Model(&item).Association("Records").Find(&item.Records).Error; err != nil {
+		return err
+	}
+	header, rows, err := p._exportForm(&item)
 	if err != nil {
 		return err
 	}
