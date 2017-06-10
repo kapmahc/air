@@ -6,6 +6,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/kapmahc/air/web"
+	"github.com/kapmahc/air/web/i18n"
 )
 
 func (p *Plugin) indexForms(c *gin.Context) error {
@@ -40,6 +41,10 @@ func (p *Plugin) createForm(c *gin.Context) error {
 		return err
 	}
 
+	if err := p.Db.Model(&item).Association("Fields").Append(fm.Parse(item.ID)).Error; err != nil {
+		return err
+	}
+
 	c.JSON(http.StatusOK, item)
 	return nil
 }
@@ -56,11 +61,39 @@ func (p *Plugin) showForm(c *gin.Context) error {
 	return nil
 }
 
+type fmField struct {
+	Name  string `json:"name" binding:"required"`
+	Label string `json:"label" binding:"required"`
+	Body  string `json:"body"`
+	Value string `json:"value"`
+	Type  string `json:"type" binding:"required"`
+}
+
 type fmForm struct {
-	Title    string `json:"title" binding:"required,max=255"`
-	Deadline string `json:"deadline" binding:"required"`
-	Body     string `json:"body" binding:"required"`
-	Type     string `json:"type" binding:"required,max=8"`
+	Title    string    `json:"title" binding:"required,max=255"`
+	Deadline string    `json:"deadline" binding:"required"`
+	Body     string    `json:"body" binding:"required"`
+	Type     string    `json:"type" binding:"required,max=8"`
+	Fields   []fmField `json:"fields"`
+}
+
+func (p *fmForm) Parse(id uint) []Field {
+	var fields []Field
+	for i, f := range p.Fields {
+		fields = append(
+			fields, Field{
+				FormID:    id,
+				SortOrder: i,
+				Name:      f.Name,
+				Label:     f.Label,
+				Value:     f.Value,
+				Media: web.Media{
+					Body: f.Body,
+					Type: f.Type,
+				},
+			})
+	}
+	return fields
 }
 
 func (p *Plugin) updateForm(c *gin.Context) error {
@@ -85,6 +118,19 @@ func (p *Plugin) updateForm(c *gin.Context) error {
 		"body":     fm.Body,
 		"deadline": deadline,
 	}).Error; err != nil {
+		return err
+	}
+
+	lang := c.MustGet(i18n.LOCALE).(string)
+	if p.Db.Model(&item).Association("Records").Count() > 0 {
+		return p.I18n.E(http.StatusInternalServerError, lang, "errors.in-use")
+	}
+
+	if err := p.Db.Where("form_id = ?", item.ID).Delete(&Field{}).Error; err != nil {
+		return err
+	}
+
+	if err := p.Db.Model(&item).Association("Fields").Append(fm.Parse(item.ID)).Error; err != nil {
 		return err
 	}
 

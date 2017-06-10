@@ -3,11 +3,11 @@
     <el-col :md="{span: 22, offset: 1}">
       <el-dialog :title="$t('buttons.edit')" :visible.sync="dialogFormVisible">
         <el-form ref="form" :model="form" :rules="rules" label-width="80px">
-        <el-form-item :label="$t('attributes.loc')">
-          <el-select v-model="form.loc">
-            <el-option :key="i" :label="i" :value="i" v-for="i in ['carousel', 'zone']" />
-          </el-select>
-        </el-form-item>
+          <el-form-item :label="$t('attributes.loc')">
+            <el-select v-model="form.loc">
+              <el-option :key="i" :label="i" :value="i" v-for="i in ['carousel', 'zone']" />
+            </el-select>
+          </el-form-item>
           <el-form-item :label="$t('attributes.title')" prop="title">
             <el-input v-model="form.title" />
           </el-form-item>

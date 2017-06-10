@@ -23,7 +23,7 @@ export default {
     }
   },
   created () {
-    get(`/forms/${this.$route.params.id}`).then((rst) => { this.item = rst }).catch(this.$message.error)
+    get(`/forms/models/${this.$route.params.id}`).then((rst) => { this.item = rst }).catch(this.$message.error)
   },
   methods: {
   }

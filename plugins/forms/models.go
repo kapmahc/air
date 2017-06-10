@@ -31,12 +31,12 @@ func (Form) TableName() string {
 type Field struct {
 	web.Media
 
-	Name      string
-	Label     string
-	Value     string
-	SortOrder int
+	Name      string `json:"name"`
+	Label     string `json:"label"`
+	Value     string `json:"value"`
+	SortOrder int    `json:"sortOrder"`
 
-	FormID uint
+	FormID uint `json:"formId"`
 	Form   Form
 }
 
