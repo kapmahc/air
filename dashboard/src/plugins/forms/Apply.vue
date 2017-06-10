@@ -30,7 +30,7 @@
             <el-input v-else :prop="'fields.' + i + '.value'" v-model="f.value" />
           </el-form-item>
           <el-form-item>
-            <el-button type="primary" @click="handleSubmit('form')">{{$t("buttons.submit")}}</el-button>
+            <el-button type="primary" @click="handleSubmit('form')">{{$t("buttons.apply")}}</el-button>
           </el-form-item>
         </el-form>
       </el-col>
@@ -113,7 +113,7 @@ export default {
           })
           post(`/forms/${this.id}/apply`, Object.assign({}, this.form, {records}))
             .then(function (rst) {
-              this.$message.success(this.$t('success'))
+              this.$message.success(this.$t('forms.messages.apply-success'))
             }.bind(this)).catch(this.$message.error)
         } else {
           return false

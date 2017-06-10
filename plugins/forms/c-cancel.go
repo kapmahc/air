@@ -18,7 +18,10 @@ func (p *Plugin) postFormCancel(c *gin.Context) error {
 	}
 
 	lng := c.MustGet(i18n.LOCALE).(string)
-	item := c.MustGet("item").(*Form)
+	var item Form
+	if err := p.Db.Where("id = ?", c.Param("id")).First(&item).Error; err != nil {
+		return err
+	}
 
 	if item.Expire() {
 		return p.I18n.E(http.StatusForbidden, lng, "forms.errors.expired")
@@ -31,7 +34,7 @@ func (p *Plugin) postFormCancel(c *gin.Context) error {
 	if err := p.Db.Delete(&record).Error; err != nil {
 		return err
 	}
-	p._sendEmail(lng, item, &record, actCancel)
+	p._sendEmail(lng, &item, &record, actCancel)
 	c.JSON(http.StatusOK, gin.H{})
 	return nil
 }
