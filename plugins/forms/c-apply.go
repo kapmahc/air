@@ -18,9 +18,15 @@ func (p *Plugin) _parseValues(f *Field) []interface{} {
 }
 
 type fmApply struct {
-	Username string `json:"username" binding:"required,max=255"`
-	Email    string `json:"email" binding:"required,max=255"`
-	Phone    string `json:"phone" binding:"required,max=255"`
+	Records  []fmRecord `json:"records" binding:"required,max=255"`
+	Username string     `json:"username" binding:"required,max=255"`
+	Email    string     `json:"email" binding:"required,max=255"`
+	Phone    string     `json:"phone" binding:"required,max=255"`
+}
+
+type fmRecord struct {
+	Name  string `json:"name" binding:"required"`
+	Value string `json:"value" binding:"required"`
 }
 
 func (p *Plugin) postFormApply(c *gin.Context) error {
@@ -28,7 +34,10 @@ func (p *Plugin) postFormApply(c *gin.Context) error {
 	if err := c.BindJSON(&fm); err != nil {
 		return err
 	}
-	item := c.MustGet("item").(*Form)
+	var item Form
+	if err := p.Db.Where("id = ?", c.Param("id")).First(&item).Error; err != nil {
+		return err
+	}
 	lng := c.MustGet(i18n.LOCALE).(string)
 	if item.Expire() {
 		return p.I18n.E(http.StatusForbidden, lng, "forms.errors.expired")
@@ -41,12 +50,7 @@ func (p *Plugin) postFormApply(c *gin.Context) error {
 		return p.I18n.E(http.StatusForbidden, lng, "forms.errors.already-apply")
 	}
 
-	data := c.Request.Form
-	data.Del("email")
-	data.Del("phone")
-	data.Del("username")
-	data.Del("authenticity_token")
-	val, err := json.Marshal(data)
+	val, err := json.Marshal(fm.Records)
 	if err != nil {
 		return err
 	}
@@ -61,7 +65,7 @@ func (p *Plugin) postFormApply(c *gin.Context) error {
 	if err := p.Db.Create(&record).Error; err != nil {
 		return err
 	}
-	p._sendEmail(lng, item, &record, actApply)
+	p._sendEmail(lng, &item, &record, actApply)
 	c.JSON(http.StatusOK, gin.H{})
 	return nil
 }

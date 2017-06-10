@@ -1,7 +1,6 @@
 import Apply from './Apply'
 import Cancel from './Cancel'
 import Report from './Report'
-import Show from './Show'
 import Index from './Index'
 import Edit from './Edit'
 
@@ -22,7 +21,6 @@ export default {
   routes: [
     { path: '/forms', name: 'forms.index', component: Index },
     { path: '/forms/new', name: 'forms.new', component: Edit },
-    { path: '/forms/:id', name: 'forms.show', component: Show },
     { path: '/forms/:id/edit', name: 'forms.edit', component: Edit },
     { path: '/forms/:id/report', name: 'forms.export', component: Report },
     { path: '/forms/:id/apply', name: 'forms.apply', component: Apply },

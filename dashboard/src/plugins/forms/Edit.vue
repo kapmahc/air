@@ -108,7 +108,7 @@ export default {
   },
   created () {
     if (this.id) {
-      get(`/forms/models/${this.id}`).then((rst) => {
+      get(`/forms/${this.id}`).then((rst) => {
         this.form = Object.assign({}, rst, {deadline: new Date(rst.deadline)})
       }).catch(this.$message.error)
     }
@@ -126,7 +126,7 @@ export default {
     handleSubmit (formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          post(this.id ? `/forms/models/${this.id}` : '/forms/models', Object.assign({}, this.form, {type: 'markdown'}))
+          post(this.id ? `/forms/${this.id}` : '/forms', Object.assign({}, this.form, {type: 'markdown'}))
             .then(function (rst) {
               this.$message.success(this.$t('success'))
               this.$router.push({name: 'forms.index'})

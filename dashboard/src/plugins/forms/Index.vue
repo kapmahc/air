@@ -29,7 +29,7 @@ import {get, _delete} from '@/ajax'
 
 export default {
   created () {
-    get('/forms/models').then((rst) => { this.items = rst }).catch(this.$message.error)
+    get('/forms').then((rst) => { this.items = rst }).catch(this.$message.error)
   },
   data () {
     return {
@@ -51,7 +51,7 @@ export default {
         }
       )
       .then(() => {
-        _delete(`/forms/models/${id}`).then(function (rst) {
+        _delete(`/forms/${id}`).then(function (rst) {
           this.$message.success('success')
           this.items = this.items.filter((o) => o.id !== id)
         }.bind(this)).catch(this.$message.error)
@@ -59,7 +59,7 @@ export default {
       .catch(() => {})
     },
     handleView (id) {
-      this.$router.push({name: 'forms.show', params: {id}})
+      this.$router.push({name: 'forms.apply', params: {id}})
     }
   }
 }
