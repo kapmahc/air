@@ -21,9 +21,9 @@ func (p *Plugin) getFormReport(c *gin.Context) error {
 	}
 	lang := c.MustGet(i18n.LOCALE).(string)
 	headers := []gin.H{
-		gin.H{"name": "username", "label": p.I18n.T(lang, "attributes.fullName")},
-		gin.H{"name": "email", "label": p.I18n.T(lang, "attributes.email")},
-		gin.H{"name": "phone", "label": p.I18n.T(lang, "attributes.phone")},
+		gin.H{"name": "username", "label": p.I18n.T(lang, "forms.attributes.record.username")},
+		gin.H{"name": "email", "label": p.I18n.T(lang, "forms.attributes.record.email")},
+		gin.H{"name": "phone", "label": p.I18n.T(lang, "forms.attributes.record.phone")},
 	}
 	for _, f := range item.Fields {
 		headers = append(headers, gin.H{"name": f.Name, "label": f.Label})

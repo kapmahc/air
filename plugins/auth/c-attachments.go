@@ -121,5 +121,5 @@ func (p *Plugin) canEditAttachment(c *gin.Context) error {
 		return nil
 	}
 
-	return p.I18n.E(http.StatusForbidden, lng, "auth.errors.not-allow")
+	return p.I18n.E(http.StatusForbidden, lng, "errors.not-allow")
 }

@@ -33,7 +33,7 @@ func (p *Plugin) postUsersSignUp(c *gin.Context) error {
 	}
 
 	if count > 0 {
-		return p.I18n.E(http.StatusInternalServerError, l, "auth.errors.email-already-exists")
+		return p.I18n.E(http.StatusInternalServerError, l, "auth.errors.user.email-already-exists")
 	}
 
 	user, err := p.Dao.AddEmailUser(fm.Name, fm.Email, fm.Password)
@@ -41,7 +41,7 @@ func (p *Plugin) postUsersSignUp(c *gin.Context) error {
 		return err
 	}
 
-	p.Dao.Log(user.ID, c.ClientIP(), p.I18n.T(l, "auth.logs.sign-up"))
+	p.Dao.Log(user.ID, c.ClientIP(), p.I18n.T(l, "auth.logs.user.sign-up"))
 	p.sendEmail(l, user, actConfirm)
 
 	c.JSON(http.StatusOK, gin.H{})
@@ -93,10 +93,10 @@ func (p *Plugin) getUsersConfirm(c *gin.Context) error {
 		return err
 	}
 	if user.IsConfirm() {
-		return p.I18n.E(http.StatusForbidden, l, "auth.errors.user-already-confirm")
+		return p.I18n.E(http.StatusForbidden, l, "auth.errors.user.already-confirm")
 	}
 	p.Db.Model(user).Update("confirmed_at", time.Now())
-	p.Dao.Log(user.ID, c.ClientIP(), p.I18n.T(l, "auth.logs.confirm"))
+	p.Dao.Log(user.ID, c.ClientIP(), p.I18n.T(l, "auth.logs.user.confirm"))
 
 	c.Redirect(http.StatusFound, p._signInURL())
 	return nil
@@ -114,7 +114,7 @@ func (p *Plugin) postUsersConfirm(c *gin.Context) error {
 	}
 
 	if user.IsConfirm() {
-		return p.I18n.E(http.StatusForbidden, l, "auth.errors.user-already-confirm")
+		return p.I18n.E(http.StatusForbidden, l, "auth.errors.user.already-confirm")
 	}
 
 	p.sendEmail(l, user, actConfirm)
@@ -131,11 +131,11 @@ func (p *Plugin) getUsersUnlock(c *gin.Context) error {
 		return err
 	}
 	if !user.IsLock() {
-		return p.I18n.E(http.StatusForbidden, l, "auth.errors.user-not-lock")
+		return p.I18n.E(http.StatusForbidden, l, "auth.errors.user.not-lock")
 	}
 
 	p.Db.Model(user).Update(map[string]interface{}{"locked_at": nil})
-	p.Dao.Log(user.ID, c.ClientIP(), p.I18n.T(l, "auth.logs.unlock"))
+	p.Dao.Log(user.ID, c.ClientIP(), p.I18n.T(l, "auth.logs.user.unlock"))
 
 	c.Redirect(http.StatusFound, p._signInURL())
 	return nil
@@ -153,7 +153,7 @@ func (p *Plugin) postUsersUnlock(c *gin.Context) error {
 		return err
 	}
 	if !user.IsLock() {
-		return p.I18n.E(http.StatusForbidden, l, "auth.errors.user-not-lock")
+		return p.I18n.E(http.StatusForbidden, l, "auth.errors.user.not-lock")
 	}
 	p.sendEmail(l, user, actUnlock)
 	c.JSON(http.StatusOK, gin.H{})
@@ -195,7 +195,7 @@ func (p *Plugin) postUsersResetPassword(c *gin.Context) error {
 		return err
 	}
 	p.Db.Model(user).Update("password", p.Hmac.Sum([]byte(fm.Password)))
-	p.Dao.Log(user.ID, c.ClientIP(), p.I18n.T(l, "auth.logs.reset-password"))
+	p.Dao.Log(user.ID, c.ClientIP(), p.I18n.T(l, "auth.logs.user.reset-password"))
 	c.JSON(http.StatusOK, gin.H{})
 	return nil
 }
@@ -203,7 +203,7 @@ func (p *Plugin) postUsersResetPassword(c *gin.Context) error {
 func (p *Plugin) deleteUsersSignOut(c *gin.Context) error {
 	l := c.MustGet(i18n.LOCALE).(string)
 	user := c.MustGet(CurrentUser).(*User)
-	p.Dao.Log(user.ID, c.ClientIP(), p.I18n.T(l, "auth.logs.sign-out"))
+	p.Dao.Log(user.ID, c.ClientIP(), p.I18n.T(l, "auth.logs.user.sign-out"))
 	c.JSON(http.StatusOK, gin.H{})
 	return nil
 }

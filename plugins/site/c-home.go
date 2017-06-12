@@ -9,7 +9,7 @@ import (
 
 func (p *Plugin) getLocales(c *gin.Context) error {
 	lang := c.Param("lang")
-	items, err := p.I18n.All(lang) //p.I18n.Store.All(lang) //
+	items, err := p.I18n.All(lang)
 	if err != nil {
 		return err
 	}
@@ -25,6 +25,7 @@ func (p *Plugin) getSiteInfo(c *gin.Context) error {
 
 	lng := c.MustGet(i18n.LOCALE).(string)
 	data := gin.H{"locale": lng, "languages": langs}
+
 	for _, k := range []string{"title", "subTitle", "keywords", "description", "copyright"} {
 		data[k] = p.I18n.T(lng, "site."+k)
 	}

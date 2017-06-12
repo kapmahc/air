@@ -25,7 +25,7 @@ func (p *Plugin) postInstall(c *gin.Context) error {
 
 	lng := c.MustGet(i18n.LOCALE).(string)
 	p.I18n.Set(lng, "site.title", fm.Title)
-	p.I18n.Set(lng, "site.subTitle", fm.SubTitle)
+	p.I18n.Set(lng, "site.sub-title", fm.SubTitle)
 	user, err := p.Dao.AddEmailUser("root", fm.Email, fm.Password)
 	if err != nil {
 		return err

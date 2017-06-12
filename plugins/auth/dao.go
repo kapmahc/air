@@ -25,19 +25,19 @@ func (p *Dao) SignIn(lang, email, password, ip string) (*User, error) {
 		return nil, err
 	}
 	if !p.Hmac.Chk([]byte(password), user.Password) {
-		p.Log(user.ID, ip, p.I18n.T(lang, "auth.logs.sign-in-failed"))
-		return nil, p.I18n.E(http.StatusForbidden, lang, "auth.errors.email-password-not-match")
+		p.Log(user.ID, ip, p.I18n.T(lang, "auth.logs.user.sign-in.failed"))
+		return nil, p.I18n.E(http.StatusForbidden, lang, "auth.errors.user.email-password-not-match")
 	}
 
 	if !user.IsConfirm() {
-		return nil, p.I18n.E(http.StatusForbidden, lang, "auth.errors.user-not-confirm")
+		return nil, p.I18n.E(http.StatusForbidden, lang, "auth.errors.user.not-confirm")
 	}
 
 	if user.IsLock() {
-		return nil, p.I18n.E(http.StatusForbidden, lang, "auth.errors.user-is-lock")
+		return nil, p.I18n.E(http.StatusForbidden, lang, "auth.errors.user.is-lock")
 	}
 
-	p.Log(user.ID, ip, p.I18n.T(lang, "auth.logs.sign-in-success"))
+	p.Log(user.ID, ip, p.I18n.T(lang, "auth.logs.sign-in.success"))
 	user.SignInCount++
 	user.LastSignInAt = user.CurrentSignInAt
 	user.LastSignInIP = user.CurrentSignInIP

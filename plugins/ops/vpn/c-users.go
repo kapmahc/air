@@ -157,7 +157,7 @@ func (p *Plugin) postChangeUserPassword(c *gin.Context) error {
 		return err
 	}
 	if !user.ChkPassword(fm.CurrentPassword) {
-		return p.I18n.E(http.StatusBadRequest, lng, "ops.vpn.users.email-password-not-match")
+		return p.I18n.E(http.StatusBadRequest, lng, "ops.vpn.errors.user.email-password-not-match")
 	}
 	if err := user.SetPassword(fm.NewPassword); err != nil {
 		return err

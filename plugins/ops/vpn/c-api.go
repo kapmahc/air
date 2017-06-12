@@ -28,7 +28,7 @@ func (p *Plugin) apiAuth(c *gin.Context) error {
 		c.JSON(http.StatusOK, gin.H{})
 		return nil
 	}
-	return p.I18n.E(http.StatusForbidden, lng, "ops.vpn.errors.user-is-not-available")
+	return p.I18n.E(http.StatusForbidden, lng, "ops.vpn.errors.user.not-available")
 }
 
 type fmStatus struct {

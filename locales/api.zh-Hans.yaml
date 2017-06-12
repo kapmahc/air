@@ -1,0 +1,72 @@
+errors:
+  in-use: 正在被使用
+  forbidden: 禁止的访问
+  bad-action: 错误的操作
+  not-allow: 不允许
+
+site:
+  title: 站点标题
+  sub-title: 副标题
+  keywords: 关键字
+  description: 说明信息
+  copyright: 版权信息
+  author:
+    email: author@change-me.com
+    name: who-ami-i
+auth:
+  errors:
+    please-sign-in: 请先登录
+    user:
+      already-confirm: 已经被激活
+      not-lock: 没有被锁定
+      bad-password: 错误的密码
+      not-confirm: 没有被激活
+      is-lock: 被锁定
+  logs:
+    user:
+      sign-up: 创建用户
+      confirm: 激活账户
+      lock: 锁定账户
+      unlock: 解锁账户
+      reset-password: 重置密码
+      change-password: 修改密码
+      sign-out: 安全退出
+      sign-in:
+        failed: 登录失败
+        success: 成功登录
+  emails:
+    confirm:
+      subject: 确认信息
+      body: 您可以通过下面的链接确认您的帐户的电子邮件。 <br/> <a href="{{.Backend}}/users/confirm/{{.Token}}">{{.Backend}}/users/confirm/{{.Token}}</a>
+    unlock:
+      subject: 解锁信息
+      body: 点击下面的链接到您的帐户解锁。 <br/> <a href="{{.Backend}}/users/unlock/{{.Token}}">{{.Backend}}/users/unlock/{{.Token}}</a>
+    reset-password:
+      subject: 重置密码信息
+      body: 有人要求更改密码的链接，您可以通过下面的链接更改密码。 <br/> <a href="{{.Frontend}}/users/reset-password/{{.Token}}">{{.Frontend}}/users/reset-password/{{.Token}}</a><br/>如果您没有要求请求更改密码，请忽略此电子邮件。<br/>如果你没有访问上面的链接并更改密码，你的密码就不会被改变。
+forms:
+  emails:
+    apply:
+      subject: 申请
+      body: 你申请了{{.Title}}, 可以点击<a href="{{.Home}}{{.Cancel}}">{{.Home}}{{.Cancel}}</a>取消
+    cancel:
+      subject: 去掉
+      body: 您取消了{{.Title}}
+  errors:
+    expired: 已过期
+    already-apply: 已经申请
+  attributes:
+    record:
+      email: 邮箱
+      phone: 电话号码
+      username: 姓名
+ops:
+  mail:
+    errors:
+      user:
+        email-password-not-match: 邮箱和密码不匹配
+  vpn:
+    errors:
+      user:
+        not-available: 用户不可用
+        email-password-not-match: 邮箱和密码不匹配

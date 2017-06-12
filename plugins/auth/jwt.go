@@ -78,10 +78,10 @@ func (p *Jwt) getUserFromRequest(c *gin.Context) (*User, error) {
 		return nil, err
 	}
 	if !user.IsConfirm() {
-		return nil, p.I18n.E(http.StatusForbidden, lng, "auth.errors.user-not-confirm")
+		return nil, p.I18n.E(http.StatusForbidden, lng, "auth.errors.user.not-confirm")
 	}
 	if user.IsLock() {
-		return nil, p.I18n.E(http.StatusForbidden, lng, "auth.errors.user-is-lock")
+		return nil, p.I18n.E(http.StatusForbidden, lng, "auth.errors.user.is-lock")
 	}
 	return user, nil
 }
