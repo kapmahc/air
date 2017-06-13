@@ -1,6 +1,8 @@
 <template>
   <div>
+    <p slot="header">Hello</p>
     home
+    <i class="icon ion-home"></i>
   </div>
 </template>
 
@@ -23,6 +25,9 @@ export default {
       },
       showMenus: false
     }
+  },
+  created () {
+    this.$store.commit('refresh', 'Home, Hi')
   }
 }
 </script>

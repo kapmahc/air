@@ -8,8 +8,7 @@
   nvm alias default 8.0
   ```
 
-- [icons](http://ionicons.com/)
-
+- [icons](http://fontawesome.io/)
 - [vux](https://vux.li)
 - [vue](https://vuejs.org/v2/guide/)
 - [vue router](https://router.vuejs.org/en/)
