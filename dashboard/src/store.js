@@ -8,22 +8,27 @@ import jwtDecode from 'jwt-decode'
 
 const store = new Vuex.Store({
   state: {
-    title: null,
+    siteInfo: null,
     currentUser: null
   },
   mutations: {
-    refresh (state, title) {
-      state.title = title
+    refresh (state, payload) {
+      state.siteInfo = payload.info
     },
-    signIn (state, token) {
+    signIn (state, payload) {
       try {
-        state.currentUser = jwtDecode(token)
+        state.currentUser = jwtDecode(payload.token)
       } catch (e) {
         console.error()
       }
     },
     signOut (state) {
       state.currentUser = null
+    }
+  },
+  actions: {
+    signIn ({commit}, token) {
+      commit({type: 'signIn', token})
     }
   }
 })

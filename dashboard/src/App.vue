@@ -38,10 +38,10 @@
 
 <script>
 import { Actionsheet, ButtonTab, ButtonTabItem, ViewBox, XHeader, Tabbar, TabbarItem, Loading, TransferDom } from 'vux'
-import { mapState } from 'vuex'
-import { get, fail } from '@/ajax'
+import { mapState, mapActions } from 'vuex'
 
-const LOCALE = 'locale'
+import { get, fail } from '@/ajax'
+import {LOCALE, TOKEN} from '@/constants'
 
 export default {
   directives: {
@@ -58,6 +58,9 @@ export default {
     Actionsheet
   },
   methods: {
+    ...mapActions([
+      'signIn'
+    ]),
     switchLanguage (l) {
       let that = this
       get(`/locales/${l}`)
@@ -70,6 +73,11 @@ export default {
     }
   },
   created () {
+    var token = sessionStorage.getItem(TOKEN)
+    if (!this.user && token) {
+      this.signIn(token)
+    }
+    // ----
     var locale = localStorage.getItem(LOCALE) || 'en-US'
     this.switchLanguage(locale)
   },

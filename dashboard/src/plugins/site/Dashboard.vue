@@ -1,39 +1,42 @@
 <template>
-  <div v-if="user && (user.admin || !admin)">
-    dashboard
-  </div>
-  <div v-else>
-    <group>
-      <cell
-        :title="$t(l + '.title')"
-        :link="{name: l}"
-        :key="i"
-        v-for="(l, i) in ['auth.users.sign-in', 'auth.users.sign-up', 'auth.users.forgot-password', 'auth.users.confirm', 'auth.users.unlock']"
-        />
+  <dashboard-layout>
+    <group
+     :title="$t(d.label)"
+     :key="i"
+     v-for="(d, i) in dashboard">
+    <cell
+      :key="j"
+      :link="{name: l.href}"
+      :title="$t(l.href + '.title')"
+      v-for="(l, j) in d.items"/>
     </group>
-  </div>
+  </dashboard-layout>
 </template>
 
 <script>
 import { mapState } from 'vuex'
-import { Cell, CellBox, CellFormPreview, Group, Badge } from 'vux'
+import { Cell, CellBox, Group, Badge } from 'vux'
+import plugins from '@/plugins'
 
 export default {
   components: {
     Group,
     Cell,
-    CellFormPreview,
     CellBox,
     Badge
   },
   data () {
     return {
+      showPanels: {}
     }
   },
   computed: {
     ...mapState({
       user: state => state.currentUser
-    })
+    }),
+    dashboard () {
+      return plugins.dashboard(this.user)
+    }
   }
 }
 </script>

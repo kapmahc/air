@@ -21,12 +21,62 @@ footer:
   me: 我
   about: 关于
 site:
+  profile:
+    title: 站点
   home:
     title: 主页
   dashboard:
     title: 控制面板
+  admin:
+    status:
+      title: 当前状态
+    info:
+      title: 基本信息
+    author:
+      title: 作者信息
+    seo:
+      title: 搜索引擎
+    smtp:
+      title: 邮件发送
+    paypal:
+      title: Paypal支付
+    users:
+      index:
+        title: 用户列表
+    locales:
+      index:
+        title: 国际化
+    posts:
+      index:
+        title: 页面管理
+    notices:
+      index:
+        title: 站点通知
+    links:
+      index:
+        title: 链接
+    cards:
+      index:
+        title: 卡片
+    leave-words:
+      index:
+        title: 留言板
+    friend-links:
+      index:
+        title: 友情链接
 auth:
+  profile:
+    title: 账户
+  attachments:
+    index:
+      title: 文件管理
   users:
+    logs:
+      title: 操作日志
+    info:
+      title: 个人信息
+    change-password:
+      title: 修改密码
     sign-in:
       title: 登录
     sign-up:

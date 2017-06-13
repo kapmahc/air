@@ -9,6 +9,7 @@ Vue.use(AjaxPlugin)
 Vue.use(ToastPlugin)
 
 import './main.css'
+import './layouts'
 import App from './App'
 import plugins from './plugins'
 import store from './store'

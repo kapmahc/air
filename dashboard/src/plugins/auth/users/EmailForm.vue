@@ -17,7 +17,11 @@ import { Group, Box, XInput, XButton } from 'vux'
 import { post, fail, success } from '@/ajax'
 
 export default {
-  props: ['action'],
+  props: {
+    action: {
+      type: String
+    }
+  },
   components: {
     Group,
     XInput,

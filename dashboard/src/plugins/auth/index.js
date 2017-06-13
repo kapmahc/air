@@ -4,6 +4,22 @@ import UsersEmailForm from './users/EmailForm'
 import UsersResetPassword from './users/ResetPassword'
 
 export default {
+  dashboard (user) {
+    var items = []
+    if (user) {
+      items.push({
+        label: 'auth.profile.title',
+        icon: 'user',
+        items: [
+          {href: 'auth.users.logs'},
+          {href: 'auth.users.info'},
+          {href: 'auth.users.change-password'},
+          {href: 'auth.attachments.index'}
+        ]
+      })
+    }
+    return items
+  },
   routes: [
     {path: '/users/sign-in', name: 'auth.users.sign-in', component: UsersSignIn},
     {path: '/users/sign-up', name: 'auth.users.sign-up', component: UsersSignUp},
