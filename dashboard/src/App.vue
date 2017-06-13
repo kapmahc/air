@@ -79,9 +79,13 @@ export default {
   },
   computed: {
     ...mapState({
-      title: state => state.title,
       currentUser: state => state.currentUser
-    })
+    }),
+    title () {
+      var title = this.$t(this.$route.name + '.title', this.$route.params)
+      document.title = title
+      return title
+    }
   },
   data () {
     return {

@@ -5,5 +5,10 @@ footer:
   menus: 菜单
   me: 我
   about: 关于
-home:
-  title: 主页
+site:
+  home:
+    title: 主页
+auth:
+  users:
+    sign-in:
+      title: 登录

@@ -1,12 +1,11 @@
 <template>
   <div>
-    <p>Hello</p>
+    <p>Dashboard</p>
     {{$t('home.title')}}
   </div>
 </template>
 
 <script>
-
 export default {
   components: {
   },
