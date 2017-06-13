@@ -1,6 +1,9 @@
 import {TOKEN} from './constants'
 
-export const fail = (that, err) => that.$vux.toast.show({type: 'warn', text: err, width: '100%'})
+export const fail = (that, err) => {
+  that.$vux.toast.show({type: 'warn', text: err, width: '100%'})
+  console.error(err)
+}
 export const success = (that, msg) => that.$vux.toast.show({type: 'success', text: msg || that.$t('messages.success'), width: '100%'})
 
 export const api = (path) => {
@@ -17,7 +20,7 @@ export const options = (method) => {
   return {
     method: method,
     mode: 'cors',
-    credentials: 'include',
+    credentials: true,
     headers: {
       'Authorization': `BEARER ${window.sessionStorage.getItem(TOKEN)}`
     }

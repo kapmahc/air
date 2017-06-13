@@ -1,16 +1,17 @@
 package auth
 
 import (
+	"log"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
 	"github.com/kapmahc/air/web/i18n"
 )
 
-type fmAttachmentNew struct {
-	Type string `json:"type" binding:"required,max=255"`
-	ID   uint   `json:"id"`
-}
+// type fmAttachmentNew struct {
+// 	Type string `json:"type" binding:"required,max=255"`
+// 	ID   uint   `json:"id"`
+// }
 
 func (p *Plugin) _writeAttachment(c *gin.Context, k string) (*Attachment, error) {
 	user := c.MustGet(CurrentUser).(*User)
@@ -52,6 +53,7 @@ func (p *Plugin) createAttachment(c *gin.Context) error {
 	if e != nil {
 		return e
 	}
+	log.Printf("%+v", a)
 	c.JSON(http.StatusOK, a)
 	return nil
 }

@@ -20,6 +20,7 @@ Vue.http.defaults.headers.common['Authorization'] = `BEARER ${window.sessionStor
 Vue.http.defaults.withCredentials = true
 
 const router = new VueRouter({
+  mode: 'history',
   routes: plugins.routes
 })
 

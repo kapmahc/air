@@ -631,7 +631,7 @@ func (p *Plugin) runServer(c *cli.Context, _ *inject.Graph) error {
 		web.IsProduction(),
 		cors.Options{
 			AllowedOrigins:   []string{web.Frontend()},
-			AllowedHeaders:   []string{"Authorization"},
+			AllowedHeaders:   []string{"Authorization", "Cache-Control", "X-Requested-With"},
 			AllowedMethods:   []string{http.MethodGet, http.MethodPost, http.MethodPut, http.MethodDelete, http.MethodPatch},
 			AllowCredentials: true,
 			Debug:            !web.IsProduction(),

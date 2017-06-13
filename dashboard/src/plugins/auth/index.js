@@ -4,6 +4,8 @@ import UsersEmailForm from './users/EmailForm'
 import UsersResetPassword from './users/ResetPassword'
 import UsersLogs from './users/Logs'
 import UsersInfo from './users/Info'
+import UsersChangePassword from './users/ChangePassword'
+import AttachmentsIndex from './Attachments'
 
 export default {
   dashboard (user) {
@@ -25,6 +27,8 @@ export default {
   routes: [
     {path: '/users/logs', name: 'auth.users.logs', component: UsersLogs},
     {path: '/users/info', name: 'auth.users.info', component: UsersInfo},
+    {path: '/users/change-password', name: 'auth.users.change-password', component: UsersChangePassword},
+    {path: '/attachments', name: 'auth.attachments.index', component: AttachmentsIndex},
 
     {path: '/users/sign-in', name: 'auth.users.sign-in', component: UsersSignIn},
     {path: '/users/sign-up', name: 'auth.users.sign-up', component: UsersSignUp},

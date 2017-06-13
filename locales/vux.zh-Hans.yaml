@@ -3,13 +3,22 @@ messages:
   success: 操作成功
 buttons:
   submit: 提交
+  manage: 管理
+  edit: 编辑
+  new: 添加
+  remove: 删除
+  upload: 上传
 attributes:
   email: 邮箱
   username: 姓名
   password: 密码
+  currentPassword: 当前密码
+  newPassword: 新密码
   passwordConfirmation: 密码确认
   createdAt: 创建日期
-  content: 内容  
+  content: 内容
+  size: 大小
+  name: 名称
 placeholders:
   not-empty: 必填
   email: 我们不会公开您的电子邮箱
