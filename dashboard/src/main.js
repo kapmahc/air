@@ -4,12 +4,15 @@ import Vue from 'vue'
 import FastClick from 'fastclick'
 import VueRouter from 'vue-router'
 Vue.use(VueRouter)
-import { AjaxPlugin, ToastPlugin } from 'vux'
+import { AjaxPlugin, ToastPlugin, ConfirmPlugin } from 'vux'
 Vue.use(AjaxPlugin)
 Vue.use(ToastPlugin)
+Vue.use(ConfirmPlugin)
 
 import './main.css'
 import './layouts'
+import './components'
+
 import App from './App'
 import plugins from './plugins'
 import store from './store'

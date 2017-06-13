@@ -16,19 +16,19 @@
       </transition>
       <tabbar slot="bottom">
         <tabbar-item :link="{name: 'site.home'}">
-          <i slot="icon" class="fa fa-home"/>
+          <fa-icon slot="icon" name="home"/>
           <span slot="label">{{$t('footer.home')}}</span>
         </tabbar-item>
         <tabbar-item>
-          <i slot="icon" class="fa fa-bars"/>
+          <fa-icon slot="icon" name="bars"/>
           <span slot="label">{{$t('footer.menus')}}</span>
         </tabbar-item>
         <tabbar-item :link="{name: 'site.dashboard'}">
-          <i slot="icon" class="fa fa-user"/>
+          <fa-icon slot="icon" name="user"/>
           <span slot="label">{{$t('footer.me')}}</span>
         </tabbar-item>
         <tabbar-item>
-          <i slot="icon" class="fa fa-comments"/>
+          <fa-icon slot="icon" name="comments"/>
           <span slot="label">{{$t('footer.about')}}</span>
         </tabbar-item>
       </tabbar>

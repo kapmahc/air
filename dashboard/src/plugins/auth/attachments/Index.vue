@@ -6,7 +6,7 @@
       useFontAwesome
       useCustomDropzoneOptions
       :dropzoneOptions="option"
-      v-on:vdropzone-success="showSuccess">
+      v-on:vdropzone-success="onSuccess">
         <!-- Optional parameters if any! -->
         <input type="hidden" name="token" value="xxx">
     </dropzone>
@@ -22,7 +22,12 @@
         <tr :key="i" v-for="(l, i) in items">
           <td><a :href="l.url" target="_blank">{{l.title}}</a></td>
           <td>{{l.length}}KB</td>
-          <td></td>
+          <td>
+            <router-link :to="{name: 'auth.attachments.edit', params: {id: l.id}}">
+              <fa-icon name="pencil"/>
+            </router-link>
+            <fa-icon @click.native="onRemove(l.id)" name="trash"/>
+          </td>
         </tr>
       </tbody>
     </x-table>
@@ -33,7 +38,7 @@
 import Dropzone from 'vue2-dropzone'
 import { XTable } from 'vux'
 
-import {api, get, fail} from '@/ajax'
+import {api, get, fail, destroy} from '@/ajax'
 import {TOKEN} from '@/constants'
 
 export default {
@@ -63,8 +68,13 @@ export default {
     }
   },
   methods: {
-    showSuccess (file, res) {
+    onSuccess (file, res) {
       this.items.unshift(res)
+    },
+    onRemove (id) {
+      destroy(this, `/attachments/${id}`, (rst) => {
+        this.items = this.items.filter((a) => a.id !== id)
+      })
     }
   }
 }

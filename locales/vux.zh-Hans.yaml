@@ -8,6 +8,10 @@ buttons:
   new: 添加
   remove: 删除
   upload: 上传
+  confirm: 确认
+  cancel: 删除
+  ok: 确定
+  close: 关闭
 attributes:
   email: 邮箱
   username: 姓名

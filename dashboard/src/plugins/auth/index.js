@@ -5,7 +5,8 @@ import UsersResetPassword from './users/ResetPassword'
 import UsersLogs from './users/Logs'
 import UsersInfo from './users/Info'
 import UsersChangePassword from './users/ChangePassword'
-import AttachmentsIndex from './Attachments'
+import AttachmentsIndex from './attachments/Index'
+import AttachmentsEdit from './attachments/Edit'
 
 export default {
   dashboard (user) {
@@ -29,6 +30,7 @@ export default {
     {path: '/users/info', name: 'auth.users.info', component: UsersInfo},
     {path: '/users/change-password', name: 'auth.users.change-password', component: UsersChangePassword},
     {path: '/attachments', name: 'auth.attachments.index', component: AttachmentsIndex},
+    {path: '/attachments/:id', name: 'auth.attachments.edit', component: AttachmentsEdit},
 
     {path: '/users/sign-in', name: 'auth.users.sign-in', component: UsersSignIn},
     {path: '/users/sign-up', name: 'auth.users.sign-up', component: UsersSignUp},
