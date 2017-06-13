@@ -16,6 +16,7 @@ import {TOKEN} from './constants'
 
 Vue.http.defaults.baseURL = process.env.API_HOST
 Vue.http.defaults.headers.common['Authorization'] = `BEARER ${window.sessionStorage.getItem(TOKEN)}`
+Vue.http.defaults.withCredentials = true
 
 const router = new VueRouter({
   routes: plugins.routes

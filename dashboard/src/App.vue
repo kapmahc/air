@@ -23,11 +23,11 @@
           <i slot="icon" class="fa fa-bars"/>
           <span slot="label">{{$t('footer.menus')}}</span>
         </tabbar-item>
-        <tabbar-item>
+        <tabbar-item :link="{name: 'site.dashboard'}">
           <i slot="icon" class="fa fa-user"/>
           <span slot="label">{{$t('footer.me')}}</span>
         </tabbar-item>
-        <tabbar-item :link="{name: 'auth.users.sign-in'}">
+        <tabbar-item>
           <i slot="icon" class="fa fa-comments"/>
           <span slot="label">{{$t('footer.about')}}</span>
         </tabbar-item>
@@ -39,6 +39,7 @@
 <script>
 import { Actionsheet, ButtonTab, ButtonTabItem, ViewBox, XHeader, Tabbar, TabbarItem, Loading, TransferDom } from 'vux'
 import { mapState } from 'vuex'
+import { get, fail } from '@/ajax'
 
 const LOCALE = 'locale'
 
@@ -59,18 +60,13 @@ export default {
   methods: {
     switchLanguage (l) {
       let that = this
-      this.$http.get(`/locales/${l}`)
-        .then(function (r) {
-          that.$i18n.add(l, r.data.vux)
+      get(`/locales/${l}`)
+        .then((res) => {
+          that.$i18n.add(l, res.vux)
           that.$i18n.set(l)
           localStorage.setItem(LOCALE, l)
         })
-        .catch(function (e) {
-          that.$vux.toast.show({
-            text: e,
-            type: 'warn'
-          })
-        })
+        .catch(err => fail(that, err))
     }
   },
   created () {
@@ -82,7 +78,7 @@ export default {
       currentUser: state => state.currentUser
     }),
     title () {
-      var title = this.$t(this.$route.name + '.title', this.$route.params)
+      var title = this.$route.name ? this.$t(this.$route.name + '.title', this.$route.params) : ''
       document.title = title
       return title
     }

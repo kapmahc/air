@@ -1,3 +1,18 @@
+messages:
+  are-your-sure: 你确定么？
+  success: 操作成功
+buttons:
+  submit: 提交
+attributes:
+  email: 邮箱
+  username: 姓名
+  password: 密码
+  passwordConfirmation: 密码确认
+placeholders:
+  not-empty: 必填
+  email: 我们不会公开您的电子邮箱
+  password: 密码应该在6至32位之间
+  passwordConfirmation: 两次密码输入应一致
 header:
   back: 返回
 footer:
@@ -8,7 +23,23 @@ footer:
 site:
   home:
     title: 主页
+  dashboard:
+    title: 控制面板
 auth:
   users:
     sign-in:
       title: 登录
+    sign-up:
+      title: 新用户注册
+    forgot-password:
+      title: 忘记密码？
+      success: 你将会收到一封邮件来重置密码
+    confirm:
+      title: 没有收到激活邮件？
+      success: 你将会收到一封邮件来激活账户
+    unlock:
+      title: 没有收到解锁邮件？
+      success: 你将会收到一封邮件来解锁账户
+    reset-password:
+      title: 重置密码
+      success: 重置密码成功
