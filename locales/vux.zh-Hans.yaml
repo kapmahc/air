@@ -1,2 +1,9 @@
+header:
+  back: 返回
+footer:
+  home: 主页
+  menus: 菜单
+  me: 我
+  about: 关于
 home:
   title: 主页

@@ -4,8 +4,9 @@ import Vue from 'vue'
 import FastClick from 'fastclick'
 import VueRouter from 'vue-router'
 Vue.use(VueRouter)
-import { AjaxPlugin } from 'vux'
+import { AjaxPlugin, ToastPlugin } from 'vux'
 Vue.use(AjaxPlugin)
+Vue.use(ToastPlugin)
 
 import './main.css'
 import App from './App'
@@ -15,8 +16,6 @@ import {TOKEN} from './constants'
 
 Vue.http.defaults.baseURL = process.env.API_HOST
 Vue.http.defaults.headers.common['Authorization'] = `BEARER ${window.sessionStorage.getItem(TOKEN)}`
-
-console.log(Vue.http.get('/site/info'))
 
 const router = new VueRouter({
   routes: plugins.routes

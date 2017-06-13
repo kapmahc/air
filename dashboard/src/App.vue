@@ -1,11 +1,12 @@
 <template>
   <div style="height:100%;">
     <div v-transfer-dom>
-      <actionsheet @on-click-menu="onSwitchLanguage" :menus="languages" v-model="showLanguageMenus" />
+      <actionsheet @on-click-menu="switchLanguage" :menus="languages" v-model="showLanguageMenus" />
     </div>
     <view-box body-padding-top="46px" body-padding-bottom="55px">
       <x-header
         slot="header"
+        :left-options="{backText: $t('header.back')}"
         :title="title"
         style="width:100%;position:absolute;left:0;top:0;z-index:100;"
         :right-options="{showMore: true}"
@@ -16,19 +17,19 @@
       <tabbar slot="bottom">
         <tabbar-item :link="{name: 'site.home'}">
           <i slot="icon" class="fa fa-home"/>
-          <span slot="label">Wechat</span>
+          <span slot="label">{{$t('footer.home')}}</span>
         </tabbar-item>
         <tabbar-item>
           <i slot="icon" class="fa fa-bars"/>
-          <span slot="label">Message</span>
+          <span slot="label">{{$t('footer.menus')}}</span>
         </tabbar-item>
         <tabbar-item>
           <i slot="icon" class="fa fa-user"/>
-          <span slot="label">Explore</span>
+          <span slot="label">{{$t('footer.me')}}</span>
         </tabbar-item>
         <tabbar-item :link="{name: 'auth.users.sign-in'}">
           <i slot="icon" class="fa fa-comments"/>
-          <span slot="label">News</span>
+          <span slot="label">{{$t('footer.about')}}</span>
         </tabbar-item>
       </tabbar>
     </view-box>
@@ -56,13 +57,25 @@ export default {
     Actionsheet
   },
   methods: {
-    onSwitchLanguage (key) {
-      console.log(key)
+    switchLanguage (l) {
+      let that = this
+      this.$http.get(`/locales/${l}`)
+        .then(function (r) {
+          that.$i18n.add(l, r.data.vux)
+          that.$i18n.set(l)
+          localStorage.setItem(LOCALE, l)
+        })
+        .catch(function (e) {
+          that.$vux.toast.show({
+            text: e,
+            type: 'warn'
+          })
+        })
     }
   },
   created () {
     var locale = localStorage.getItem(LOCALE) || 'en-US'
-    console.log(locale)
+    this.switchLanguage(locale)
   },
   computed: {
     ...mapState({

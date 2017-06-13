@@ -1,7 +1,7 @@
 <template>
   <div>
-    <p slot="header">Hello</p>
-    home
+    <p>Hello</p>
+    {{$t('home.title')}}
     <i class="icon ion-home"></i>
   </div>
 </template>
@@ -27,7 +27,7 @@ export default {
     }
   },
   created () {
-    this.$store.commit('refresh', 'Home, Hi')
+    this.$store.commit('refresh', this.$t('home.title'))
   }
 }
 </script>
