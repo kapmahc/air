@@ -39,13 +39,12 @@ export default {
   },
   methods: {
     submitForm () {
-      let that = this
       post('/users/reset-password', Object.assign({}, this.form, {token: this.$route.params.token}))
       .then(res => {
-        that.$router.push({name: 'auth.users.sign-in'})
-        success(that, that.$t('auth.users.reset-password.success'))
+        this.$router.push({name: 'auth.users.sign-in'})
+        success(this, this.$t('auth.users.reset-password.success'))
       })
-      .catch(err => fail(that, err))
+      .catch(err => fail(this, err))
     }
   }
 }

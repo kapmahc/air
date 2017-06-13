@@ -8,6 +8,8 @@ attributes:
   username: 姓名
   password: 密码
   passwordConfirmation: 密码确认
+  createdAt: 创建日期
+  content: 内容  
 placeholders:
   not-empty: 必填
   email: 我们不会公开您的电子邮箱

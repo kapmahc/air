@@ -37,7 +37,7 @@ func (p *Dao) SignIn(lang, email, password, ip string) (*User, error) {
 		return nil, p.I18n.E(http.StatusForbidden, lang, "auth.errors.user.is-lock")
 	}
 
-	p.Log(user.ID, ip, p.I18n.T(lang, "auth.logs.sign-in.success"))
+	p.Log(user.ID, ip, p.I18n.T(lang, "auth.logs.user.sign-in.success"))
 	user.SignInCount++
 	user.LastSignInAt = user.CurrentSignInAt
 	user.LastSignInIP = user.CurrentSignInIP

@@ -49,13 +49,12 @@ export default {
   },
   methods: {
     submitForm () {
-      let that = this
       post('/users/sign-up', this.form)
       .then(res => {
-        that.$router.push({name: 'auth.users.sign-in'})
-        success(that)
+        this.$router.push({name: 'auth.users.sign-in'})
+        success(this)
       })
-      .catch(err => fail(that, err))
+      .catch(err => fail(this, err))
     }
   }
 }
