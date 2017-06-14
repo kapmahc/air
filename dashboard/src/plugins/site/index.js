@@ -1,6 +1,8 @@
 import Home from './Home'
 import Dashboard from './Dashboard'
 
+import AdminSiteStatus from './admin/site/Status'
+
 export default {
   dashboard (user) {
     var items = []
@@ -30,6 +32,8 @@ export default {
   },
   routes: [
     {path: '/', name: 'site.home', component: Home},
-    {path: '/dashboard', name: 'site.dashboard', component: Dashboard}
+    {path: '/dashboard', name: 'site.dashboard', component: Dashboard},
+
+    {path: '/admin/site/status', name: 'site.admin.status', component: AdminSiteStatus}
   ]
 }

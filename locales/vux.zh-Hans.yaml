@@ -45,6 +45,12 @@ site:
   admin:
     status:
       title: 当前状态
+      os: 操作
+      cache: 缓存
+      jobs: 后台任务
+      network: 网络
+      routes: HTTP路由
+      database: 数据库
     info:
       title: 基本信息
     author:
