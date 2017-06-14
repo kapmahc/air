@@ -12,6 +12,10 @@ import AdminUsersIndex from './admin/users/Index'
 import AdminLocalesIndex from './admin/locales/Index'
 import AdminLocalesEdit from './admin/locales/Edit'
 
+import PostsIndex from './posts/Index'
+import PostsEdit from './posts/Edit'
+import PostsShow from './posts/Show'
+
 export default {
   dashboard (user) {
     var items = []
@@ -28,12 +32,12 @@ export default {
           {href: 'site.admin.paypal'},
           {href: 'site.admin.users.index'},
           {href: 'site.admin.locales.index'},
-          {href: 'site.admin.posts.index'},
-          {href: 'site.admin.notices.index'},
-          {href: 'site.admin.links.index'},
-          {href: 'site.admin.cards.index'},
-          {href: 'site.admin.leave-words.index'},
-          {href: 'site.admin.friend-links.index'}
+          {href: 'site.posts.index'},
+          {href: 'site.notices.index'},
+          {href: 'site.links.index'},
+          {href: 'site.cards.index'},
+          {href: 'site.leave-words.index'},
+          {href: 'site.friend-links.index'}
         ]
       })
     }
@@ -41,6 +45,12 @@ export default {
   },
   routes: [
     {path: '/', name: 'site.home', component: Home},
+
+    {path: '/posts/:name', name: 'site.posts.show', component: PostsShow},
+    {path: '/posts', name: 'site.posts.index', component: PostsIndex},
+    {path: '/posts/new', name: 'site.posts.new', component: PostsEdit},
+    {path: '/posts/:id/edit', name: 'site.posts.edit', component: PostsEdit},
+
     {path: '/dashboard', name: 'site.dashboard', component: Dashboard},
 
     {path: '/admin/paypal', name: 'site.admin.paypal', component: AdminPaypal},

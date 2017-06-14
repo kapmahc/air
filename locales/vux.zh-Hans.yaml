@@ -26,6 +26,8 @@ attributes:
   host: 主机
   port: 端口
   ssl: 启用SSL?
+  title: 标题
+  body: 正文
 placeholders:
   not-empty: 必填
   email: 我们不会公开您的电子邮箱
@@ -54,6 +56,28 @@ site:
     title: 主页
   dashboard:
     title: 控制面板
+  posts:
+    show:
+      title: 文档-{name}
+    index:
+      title: 页面管理
+    edit:
+      title: 编辑[{{id}}]
+  notices:
+    index:
+      title: 站点通知
+  links:
+    index:
+      title: 链接
+  cards:
+    index:
+      title: 卡片
+  leave-words:
+    index:
+      title: 留言板
+  friend-links:
+    index:
+      title: 友情链接
   admin:
     status:
       title: 当前状态
@@ -88,24 +112,6 @@ site:
     locales:
       index:
         title: 国际化
-    posts:
-      index:
-        title: 页面管理
-    notices:
-      index:
-        title: 站点通知
-    links:
-      index:
-        title: 链接
-    cards:
-      index:
-        title: 卡片
-    leave-words:
-      index:
-        title: 留言板
-    friend-links:
-      index:
-        title: 友情链接
 auth:
   profile:
     title: 账户
