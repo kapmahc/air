@@ -62,9 +62,11 @@ site:
     show:
       title: 文档-{name}
     index:
-      title: 页面管理
+      title: 文档列表
     edit:
       title: 编辑[{id}]
+    manage:
+      title: 文档管理
   notices:
     new:
       title: 新增
@@ -74,16 +76,32 @@ site:
       title: 通知[{id}]
     edit:
       title: 编辑[{id}]
+    manage:
+      title: 通知管理
   links:
+    new:
+      title: 新增
+    edit:
+      title: 编辑[{id}]
     index:
       title: 链接
   cards:
+    new:
+      title: 新增
+    edit:
+      title: 编辑[{id}]
     index:
       title: 卡片
   leave-words:
+    new:
+      title: 给我们留言
     index:
       title: 留言板
   friend-links:
+    new:
+      title: 新增
+    edit:
+      title: 编辑[{id}]
     index:
       title: 友情链接
   admin:

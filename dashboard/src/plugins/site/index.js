@@ -13,9 +13,12 @@ import AdminLocalesIndex from './admin/locales/Index'
 import AdminLocalesEdit from './admin/locales/Edit'
 
 import PostsIndex from './posts/Index'
+import PostsManage from './posts/Manage'
 import PostsEdit from './posts/Edit'
 import PostsShow from './posts/Show'
+
 import NoticesIndex from './notices/Index'
+import NoticesManage from './notices/Manage'
 import NoticesEdit from './notices/Edit'
 import NoticesShow from './notices/Show'
 
@@ -35,8 +38,8 @@ export default {
           {href: 'site.admin.paypal'},
           {href: 'site.admin.users.index'},
           {href: 'site.admin.locales.index'},
-          {href: 'site.posts.index'},
-          {href: 'site.notices.index'},
+          {href: 'site.posts.manage'},
+          {href: 'site.notices.manage'},
           {href: 'site.links.index'},
           {href: 'site.cards.index'},
           {href: 'site.leave-words.index'},
@@ -51,11 +54,13 @@ export default {
 
     {path: '/posts/show/:name', name: 'site.posts.show', component: PostsShow},
     {path: '/posts', name: 'site.posts.index', component: PostsIndex},
+    {path: '/posts/manage', name: 'site.posts.manage', component: PostsManage},
     {path: '/posts/new', name: 'site.posts.new', component: PostsEdit},
     {path: '/posts/edit/:id', name: 'site.posts.edit', component: PostsEdit},
 
     {path: '/notices/show/:id', name: 'site.notices.show', component: NoticesShow},
     {path: '/notices', name: 'site.notices.index', component: NoticesIndex},
+    {path: '/manage', name: 'site.manage.index', component: NoticesManage},
     {path: '/notices/new', name: 'site.notices.new', component: NoticesEdit},
     {path: '/notices/edit/:id', name: 'site.notices.edit', component: NoticesEdit},
 

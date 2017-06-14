@@ -18,6 +18,7 @@
     "font-awesome": "^4.7.0",
     "jwt-decode": "^2.2.0",
     "marked": "^0.3.6",
+    "timeago.js": "^3.0.1",
     "vue": "^2.2.2",
     "vue-router": "^2.2.0",
     "vue2-dropzone": "^2.3.1",

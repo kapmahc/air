@@ -50,7 +50,7 @@ export default {
       post(id ? `/posts/${id}` : '/posts', Object.assign({}, this.form, {type: 'markdown'}))
       .then(res => {
         success(this)
-        this.$router.push({name: 'site.posts.manage'})
+        this.$router.push({name: 'site.posts.index'})
       })
       .catch(err => fail(this, err))
     }

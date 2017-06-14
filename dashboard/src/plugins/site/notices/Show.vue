@@ -1,5 +1,5 @@
 <template>
-  <group :title="item.createdAt">
+  <group :title="item.updatedAt">
     <cell-box>
       <md2ht :body="item.body"/>
     </cell-box>

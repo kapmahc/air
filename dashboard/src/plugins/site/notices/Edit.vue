@@ -38,7 +38,7 @@ export default {
       post(id ? `/notices/${id}` : '/notices', Object.assign({}, this.form, {type: 'markdown'}))
       .then(res => {
         success(this)
-        this.$router.push({name: 'site.notices.index'})
+        this.$router.push({name: 'site.notices.manage'})
       })
       .catch(err => fail(this, err))
     }
