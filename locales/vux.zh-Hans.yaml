@@ -36,6 +36,7 @@ attributes:
   label: 标签
   summary: 摘要
   action: 动作
+  deadline: 截止日期
 placeholders:
   not-empty: 必填
   email: 我们不会公开您的电子邮箱
@@ -72,6 +73,7 @@ site:
     contact: 联系信息
     faq: 常见问题
     friend-links: 友情链接
+    qrcode: 二维码
   menus:
     title: 导航菜单
   dashboard:
@@ -190,3 +192,8 @@ auth:
     reset-password:
       title: 重置密码
       success: 重置密码成功
+forms:
+  profile:
+    title: 调查问卷
+  manage:
+    title: 问卷管理

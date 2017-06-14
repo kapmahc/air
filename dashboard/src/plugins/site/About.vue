@@ -17,6 +17,10 @@
          />
       </grid-item>
     </grid>
+    <group-title>{{$t('site.about.qrcode')}}</group-title>
+    <div style="text-align:center;margin-top:15px;">
+      <qrcode :value="host" type="img"/>
+    </div>
     <group-title>{{$t('site.about.friend-links')}}</group-title>
     <grid>
       <grid-item
@@ -31,7 +35,7 @@
 </template>
 
 <script>
-import { Cell, Group, Grid, GridItem, GroupTitle } from 'vux'
+import { Cell, Group, Grid, GridItem, GroupTitle, Qrcode } from 'vux'
 import { mapState } from 'vuex'
 
 export default {
@@ -40,7 +44,8 @@ export default {
     Group,
     Grid,
     GridItem,
-    GroupTitle
+    GroupTitle,
+    Qrcode
   },
   data () {
     return {
@@ -51,7 +56,10 @@ export default {
     ...mapState({
       donates: state => state.siteInfo ? state.siteInfo.donates : [],
       friendLinks: state => state.siteInfo ? state.siteInfo.friendLinks : []
-    })
+    }),
+    host () {
+      return location.protocol + '//' + window.location.hostname
+    }
   }
 }
 </script>
