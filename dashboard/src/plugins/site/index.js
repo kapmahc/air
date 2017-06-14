@@ -7,6 +7,11 @@ import AdminSiteAuthor from './admin/site/Author'
 import AdminSiteSeo from './admin/site/Seo'
 import AdminSiteSmtp from './admin/site/Smtp'
 
+import AdminPaypal from './admin/Paypal'
+import AdminUsersIndex from './admin/users/Index'
+import AdminLocalesIndex from './admin/locales/Index'
+import AdminLocalesEdit from './admin/locales/Edit'
+
 export default {
   dashboard (user) {
     var items = []
@@ -37,6 +42,13 @@ export default {
   routes: [
     {path: '/', name: 'site.home', component: Home},
     {path: '/dashboard', name: 'site.dashboard', component: Dashboard},
+
+    {path: '/admin/paypal', name: 'site.admin.paypal', component: AdminPaypal},
+
+    {path: '/admin/users', name: 'site.admin.users.index', component: AdminUsersIndex},
+    {path: '/admin/locales', name: 'site.admin.locales.index', component: AdminLocalesIndex},
+    {path: '/admin/locales/new', name: 'site.admin.locales.new', component: AdminLocalesEdit},
+    {path: '/admin/locales/:code/edit', name: 'site.admin.locales.edit', component: AdminLocalesEdit},
 
     {path: '/admin/site/info', name: 'site.admin.info', component: AdminSiteInfo},
     {path: '/admin/site/author', name: 'site.admin.author', component: AdminSiteAuthor},

@@ -16,9 +16,10 @@ func (p *Plugin) Mount(rt *gin.Engine) {
 
 	ag.GET("/users", web.Wrap(p.indexAdminUsers))
 
-	ag.GET("/locales", web.Wrap(p.getAdminLocales))
+	ag.GET("/locales", web.Wrap(p.indexAdminLocales))
 	ag.POST("/locales", web.Wrap(p.postAdminLocales))
-	ag.DELETE("/locales/:code", web.Wrap(p.deleteAdminLocales))
+	ag.GET("/locales/:code", web.Wrap(p.showAdminLocale))
+	ag.DELETE("/locales/:code", web.Wrap(p.destroyAdminLocale))
 
 	ag.GET("/paypal", web.Wrap(p.getAdminPaypal))
 	ag.POST("/paypal", web.Wrap(p.postAdminPaypal))

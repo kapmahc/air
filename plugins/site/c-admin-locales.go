@@ -7,7 +7,7 @@ import (
 	"github.com/kapmahc/air/web/i18n"
 )
 
-func (p *Plugin) getAdminLocales(c *gin.Context) error {
+func (p *Plugin) indexAdminLocales(c *gin.Context) error {
 	lng := c.MustGet(i18n.LOCALE).(string)
 	items, err := p.I18n.Store.All(lng)
 	if err != nil {
@@ -16,8 +16,21 @@ func (p *Plugin) getAdminLocales(c *gin.Context) error {
 	c.JSON(http.StatusOK, items)
 	return nil
 }
+func (p *Plugin) showAdminLocale(c *gin.Context) error {
+	lng := c.MustGet(i18n.LOCALE).(string)
+	code := c.Param("code")
+	message, err := p.I18n.Store.Get(lng, code)
+	if err != nil {
+		return err
+	}
+	c.JSON(http.StatusOK, gin.H{
+		"code":    code,
+		"message": message,
+	})
+	return nil
+}
 
-func (p *Plugin) deleteAdminLocales(c *gin.Context) error {
+func (p *Plugin) destroyAdminLocale(c *gin.Context) error {
 	lng := c.MustGet(i18n.LOCALE).(string)
 	if err := p.I18n.Store.Del(lng, c.Param("code")); err != nil {
 		return err
