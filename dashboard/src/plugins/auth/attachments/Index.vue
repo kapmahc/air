@@ -6,10 +6,7 @@
       useFontAwesome
       useCustomDropzoneOptions
       :dropzoneOptions="option"
-      v-on:vdropzone-success="onSuccess">
-        <!-- Optional parameters if any! -->
-        <input type="hidden" name="token" value="xxx">
-    </dropzone>
+      v-on:vdropzone-success="onSuccess" />
     <x-table full-bordered>
       <thead>
         <tr>
