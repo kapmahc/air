@@ -3,19 +3,20 @@
     <group label-width="4.5em" label-margin-right="2em" label-align="right">
       <x-input
         required
-        :title="$t('attributes.name')"
+        :title="$t('attributes.loc')"
         :placeholder="$t('placeholders.not-empty')"
-        v-model="form.name" />
+        v-model="form.loc" />
       <x-input
         required
-        :title="$t('attributes.title')"
+        :title="$t('attributes.href')"
         :placeholder="$t('placeholders.not-empty')"
-        v-model="form.title" />
-      <x-textarea
+        v-model="form.href" />
+      <x-input
         required
-        :title="$t('attributes.body')"
+        :title="$t('attributes.label')"
         :placeholder="$t('placeholders.not-empty')"
-        v-model="form.body" />
+        v-model="form.label" />
+      <selector :title="$t('attributes.sortOrder')" :options="orders" v-model="form.sortOrder" />
     </group>
     <box gap="10px 10px">
       <x-button type="primary" @click.native="submitForm">{{$t("buttons.submit")}}</x-button>
@@ -24,7 +25,7 @@
 </template>
 
 <script>
-import { Group, Box, XInput, XTextarea, XButton } from 'vux'
+import { Group, Box, XInput, Selector, XButton } from 'vux'
 import { get, post, fail, success } from '@/ajax'
 
 export default {
@@ -33,24 +34,25 @@ export default {
     XInput,
     XButton,
     Box,
-    XTextarea
+    Selector
   },
   data () {
     return {
       form: {
-        name: '',
-        title: '',
-        body: ''
+        label: '',
+        href: '',
+        loc: '',
+        sortOrder: 0
       }
     }
   },
   methods: {
     submitForm () {
       var id = this.$route.params.id
-      post(id ? `/posts/${id}` : '/posts', Object.assign({}, this.form, {type: 'markdown'}))
+      post(id ? `/links/${id}` : '/links', this.form)
       .then(res => {
         success(this)
-        this.$router.push({name: 'site.posts.index'})
+        this.$router.push({name: 'site.links.index'})
       })
       .catch(err => fail(this, err))
     }
@@ -58,9 +60,14 @@ export default {
   created () {
     var id = this.$route.params.id
     if (id) {
-      get(`/posts/${id}`)
+      get(`/links/${id}`)
         .then((rst) => { this.form = rst })
         .catch((err) => fail(this, err))
+    }
+  },
+  computed: {
+    orders () {
+      return Array.from(new Array(21), (x, i) => i - 10)
     }
   }
 }

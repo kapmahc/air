@@ -19,7 +19,8 @@ attributes:
   currentPassword: 当前密码
   newPassword: 新密码
   passwordConfirmation: 密码确认
-  createdAt: 创建日期
+  createdAt: 创建时间
+  updatedAt: 修改时间
   content: 内容
   size: 大小
   name: 名称
@@ -28,6 +29,13 @@ attributes:
   ssl: 启用SSL?
   title: 标题
   body: 正文
+  logo: 图标
+  sortOrder: 序号
+  loc: 位置
+  href: 地址
+  label: 标签
+  summary: 摘要
+  action: 动作
 placeholders:
   not-empty: 必填
   email: 我们不会公开您的电子邮箱
@@ -37,7 +45,7 @@ header:
   back: 返回
 footer:
   home: 主页
-  menus: 菜单
+  menus: 导航
   me: 我
   about: 关于
 site:
@@ -52,6 +60,8 @@ site:
     locale:
       code: 代号
       message: 内容
+    friend-link:
+      home: 主页
   home:
     title: 主页
   dashboard:
@@ -95,6 +105,7 @@ site:
   leave-words:
     new:
       title: 给我们留言
+      please-leave-contact: 请留下邮箱、电话等联系信息
     index:
       title: 留言板
   friend-links:

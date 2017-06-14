@@ -22,6 +22,15 @@ import NoticesManage from './notices/Manage'
 import NoticesEdit from './notices/Edit'
 import NoticesShow from './notices/Show'
 
+import FriendLinksIndex from './friend-links/Index'
+import FriendLinksEdit from './friend-links/Edit'
+import LinksIndex from './links/Index'
+import LinksEdit from './links/Edit'
+import CardsIndex from './cards/Index'
+import CardsEdit from './cards/Edit'
+import LeaveWordsIndex from './leave-words/Index'
+import LeaveWordsEdit from './leave-words/Edit'
+
 export default {
   dashboard (user) {
     var items = []
@@ -58,9 +67,21 @@ export default {
     {path: '/posts/new', name: 'site.posts.new', component: PostsEdit},
     {path: '/posts/edit/:id', name: 'site.posts.edit', component: PostsEdit},
 
+    {path: '/friend-links', name: 'site.friend-links.index', component: FriendLinksIndex},
+    {path: '/friend-links/new', name: 'site.friend-links.new', component: FriendLinksEdit},
+    {path: '/friend-links/edit/:id', name: 'site.friend-links.edit', component: FriendLinksEdit},
+    {path: '/links', name: 'site.links.index', component: LinksIndex},
+    {path: '/links/new', name: 'site.links.new', component: LinksEdit},
+    {path: '/links/edit/:id', name: 'site.links.edit', component: LinksEdit},
+    {path: '/cards', name: 'site.cards.index', component: CardsIndex},
+    {path: '/cards/new', name: 'site.cards.new', component: CardsEdit},
+    {path: '/cards/edit/:id', name: 'site.cards.edit', component: CardsEdit},
+    {path: '/leave-words', name: 'site.leave-words.index', component: LeaveWordsIndex},
+    {path: '/leave-words/new', name: 'site.leave-words.new', component: LeaveWordsEdit},
+
     {path: '/notices/show/:id', name: 'site.notices.show', component: NoticesShow},
     {path: '/notices', name: 'site.notices.index', component: NoticesIndex},
-    {path: '/manage', name: 'site.manage.index', component: NoticesManage},
+    {path: '/notices/manage', name: 'site.notices.manage', component: NoticesManage},
     {path: '/notices/new', name: 'site.notices.new', component: NoticesEdit},
     {path: '/notices/edit/:id', name: 'site.notices.edit', component: NoticesEdit},
 

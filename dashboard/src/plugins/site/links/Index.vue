@@ -3,25 +3,22 @@
     <x-table full-bordered>
       <thead>
         <tr>
-          <th>{{$t('attributes.content')}}</th>
+          <th>{{$t('attributes.loc')}}</th>
+          <th>{{$t('attributes.href')}}</th>
+          <th>{{$t('attributes.label')}}</th>
           <th width="60px">
             {{$t('buttons.manage')}}
-            <router-link :to="{name: 'site.posts.new'}"><fa-icon name="plus"/></router-link>
+            <router-link :to="{name: 'site.links.new'}"><fa-icon name="plus"/></router-link>
           </th>
         </tr>
       </thead>
       <tbody>
         <tr :key="i" v-for="(l, i) in items">
+          <td>{{l.loc}}[{{l.sortOrder}}]</td>
+          <td>{{l.href}}</td>
+          <td>{{l.label}}</td>
           <td>
-            {{l.title}}
-            <divider />
-            {{l.body}}
-          </td>
-          <td>
-            <router-link :to="{name: 'site.posts.show', params: {name: l.name}}">
-              <fa-icon name="eye"/>
-            </router-link>
-            <router-link :to="{name: 'site.posts.edit', params: {id: l.id}}">
+            <router-link :to="{name: 'site.links.edit', params: {id: l.id}}">
               <fa-icon name="pencil"/>
             </router-link>
             <fa-icon @click.native="onRemove(l.id)" name="trash"/>
@@ -42,7 +39,7 @@ export default {
     Divider
   },
   created () {
-    get('/posts').then((rst) => { this.items = rst }).catch((err) => fail(this, err))
+    get('/links').then((rst) => { this.items = rst }).catch((err) => fail(this, err))
   },
   data () {
     return {
@@ -51,7 +48,7 @@ export default {
   },
   methods: {
     onRemove (id) {
-      destroy(this, `/posts/${id}`, (rst) => {
+      destroy(this, `/links/${id}`, (rst) => {
         this.items = this.items.filter((l) => l.id !== id)
       })
     }
