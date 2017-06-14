@@ -5,7 +5,7 @@
       v-for="(c, i) in items">
       <divider>{{c.title}}</divider>
       <card>
-        <img slot="header" :src="c.logo" />
+        <img width="100%" slot="header" :src="c.logo" />
         <div slot="content" class="card-padding">
           <p style="color:#999;font-size:12px;">
             <time-ago :date="c.updatedAt" />

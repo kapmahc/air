@@ -2,7 +2,7 @@
   <group :title="$t('site.menus.title')">
     <cell
       :key="i"
-      :link="{name: l.href}"
+      :link="{path: l.href}"
       :title="$t(l.label)"
       v-for="(l, i) in items"/>
   </group>

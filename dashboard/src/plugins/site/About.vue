@@ -17,6 +17,16 @@
          />
       </grid-item>
     </grid>
+    <group-title>{{$t('site.about.friend-links')}}</group-title>
+    <grid>
+      <grid-item
+        :key="i"
+        v-for="(l, i) in friendLinks">
+        <a :href="l.home" target="_blank">
+         <img width="100%" :src="l.logo" :alt="l.title" />
+        </a>
+      </grid-item>
+    </grid>
   </div>
 </template>
 
@@ -39,7 +49,8 @@ export default {
   },
   computed: {
     ...mapState({
-      donates: state => state.siteInfo ? state.siteInfo.donates : []
+      donates: state => state.siteInfo ? state.siteInfo.donates : [],
+      friendLinks: state => state.siteInfo ? state.siteInfo.friendLinks : []
     })
   }
 }
