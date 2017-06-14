@@ -1,5 +1,7 @@
 import Home from './Home'
 import Dashboard from './Dashboard'
+import About from './About'
+import Menus from './Menus'
 
 import AdminSiteStatus from './admin/site/Status'
 import AdminSiteInfo from './admin/site/Info'
@@ -60,6 +62,9 @@ export default {
   },
   routes: [
     {path: '/', name: 'site.home', component: Home},
+    {path: '/about', name: 'site.about', component: About},
+    {path: '/menus', name: 'site.menus', component: Menus},
+    {path: '/dashboard', name: 'site.dashboard', component: Dashboard},
 
     {path: '/posts/show/:name', name: 'site.posts.show', component: PostsShow},
     {path: '/posts', name: 'site.posts.index', component: PostsIndex},
@@ -84,8 +89,6 @@ export default {
     {path: '/notices/manage', name: 'site.notices.manage', component: NoticesManage},
     {path: '/notices/new', name: 'site.notices.new', component: NoticesEdit},
     {path: '/notices/edit/:id', name: 'site.notices.edit', component: NoticesEdit},
-
-    {path: '/dashboard', name: 'site.dashboard', component: Dashboard},
 
     {path: '/admin/paypal', name: 'site.admin.paypal', component: AdminPaypal},
 

@@ -19,7 +19,7 @@
           <fa-icon slot="icon" name="home"/>
           <span slot="label">{{$t('footer.home')}}</span>
         </tabbar-item>
-        <tabbar-item>
+        <tabbar-item :link="{name: 'site.menus'}">
           <fa-icon slot="icon" name="bars"/>
           <span slot="label">{{$t('footer.menus')}}</span>
         </tabbar-item>
@@ -27,7 +27,7 @@
           <fa-icon slot="icon" name="user"/>
           <span slot="label">{{$t('footer.me')}}</span>
         </tabbar-item>
-        <tabbar-item>
+        <tabbar-item :link="{name: 'site.about'}">
           <fa-icon slot="icon" name="comments"/>
           <span slot="label">{{$t('footer.about')}}</span>
         </tabbar-item>

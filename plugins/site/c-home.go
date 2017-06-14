@@ -48,6 +48,13 @@ func (p *Plugin) getSiteInfo(c *gin.Context) error {
 	}
 	data["cards"] = cards
 
+	donates := gin.H{}
+	paypal := make(map[string]interface{})
+	if err := p.Settings.Get("site.paypal", &paypal); err == nil {
+		donates["paypal"] = paypal["donate"]
+	}
+	data["donates"] = donates
+
 	c.JSON(http.StatusOK, data)
 	return nil
 }

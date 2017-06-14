@@ -41,6 +41,7 @@ placeholders:
   email: 我们不会公开您的电子邮箱
   password: 密码应该在6至32位之间
   passwordConfirmation: 两次密码输入应一致
+  can-markdown: 支持MARKDOWN格式
 header:
   back: 返回
 footer:
@@ -64,6 +65,14 @@ site:
       home: 主页
   home:
     title: 主页
+  about:
+    title: 关于我们
+    donates: 捐赠
+    about: 关于我们
+    contact: 联系信息
+    faq: 常见问题
+  menus:
+    title: 导航菜单
   dashboard:
     title: 控制面板
   posts:
