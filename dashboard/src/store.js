@@ -29,6 +29,9 @@ const store = new Vuex.Store({
   actions: {
     signIn ({commit}, token) {
       commit({type: 'signIn', token})
+    },
+    refresh ({commit}, info) {
+      commit({type: 'refresh', info})
     }
   }
 })

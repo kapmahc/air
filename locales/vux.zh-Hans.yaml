@@ -23,6 +23,9 @@ attributes:
   content: 内容
   size: 大小
   name: 名称
+  host: 主机
+  port: 端口
+  ssl: 启用SSL?
 placeholders:
   not-empty: 必填
   email: 我们不会公开您的电子邮箱
@@ -38,6 +41,12 @@ footer:
 site:
   profile:
     title: 站点
+  attributes:
+    title: 标题
+    subTitle: 副标题
+    copyright: 版权信息
+    description: 说明信息
+    keywords: 关键字
   home:
     title: 主页
   dashboard:
@@ -57,8 +66,13 @@ site:
       title: 作者信息
     seo:
       title: 搜索引擎
+      google:
+        verifyCode: Google网站ID
+      baidu:
+        verifyCode: 百度网站ID
     smtp:
       title: 邮件发送
+      sender: 发件人
     paypal:
       title: Paypal支付
     users:
@@ -91,6 +105,8 @@ auth:
   attachments:
     index:
       title: 文件管理
+    edit:
+      title: 编辑[{{id}}]
   users:
     logs:
       title: 操作日志

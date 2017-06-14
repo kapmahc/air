@@ -25,7 +25,7 @@ func (p *Plugin) postAdminSiteInfo(c *gin.Context) error {
 
 	for k, v := range map[string]string{
 		"title":       fm.Title,
-		"sub-title":   fm.SubTitle,
+		"subTitle":    fm.SubTitle,
 		"keywords":    fm.Keywords,
 		"description": fm.Description,
 		"copyright":   fm.Copyright,

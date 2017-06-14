@@ -27,12 +27,12 @@ func (p *Plugin) getSiteInfo(c *gin.Context) error {
 	data := gin.H{"locale": lng, "languages": langs}
 
 	for _, k := range []string{"title", "subTitle", "keywords", "description", "copyright"} {
-		data[k] = p.I18n.T(lng, "site."+k)
+		data[k], _ = p.I18n.Store.Get(lng, "site."+k)
 	}
 
 	author := gin.H{}
 	for _, k := range []string{"name", "email"} {
-		author[k] = p.I18n.T(lng, "site.author."+k)
+		author[k], _ = p.I18n.Store.Get(lng, "site.author."+k)
 	}
 	data["author"] = author
 

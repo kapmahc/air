@@ -1,10 +1,9 @@
 <template>
-  <dashboard-layout>
+  <dashboard-layout admin>
     <group label-width="4.5em" label-margin-right="2em" label-align="right">
       <x-input
         :title="$t('attributes.email')"
-        readonly
-        disabled
+        :placeholder="$t('placeholders.not-empty')"
         v-model="form.email" />
       <x-input
         required
@@ -30,7 +29,7 @@ export default {
     Box
   },
   created () {
-    get('/users/info').then((rst) => { this.form = rst }).catch((err) => fail(this, err))
+    get('/site/info').then((rst) => { this.form = rst.author }).catch((err) => fail(this, err))
   },
   data () {
     return {
@@ -42,7 +41,7 @@ export default {
   },
   methods: {
     submitForm () {
-      post('/users/info', this.form)
+      post('/admin/site/author', this.form)
       .then(res => success(this))
       .catch(err => fail(this, err))
     }

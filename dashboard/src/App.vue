@@ -59,7 +59,8 @@ export default {
   },
   methods: {
     ...mapActions([
-      'signIn'
+      'signIn',
+      'refresh'
     ]),
     switchLanguage (l) {
       let that = this
@@ -80,10 +81,15 @@ export default {
     // ----
     var locale = localStorage.getItem(LOCALE) || 'en-US'
     this.switchLanguage(locale)
+    // ----
+    if (!this.info) {
+      get('/site/info').then((rst) => this.refresh(rst)).catch((err) => fail(this, err))
+    }
   },
   computed: {
     ...mapState({
-      currentUser: state => state.currentUser
+      user: state => state.currentUser,
+      info: state => state.siteInfo
     }),
     title () {
       var title = this.$route.name ? this.$t(this.$route.name + '.title', this.$route.params) : ''

@@ -1,5 +1,5 @@
 <template>
-  <dashboard-layout title="site.admin.status.title" admin>
+  <dashboard-layout admin>
     <group :title="$t('site.admin.status.title')">
       <cell
       is-link
