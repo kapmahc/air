@@ -57,15 +57,23 @@ site:
   dashboard:
     title: 控制面板
   posts:
+    new:
+      title: 新增
     show:
       title: 文档-{name}
     index:
       title: 页面管理
     edit:
-      title: 编辑[{{id}}]
+      title: 编辑[{id}]
   notices:
+    new:
+      title: 新增
     index:
       title: 站点通知
+    show:
+      title: 通知[{id}]
+    edit:
+      title: 编辑[{id}]
   links:
     index:
       title: 链接

@@ -15,6 +15,9 @@ import AdminLocalesEdit from './admin/locales/Edit'
 import PostsIndex from './posts/Index'
 import PostsEdit from './posts/Edit'
 import PostsShow from './posts/Show'
+import NoticesIndex from './notices/Index'
+import NoticesEdit from './notices/Edit'
+import NoticesShow from './notices/Show'
 
 export default {
   dashboard (user) {
@@ -46,10 +49,15 @@ export default {
   routes: [
     {path: '/', name: 'site.home', component: Home},
 
-    {path: '/posts/:name', name: 'site.posts.show', component: PostsShow},
+    {path: '/posts/show/:name', name: 'site.posts.show', component: PostsShow},
     {path: '/posts', name: 'site.posts.index', component: PostsIndex},
     {path: '/posts/new', name: 'site.posts.new', component: PostsEdit},
-    {path: '/posts/:id/edit', name: 'site.posts.edit', component: PostsEdit},
+    {path: '/posts/edit/:id', name: 'site.posts.edit', component: PostsEdit},
+
+    {path: '/notices/show/:id', name: 'site.notices.show', component: NoticesShow},
+    {path: '/notices', name: 'site.notices.index', component: NoticesIndex},
+    {path: '/notices/new', name: 'site.notices.new', component: NoticesEdit},
+    {path: '/notices/edit/:id', name: 'site.notices.edit', component: NoticesEdit},
 
     {path: '/dashboard', name: 'site.dashboard', component: Dashboard},
 

@@ -1,5 +1,5 @@
 <template>
-  <group :title="item.title">
+  <group :title="item.createdAt">
     <cell-box>
       <md2ht :body="item.body"/>
     </cell-box>
@@ -18,17 +18,15 @@ export default {
   data () {
     return {
       item: {
-        name: '',
-        title: '',
         body: ''
       }
     }
   },
   created () {
-    var name = this.$route.params.name
-    get(`/posts/0?name=${name}`)
-        .then((rst) => { this.item = rst })
-        .catch((err) => fail(this, err))
+    var id = this.$route.params.id
+    get(`/notices/${id}`)
+      .then((rst) => { this.item = rst })
+      .catch((err) => fail(this, err))
   }
 }
 </script>
