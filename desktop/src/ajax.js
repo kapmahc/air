@@ -1,21 +1,9 @@
 import {TOKEN} from './constants'
 
-export const fail = (that, err) => {
-  that.$vux.toast.show({type: 'warn', text: err, width: '100%'})
-  console.error(err)
-}
-export const success = (that, msg) => that.$vux.toast.show({type: 'success', text: msg || that.$t('messages.success'), width: '100%'})
-
 export const api = (path) => {
   return `${process.env.API_HOST}${path}`
 }
 
-export const destroy = (that, path, success) => that.$vux.confirm.show({
-  title: that.$t('messages.are-your-sure'),
-  onConfirm () {
-    _delete(path).then(rst => success(rst)).catch((err) => fail(that, err))
-  }
-})
 // ---------------------------------
 
 const parse = (res) => {

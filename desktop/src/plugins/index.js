@@ -1,10 +1,10 @@
 import site from './site'
-import auth from './auth'
-import forms from './forms'
+// import auth from './auth'
+// import forms from './forms'
 
 const plugins = {
-  auth,
-  forms,
+  // auth,
+  // // forms,
   site
 }
 

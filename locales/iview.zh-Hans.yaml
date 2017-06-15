@@ -1,0 +1,199 @@
+messages:
+  are-your-sure: 你确定么？
+  success: 操作成功
+buttons:
+  submit: 提交
+  manage: 管理
+  edit: 编辑
+  new: 添加
+  remove: 删除
+  upload: 上传
+  confirm: 确认
+  cancel: 删除
+  ok: 确定
+  close: 关闭
+attributes:
+  email: 邮箱
+  username: 姓名
+  password: 密码
+  currentPassword: 当前密码
+  newPassword: 新密码
+  passwordConfirmation: 密码确认
+  createdAt: 创建时间
+  updatedAt: 修改时间
+  content: 内容
+  size: 大小
+  name: 名称
+  host: 主机
+  port: 端口
+  ssl: 启用SSL?
+  title: 标题
+  body: 正文
+  logo: 图标
+  sortOrder: 序号
+  loc: 位置
+  href: 地址
+  label: 标签
+  summary: 摘要
+  action: 动作
+  deadline: 截止日期
+placeholders:
+  not-empty: 必填
+  email: 我们不会公开您的电子邮箱
+  password: 密码应该在6至32位之间
+  passwordConfirmation: 两次密码输入应一致
+  can-markdown: 支持MARKDOWN格式
+header:
+  back: 返回
+footer:
+  home: 主页
+  menus: 导航
+  me: 我
+  about: 关于
+site:
+  profile:
+    title: 站点
+  attributes:
+    title: 标题
+    subTitle: 副标题
+    copyright: 版权信息
+    description: 说明信息
+    keywords: 关键字
+    locale:
+      code: 代号
+      message: 内容
+    friend-link:
+      home: 主页
+  home:
+    title: 主页
+  about:
+    title: 关于我们
+    donates: 捐赠
+    about: 关于我们
+    contact: 联系信息
+    faq: 常见问题
+    friend-links: 友情链接
+    qrcode: 二维码
+  menus:
+    title: 导航菜单
+  dashboard:
+    title: 控制面板
+  posts:
+    new:
+      title: 新增
+    show:
+      title: 文档-{name}
+    index:
+      title: 文档列表
+    edit:
+      title: 编辑[{id}]
+    manage:
+      title: 文档管理
+  notices:
+    new:
+      title: 新增
+    index:
+      title: 站点通知
+    show:
+      title: 通知[{id}]
+    edit:
+      title: 编辑[{id}]
+    manage:
+      title: 通知管理
+  links:
+    new:
+      title: 新增
+    edit:
+      title: 编辑[{id}]
+    index:
+      title: 链接
+  cards:
+    new:
+      title: 新增
+    edit:
+      title: 编辑[{id}]
+    index:
+      title: 卡片
+  leave-words:
+    new:
+      title: 给我们留言
+      please-leave-contact: 请留下邮箱、电话等联系信息
+    index:
+      title: 留言板
+  friend-links:
+    new:
+      title: 新增
+    edit:
+      title: 编辑[{id}]
+    index:
+      title: 友情链接
+  admin:
+    status:
+      title: 当前状态
+      os: 操作
+      cache: 缓存
+      jobs: 后台任务
+      network: 网络
+      routes: HTTP路由
+      database: 数据库
+    info:
+      title: 基本信息
+    author:
+      title: 作者信息
+    seo:
+      title: 搜索引擎
+      google:
+        verifyCode: Google网站ID
+      baidu:
+        verifyCode: 百度网站ID
+    smtp:
+      title: 邮件发送
+      sender: 发件人
+    paypal:
+      title: Paypal支付
+      donate-form: 捐赠表单代码
+    users:
+      index:
+        title: 用户列表
+        lastSignIn: 上次登录
+        currentSignIn: 本次登录
+        who: 用户
+    locales:
+      index:
+        title: 国际化
+auth:
+  profile:
+    title: 账户
+  attachments:
+    index:
+      title: 文件管理
+    edit:
+      title: 编辑[{{id}}]
+  users:
+    logs:
+      title: 操作日志
+    info:
+      title: 个人信息
+    change-password:
+      title: 修改密码
+    sign-in:
+      title: 登录
+    sign-up:
+      title: 新用户注册
+    forgot-password:
+      title: 忘记密码？
+      success: 你将会收到一封邮件来重置密码
+    confirm:
+      title: 没有收到激活邮件？
+      success: 你将会收到一封邮件来激活账户
+    unlock:
+      title: 没有收到解锁邮件？
+      success: 你将会收到一封邮件来解锁账户
+    reset-password:
+      title: 重置密码
+      success: 重置密码成功
+forms:
+  profile:
+    title: 调查问卷
+  manage:
+    title: 问卷管理
