@@ -1,3 +1,5 @@
+errors:
+  no-match: 页面不存在
 messages:
   are-your-sure: 你确定么？
   success: 操作成功
@@ -43,13 +45,6 @@ placeholders:
   password: 密码应该在6至32位之间
   passwordConfirmation: 两次密码输入应一致
   can-markdown: 支持MARKDOWN格式
-header:
-  back: 返回
-footer:
-  home: 主页
-  menus: 导航
-  me: 我
-  about: 关于
 site:
   profile:
     title: 站点
