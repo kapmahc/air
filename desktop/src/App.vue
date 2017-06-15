@@ -36,7 +36,10 @@ export default {
     // this.switchLanguage(locale)
     // ----
     if (!this.info) {
-      get('/site/info').then((rst) => this.refresh(rst)).catch(this.$Message.error)
+      get('/site/info').then((rst) => {
+        this.refresh(rst)
+        document.title = rst.subTitle + '|' + rst.title
+      }).catch(this.$Message.error)
     }
   },
   computed: {

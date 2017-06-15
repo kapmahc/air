@@ -8,8 +8,8 @@ import App from './App'
 import { i18n, detect as detectLocale, load as loadLocaleMessage } from './i18n'
 
 import './main.css'
-// import './layouts'
-// import './components'
+import './layouts'
+import './components'
 
 Vue.config.productionTip = false
 
