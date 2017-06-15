@@ -47,6 +47,8 @@ errors:
   passwordConfirmation: 两次密码输入应一致
   not-valid-email: 邮箱格式不正确
 site:
+  install:
+    title: 初始化安装
   profile:
     title: 站点
   attributes:
