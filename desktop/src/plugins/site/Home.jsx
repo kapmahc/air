@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 
-class App extends Component {
+class Widget extends Component {
   render() {
     return (
-      <div className="App">
-        app
+      <div>
+        home
       </div>
     );
   }
 }
 
-export default App;
+export default Widget;
