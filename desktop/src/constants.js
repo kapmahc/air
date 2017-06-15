@@ -9,3 +9,27 @@ export const NonSignInLinks=[
   {icon: 'unlock', href: '/users/unlock', label: 'auth.users.unlock.title'},
   {icon: 'question-circle-o', href: '/leave-words/new', label: 'site.leave-words.new.title'},
 ]
+
+export const formItemLayout = {
+  labelCol: {
+    xs: { span: 24 },
+    sm: { span: 6 },
+  },
+  wrapperCol: {
+    xs: { span: 24 },
+    sm: { span: 14 },
+  },
+};
+
+export const tailFormItemLayout = {
+  wrapperCol: {
+    xs: {
+      span: 24,
+      offset: 0,
+    },
+    sm: {
+      span: 14,
+      offset: 6,
+    },
+  },
+};

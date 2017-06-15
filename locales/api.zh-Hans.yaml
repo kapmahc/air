@@ -17,6 +17,7 @@ auth:
   errors:
     please-sign-in: 请先登录
     user:
+      email-already-exist: 邮箱已存在
       email-password-not-match: 邮箱和密码不匹配
       already-confirm: 已经被激活
       not-lock: 没有被锁定

@@ -1,5 +1,3 @@
-errors:
-  no-match: 页面不存在
 messages:
   are-your-sure: 你确定么？
   success: 操作成功
@@ -39,12 +37,15 @@ attributes:
   summary: 摘要
   action: 动作
   deadline: 截止日期
-placeholders:
-  not-empty: 必填
+helps:
   email: 我们不会公开您的电子邮箱
+  can-markdown: 支持MARKDOWN格式
+errors:
+  no-match: 页面不存在
+  not-empty: 不能为空
   password: 密码应该在6至32位之间
   passwordConfirmation: 两次密码输入应一致
-  can-markdown: 支持MARKDOWN格式
+  not-valid-email: 邮箱格式不正确
 site:
   profile:
     title: 站点
