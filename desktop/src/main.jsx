@@ -7,6 +7,9 @@ import { Provider } from 'react-redux'
 import createHistory from 'history/createBrowserHistory'
 import { Switch } from 'react-router-dom'
 import { ConnectedRouter, routerReducer, routerMiddleware } from 'react-router-redux'
+import moment from 'moment'
+import { LocaleProvider } from 'antd'
+import { IntlProvider, addLocaleData } from 'react-intl'
 
 import reducers from './reducers'
 import routes from './plugins'
@@ -26,14 +29,21 @@ const store = createStore(
 )
 
 
-const main = (id) => {
+const main = (id, user) => {
+  moment.locale(user.moment)
+  addLocaleData(user.data)
+
   ReactDOM.render(
-    (<Provider store={store}>      
-        <ConnectedRouter history={history}>
-          <Switch>
-            {routes}
-          </Switch>
-        </ConnectedRouter>
+    (<Provider store={store}>
+      <LocaleProvider locale={user.antd}>
+        <IntlProvider locale={user.locale} messages={user.messages}>
+          <ConnectedRouter history={history}>
+            <Switch>
+              {routes}
+            </Switch>
+          </ConnectedRouter>
+        </IntlProvider>
+      </LocaleProvider>
     </Provider>),
     document.getElementById(id)
   );

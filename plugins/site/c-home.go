@@ -2,10 +2,28 @@ package site
 
 import (
 	"net/http"
+	"strings"
 
 	"github.com/gin-gonic/gin"
 	"github.com/kapmahc/air/web/i18n"
 )
+
+func (p *Plugin) getIntl(c *gin.Context) error {
+	lang := c.Param("lang")
+	zone := c.Param("zone") + "."
+	items, err := p.I18n.Store.All(lang) //p.I18n.All(lang) //
+	if err != nil {
+		return err
+	}
+	intl := make(map[string]string)
+	for k, v := range items {
+		if strings.HasPrefix(k, zone) {
+			intl[k[len(zone):]] = v
+		}
+	}
+	c.JSON(http.StatusOK, intl)
+	return nil
+}
 
 func (p *Plugin) getLocales(c *gin.Context) error {
 	lang := c.Param("lang")

@@ -7,7 +7,9 @@ import (
 
 // Mount mount web points
 func (p *Plugin) Mount(rt *gin.Engine) {
+	rt.GET("/intl/:zone/:lang", web.Wrap(p.getIntl))
 	rt.GET("/locales/:lang", web.Wrap(p.getLocales))
+
 	rt.GET("/site/info", web.Wrap(p.getSiteInfo))
 	rt.POST("/install", web.Wrap(p.mustDatabaseEmpty), web.Wrap(p.postInstall))
 	rt.GET("/donates", web.Wrap(p.getDonates))
