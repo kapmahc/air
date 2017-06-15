@@ -6,8 +6,8 @@ import main from './main'
 const user = detectLocale()
 
 get(`/intl/antd/${user.locale}`)
-  .then((messages) => {
-    user.messages = {...messages}
+  .then((rst) => {
+    user.messages = {...rst}
     main('root', user)
     registerServiceWorker()
   })
