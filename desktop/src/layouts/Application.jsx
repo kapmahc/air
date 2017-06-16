@@ -11,6 +11,7 @@ import Footer from '../components/Footer'
 import {NonSignInLinks, TOKEN, LOCALE} from '../constants'
 import {signIn, refresh} from '../actions'
 import {get} from '../ajax'
+import menus from '../menus'
 
 const { SubMenu } = Menu;
 const { Content, Sider} = Layout;
@@ -78,8 +79,8 @@ class Widget extends Component {
               </SubMenu>
               {/* personal bar */}
               { user.uid ?
-                  <SubMenu key="personal-bar" title={<span><Icon type="user" /><FormattedMessage id="sider.personal-bar.welcome" values={{name:user.name}}/></span>}>
-
+                  <SubMenu key="personal-bar" title={<span><Icon type="tool" /><FormattedMessage id="sider.personal-bar.welcome" values={{name:user.name}}/></span>}>
+                    {menus(user).map((m,i)=><SubMenu key={`personal-bar-${i}`} title={<span><Icon type={m.icon}/> <FormattedMessage id={m.label}/></span>}>{m.items.map((l) => <Menu.Item key={`to-${l.href}`}><FormattedMessage id={l.label}/></Menu.Item>)}</SubMenu>)}
                   </SubMenu> :
                   <SubMenu key="personal-bar" title={<span><Icon type="user" /><FormattedMessage id="sider.personal-bar.sign-in-or-up"/></span>}>
                     {NonSignInLinks.map((l) => <Menu.Item key={`to-${l.href}`}><FormattedMessage id={l.label}/></Menu.Item>)}

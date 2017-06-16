@@ -32,7 +32,7 @@ class Widget extends Component {
             user.uid ?
               <Menu.Item key="/dashboard"><FormattedMessage id="site.dashboard.title"/></Menu.Item> :
               <Menu.Item key="/users/sign-in"><FormattedMessage id="auth.users.sign-in.title"/></Menu.Item>
-          }
+          }          
         </Menu>
       </Header>
     );
