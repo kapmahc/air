@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
 import { Form, Input, message } from 'antd';
 import {injectIntl, intlShape, FormattedMessage} from 'react-intl'
+import { push } from 'react-router-redux'
+import { connect } from 'react-redux'
+import PropTypes from 'prop-types'
 
 import Layout from '../../../layouts/Dashboard'
 import {formItemLayout} from '../../../constants'
@@ -12,20 +15,23 @@ const FormItem = Form.Item;
 class WidgetF extends Component {
   componentDidMount () {
     const {setFieldsValue} = this.props.form
-    get('/users/info').then(
+    const {match} = this.props
+    get(`/attachments/${match.params.id}`).then(
       function (rst){
-        setFieldsValue({name: rst.name, email: rst.email})
+        setFieldsValue({title: rst.title})
       }
     ).catch(message.error)
   }
   handleSubmit = (e) => {
     e.preventDefault();
     const {formatMessage} = this.props.intl
+    const {match, push} = this.props
     this.props.form.validateFieldsAndScroll((err, values) => {
      if (!err) {
-       post('/users/info', values)
+       post(`/attachments/${match.params.id}`, values)
         .then((rst) => {
           message.success(formatMessage({id: 'messages.success'}))
+          push('/attachments')
         }).catch(message.error)
      }
     });
@@ -33,28 +39,19 @@ class WidgetF extends Component {
   render() {
     const {formatMessage} = this.props.intl
     const { getFieldDecorator } = this.props.form;
+    const {match} = this.props
     return (
-      <Layout breads={[{href: '/users/info', label: 'auth.users.info.title'}]}>
+      <Layout breads={[
+          {href: '/attachments', label: 'auth.attachments.index.title'},
+          {href: `/attachments/edit/${match.params.id}`, label: 'buttons.edit'},
+        ]}>
         <Form onSubmit={this.handleSubmit}>
-
           <FormItem
             {...formItemLayout}
-            label={<FormattedMessage id="attributes.email"/>}
-          >
-          {getFieldDecorator('email', {
-            rules: [
-            ],
-          })(
-            <Input disabled/>
-          )}
-          </FormItem>
-
-          <FormItem
-            {...formItemLayout}
-            label={<FormattedMessage id="attributes.username"/>}
+            label={<FormattedMessage id="attributes.title"/>}
             hasFeedback
           >
-          {getFieldDecorator('name', {
+          {getFieldDecorator('title', {
             rules: [{ required: true, message: formatMessage({id:"errors.not-empty"})}],
           })(
             <Input />
@@ -71,6 +68,12 @@ class WidgetF extends Component {
 
 WidgetF.propTypes = {
   intl: intlShape.isRequired,
+  push: PropTypes.func.isRequired,
 }
 
-export default Form.create()(injectIntl(WidgetF))
+const Widget = Form.create()(injectIntl(WidgetF))
+
+export default connect(
+  state => ({}),
+  {push},
+)(Widget)

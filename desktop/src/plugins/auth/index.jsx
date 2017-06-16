@@ -9,6 +9,9 @@ import UsersInfo from './users/Info'
 import UsersChangePassword from './users/ChangePassword'
 import UsersLogs from './users/Logs'
 
+import AttachmentsIndex from './attachments/Index'
+import AttachmentsEdit from './attachments/Edit'
+
 const UsersForgotPassword = () => <UsersEmailForm action="forgot-password"/>
 const UsersConfirm = () => <UsersEmailForm action="confirm"/>
 const UsersUnlock = () => <UsersEmailForm action="unlock"/>
@@ -24,4 +27,8 @@ export default [
   <Route key="auth.users.info" path="/users/info" component={UsersInfo}/>,
   <Route key="auth.users.change-password" path="/users/change-password" component={UsersChangePassword}/>,
   <Route key="auth.users.logs" path="/users/logs" component={UsersLogs}/>,
+
+  <Route key="auth.attachments.edit" path="/attachments/edit/:id" component={AttachmentsEdit}/>,
+  <Route key="auth.attachments.index" path="/attachments" component={AttachmentsIndex}/>,
+
 ]
