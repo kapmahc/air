@@ -11,7 +11,7 @@ class Widget extends Component {
   render() {
     const {children, breads, user, admin} = this.props
     if (user.uid && (!admin || user.admin)) {
-      return <Layout breads={breads}>{children}</Layout>
+      return <Layout breads={[{href:'/dashboard', label: 'site.dashboard.title'}].concat(breads)}>{children}</Layout>
     }
     return (<Layout breads={[]}>
         <Row>
