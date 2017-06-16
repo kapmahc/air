@@ -31,7 +31,7 @@ class WidgetF extends Component {
     const {formatMessage} = this.props.intl
     const { getFieldDecorator } = this.props.form;
     return (
-      <Layout title="site.leave-words.new.title">
+      <Layout href="/leave-words/new" title="site.leave-words.new.title">
         <Form onSubmit={this.handleSubmit}>
           <FormItem
             {...formItemLayout}

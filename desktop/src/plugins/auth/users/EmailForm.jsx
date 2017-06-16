@@ -27,13 +27,13 @@ class WidgetF extends Component {
         }).catch(message.error)
      }
     });
-  }  
+  }
   render() {
     const {action} = this.props
     const {formatMessage} = this.props.intl
     const { getFieldDecorator } = this.props.form;
     return (
-      <Layout title={`auth.users.${action}.title`}>
+      <Layout href={`/users/${action}`} title={`auth.users.${action}.title`}>
         <Form onSubmit={this.handleSubmit}>
           <FormItem
             {...formItemLayout}

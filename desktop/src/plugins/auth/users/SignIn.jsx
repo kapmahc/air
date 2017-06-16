@@ -6,7 +6,7 @@ import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
 
 import Layout from '../../../layouts/NonSignIn'
-import {formItemLayout} from '../../../constants'
+import {formItemLayout, TOKEN} from '../../../constants'
 import SubmitButton from '../../../components/SubmitButton'
 import {post} from '../../../ajax'
 import {signIn} from '../../../actions'
@@ -23,6 +23,7 @@ class WidgetF extends Component {
        post('/users/sign-in', values)
         .then((rst) => {
           signIn(rst.token)
+          sessionStorage.setItem(TOKEN, rst.token)
           push('/dashboard')
           message.success(formatMessage({id: 'messages.success'}))
         }).catch(message.error)
@@ -33,7 +34,7 @@ class WidgetF extends Component {
     const {formatMessage} = this.props.intl
     const { getFieldDecorator } = this.props.form;
     return (
-      <Layout title="auth.users.sign-in.title">
+      <Layout href="/users/sign-in" title="auth.users.sign-in.title">
         <Form onSubmit={this.handleSubmit}>
 
           <FormItem

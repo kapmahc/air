@@ -6,7 +6,7 @@ import Layout from '../../layouts/Application'
 class Widget extends Component {
   render() {
     return (
-      <Layout>
+      <Layout breads={[]}>
         <div>
           home
           <FormattedMessage id="buttons.submit"/>

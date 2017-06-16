@@ -18,8 +18,8 @@ backend:
 
 frontend:
 	mkdir -pv $(dist)
-	cd dashboard && npm run build
-	cp -rv dashboard/dist $(dist)/public
+	cd desktop && npm run build
+	cp -rv desktop/build $(dist)/public
 
 
 clean:
@@ -29,4 +29,4 @@ clean:
 init:
 	go get -u github.com/kardianos/govendor
 	govendor sync
-	cd dashboard && npm install
+	cd desktop && npm install

@@ -1,3 +1,7 @@
+languages:
+  en-US: English
+  zh-Hans: 简体中文
+  zh-Hant: 繁體中文
 messages:
   are-your-sure: 你确定么？
   success: 操作成功
@@ -46,6 +50,14 @@ errors:
   password: 密码应该在6至32位之间
   passwordConfirmation: 两次密码输入应一致
   not-valid-email: 邮箱格式不正确
+sider:
+  nav-bar:
+    title: 快速导航
+  language-bar:
+    title: 切换语言
+  personal-bar:
+    sign-in-or-up: 注册/登录
+    welcome: 欢迎你，{name}
 site:
   install:
     title: 初始化安装
