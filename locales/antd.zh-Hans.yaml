@@ -46,6 +46,7 @@ helps:
   can-markdown: 支持MARKDOWN格式
 errors:
   no-match: 页面不存在
+  please-sign-in-first: 请先登录
   not-empty: 不能为空
   password: 密码应该在6至32位之间
   passwordConfirmation: 两次密码输入应一致
@@ -62,7 +63,7 @@ site:
   install:
     title: 初始化安装
   profile:
-    title: 站点
+    title: 站点设置
   attributes:
     title: 标题
     subTitle: 副标题
@@ -173,7 +174,7 @@ site:
         title: 国际化
 auth:
   profile:
-    title: 账户
+    title: 账户信息
   attachments:
     index:
       title: 文件管理
