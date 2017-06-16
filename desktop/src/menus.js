@@ -21,6 +21,10 @@ export default (user) => {
       label: 'site.profile.title',
       items: [
         {href: '/admin/site/status', label: 'site.admin.status.title'},
+        {href: '/admin/site/info', label: 'site.admin.info.title'},
+        {href: '/admin/site/author', label: 'site.admin.author.title'},
+        {href: '/admin/site/smtp', label: 'site.admin.smtp.title'},
+        {href: '/admin/site/seo', label: 'site.admin.seo.title'},
       ]
     })
     items.push({

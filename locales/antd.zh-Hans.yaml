@@ -78,52 +78,22 @@ site:
       home: 主页
   home:
     title: 主页
-  about:
-    title: 关于我们
-    donates: 捐赠
-    about: 关于我们
-    contact: 联系信息
-    faq: 常见问题
-    friend-links: 友情链接
-    qrcode: 二维码
-  menus:
-    title: 导航菜单
   dashboard:
     title: 控制面板
   posts:
-    new:
-      title: 新增
-    show:
-      title: 文档-{name}
     index:
       title: 文档列表
-    edit:
-      title: 编辑[{id}]
     manage:
       title: 文档管理
   notices:
-    new:
-      title: 新增
     index:
       title: 站点通知
-    show:
-      title: 通知[{id}]
-    edit:
-      title: 编辑[{id}]
     manage:
       title: 通知管理
   links:
-    new:
-      title: 新增
-    edit:
-      title: 编辑[{id}]
     index:
       title: 链接
   cards:
-    new:
-      title: 新增
-    edit:
-      title: 编辑[{id}]
     index:
       title: 卡片
   leave-words:
@@ -133,16 +103,12 @@ site:
     index:
       title: 留言板
   friend-links:
-    new:
-      title: 新增
-    edit:
-      title: 编辑[{id}]
     index:
       title: 友情链接
   admin:
     status:
       title: 当前状态
-      os: 操作
+      os: 操作系统
       cache: 缓存
       jobs: 后台任务
       network: 网络
@@ -179,8 +145,6 @@ auth:
   attachments:
     index:
       title: 文件管理
-    edit:
-      title: 编辑[{{id}}]
   users:
     logs:
       title: 操作日志
