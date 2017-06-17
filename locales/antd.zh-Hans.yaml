@@ -17,6 +17,8 @@ buttons:
   cancel: 删除
   ok: 确定
   close: 关闭
+  show: 展示
+  view: 查看
 attributes:
   email: 邮箱
   username: 姓名

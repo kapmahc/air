@@ -19,6 +19,11 @@ import AdminUsersIndex from './admin/users/Index'
 import AdminLocalesIndex from './admin/locales/Index'
 import AdminLocalesEdit from './admin/locales/Edit'
 
+import AdminPostsIndex from './admin/posts/Index'
+import AdminPostsEdit from './admin/posts/Edit'
+import PostsIndex from './posts/Index'
+import PostsShow from './posts/Show'
+
 
 export default [
   <Route key="site.home" exact path="/" component={Home}/>,
@@ -38,6 +43,12 @@ export default [
   <Route key="site.admin.locales.new" path="/admin/locales/new" component={AdminLocalesEdit}/>,
   <Route key="site.admin.locales.edit" path="/admin/locales/edit/:code" component={AdminLocalesEdit}/>,
   <Route key="site.admin.locales.index" path="/admin/locales" component={AdminLocalesIndex}/>,
+
+  <Route key="site.admin.posts.new" path="/admin/posts/new" component={AdminPostsEdit}/>,
+  <Route key="site.admin.posts.edit" path="/admin/posts/edit/:id" component={AdminPostsEdit}/>,
+  <Route key="site.admin.posts.index" path="/admin/posts" component={AdminPostsIndex}/>,
+  <Route key="site.posts.show" path="/posts/:id" component={PostsShow}/>,
+  <Route key="site.posts.index" path="/posts" component={PostsIndex}/>,
 
   <Route key="site.no-match" component={NoMatch}/>
 ]
