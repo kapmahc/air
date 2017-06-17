@@ -23,9 +23,6 @@ func (p *Plugin) Mount(rt *gin.Engine) {
 	ag.GET("/locales/:code", web.Wrap(p.showAdminLocale))
 	ag.DELETE("/locales/:code", web.Wrap(p.destroyAdminLocale))
 
-	ag.GET("/paypal", web.Wrap(p.getAdminPaypal))
-	ag.POST("/paypal", web.Wrap(p.postAdminPaypal))
-
 	asg := ag.Group("/site")
 	asg.GET("/status", web.Wrap(p.getAdminSiteStatus))
 	asg.POST("/info", web.Wrap(p.postAdminSiteInfo))
@@ -34,6 +31,8 @@ func (p *Plugin) Mount(rt *gin.Engine) {
 	asg.POST("/seo", web.Wrap(p.postAdminSiteSeo))
 	asg.GET("/smtp", web.Wrap(p.getAdminSiteSMTP))
 	asg.POST("/smtp", web.Wrap(p.postAdminSiteSMTP))
+	asg.GET("/paypal", web.Wrap(p.getAdminSitePaypal))
+	asg.POST("/paypal", web.Wrap(p.postAdminSitePaypal))
 
 	rt.GET("/notices", web.Wrap(p.indexNotices))
 	rt.GET("/notices/:id", web.Wrap(p.showNotice))

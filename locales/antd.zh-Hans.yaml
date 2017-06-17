@@ -83,29 +83,35 @@ site:
   posts:
     index:
       title: 文档列表
-    manage:
-      title: 文档管理
   notices:
     index:
       title: 站点通知
-    manage:
-      title: 通知管理
-  links:
-    index:
-      title: 链接
-  cards:
-    index:
-      title: 卡片
   leave-words:
     new:
       title: 给我们留言
       please-leave-contact: 请留下邮箱、电话等联系信息
-    index:
-      title: 留言板
   friend-links:
     index:
       title: 友情链接
   admin:
+    posts:
+      index:
+        title: 文档管理
+    notices:
+      index:
+        title: 通知管理
+    friend-links:
+      index:
+        title: 友情链接
+    leave-words:
+      index:
+        title: 留言板
+    links:
+      index:
+        title: 链接
+    cards:
+      index:
+        title: 卡片
     status:
       title: 当前状态
       os: 操作系统

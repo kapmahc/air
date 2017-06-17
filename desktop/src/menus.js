@@ -25,6 +25,15 @@ export default (user) => {
         {href: '/admin/site/author', label: 'site.admin.author.title'},
         {href: '/admin/site/smtp', label: 'site.admin.smtp.title'},
         {href: '/admin/site/seo', label: 'site.admin.seo.title'},
+        {href: '/admin/site/paypal', label: 'site.admin.paypal.title'},
+        {href: '/admin/users', label:  'site.admin.users.index.title'},
+        {href: '/admin/locales', label:  'site.admin.locales.index.title'},
+        {href: '/admin/posts', label:  'site.admin.posts.index.title'},
+        {href: '/admin/notices', label:  'site.admin.notices.index.title'},
+        {href: '/admin/links', label:  'site.admin.links.index.title'},
+        {href: '/admin/cards', label:  'site.admin.cards.index.title'},
+        {href: '/admin/leave-words', label:  'site.admin.leave-words.index.title'},
+        {href: '/admin/friend-links', label:  'site.admin.friend-links.index.title'},
       ]
     })
     items.push({
