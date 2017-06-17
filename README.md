@@ -2,6 +2,13 @@
 
 A complete open source e-commerce solution by Go language and Vue(STILL IN DEVELOPMENT).
 
+## Install go
+```bash
+zsh < <(curl -s -S -L https://raw.githubusercontent.com/moovweb/gvm/master/binscripts/gvm-installer)
+gvm install go1.9beta1 -B
+gvm use go1.9beta1 --default
+```
+
 ## Usage
 
 ```bash
