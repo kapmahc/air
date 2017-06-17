@@ -38,6 +38,7 @@ GRANT ALL PRIVILEGES ON DATABASE db-name TO user-name;
 ```
 
 ## Issues
+- Chrome browser: F12 => Console settings => Log XMLHTTPRequests
 
 - Rabbitmq Management Plugin(<http://localhost:15612>)
 

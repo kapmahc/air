@@ -17,6 +17,7 @@ import AdminSitePaypal from './admin/site/Paypal'
 
 import AdminUsersIndex from './admin/users/Index'
 import AdminLocalesIndex from './admin/locales/Index'
+import AdminLocalesEdit from './admin/locales/Edit'
 
 
 export default [
@@ -34,6 +35,8 @@ export default [
   <Route key="site.admin.status" path="/admin/site/status" component={AdminSiteStatus}/>,
 
   <Route key="site.admin.users.index" path="/admin/users" component={AdminUsersIndex}/>,
+  <Route key="site.admin.locales.new" path="/admin/locales/new" component={AdminLocalesEdit}/>,
+  <Route key="site.admin.locales.edit" path="/admin/locales/edit/:code" component={AdminLocalesEdit}/>,
   <Route key="site.admin.locales.index" path="/admin/locales" component={AdminLocalesIndex}/>,
 
   <Route key="site.no-match" component={NoMatch}/>
