@@ -80,9 +80,11 @@ GRANT ALL PRIVILEGES ON DATABASE db-name TO user-name;
 ## Atom plugins
 
 - go-plus
+- git-plus
 - file-icons
 - linter
 - editorconfig
+- language-javascript-jsx
 
 ## Documents
 

@@ -8,7 +8,8 @@ import {Link} from 'react-router-dom'
 
 import Header from '../components/Header'
 import Footer from '../components/Footer'
-import {NonSignInLinks, TOKEN, LOCALE} from '../constants'
+import {NonSignInLinks, TOKEN} from '../constants'
+import {setLocale} from '../intl'
 import {signIn, refresh} from '../actions'
 import {get} from '../ajax'
 import menus from '../menus'
@@ -28,8 +29,7 @@ class Widget extends Component {
 
     const lng = 'language-'
     if(key.startsWith(lng)){
-      localStorage.setItem(LOCALE, key.substring(lng.length))
-      window.location.reload()
+      setLocale(key.substring(lng.length))      
       return
     }
     console.error(key)

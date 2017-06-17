@@ -1,5 +1,5 @@
 import registerServiceWorker from './registerServiceWorker'
-import detectLocale from './intl'
+import {detectLocale} from './intl'
 import { get } from './ajax'
 import main from './main'
 

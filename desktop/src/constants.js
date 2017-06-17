@@ -1,5 +1,4 @@
 export const TOKEN = 'token'
-export const LOCALE = 'locale'
 
 export const NonSignInLinks=[
   {icon: 'login', href: '/users/sign-in', label: 'auth.users.sign-in.title'},

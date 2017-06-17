@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
-import { Table, Row, Col, message } from 'antd'
+import { Table, Row, Col, Button, Popconfirm, message } from 'antd'
 import {FormattedMessage} from 'react-intl'
+import { push } from 'react-router-redux'
+
 
 import Layout from '../../../../layouts/Dashboard'
 import {get} from '../../../../ajax'
