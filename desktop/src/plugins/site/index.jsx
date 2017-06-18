@@ -24,6 +24,10 @@ import AdminPostsEdit from './admin/posts/Edit'
 import PostsIndex from './posts/Index'
 import PostsShow from './posts/Show'
 
+import AdminNoticesIndex from './admin/notices/Index'
+import AdminNoticesEdit from './admin/notices/Edit'
+import NoticesIndex from './notices/Index'
+
 
 export default [
   <Route key="site.home" exact path="/" component={Home}/>,
@@ -49,6 +53,11 @@ export default [
   <Route key="site.admin.posts.index" path="/admin/posts" component={AdminPostsIndex}/>,
   <Route key="site.posts.show" path="/posts/:id" component={PostsShow}/>,
   <Route key="site.posts.index" path="/posts" component={PostsIndex}/>,
+
+  <Route key="site.admin.notices.new" path="/admin/notices/new" component={AdminNoticesEdit}/>,
+  <Route key="site.admin.notices.edit" path="/admin/notices/edit/:id" component={AdminNoticesEdit}/>,
+  <Route key="site.admin.notices.index" path="/admin/notices" component={AdminNoticesIndex}/>,  
+  <Route key="site.notices.index" path="/notices" component={NoticesIndex}/>,
 
   <Route key="site.no-match" component={NoMatch}/>
 ]
