@@ -28,6 +28,11 @@ import AdminNoticesIndex from './admin/notices/Index'
 import AdminNoticesEdit from './admin/notices/Edit'
 import NoticesIndex from './notices/Index'
 
+import AdminLinksIndex from './admin/links/Index'
+import AdminLinksEdit from './admin/links/Edit'
+import AdminCardsIndex from './admin/cards/Index'
+import AdminCardsEdit from './admin/cards/Edit'
+
 
 export default [
   <Route key="site.home" exact path="/" component={Home}/>,
@@ -56,8 +61,15 @@ export default [
 
   <Route key="site.admin.notices.new" path="/admin/notices/new" component={AdminNoticesEdit}/>,
   <Route key="site.admin.notices.edit" path="/admin/notices/edit/:id" component={AdminNoticesEdit}/>,
-  <Route key="site.admin.notices.index" path="/admin/notices" component={AdminNoticesIndex}/>,  
+  <Route key="site.admin.notices.index" path="/admin/notices" component={AdminNoticesIndex}/>,
   <Route key="site.notices.index" path="/notices" component={NoticesIndex}/>,
+
+  <Route key="site.admin.links.new" path="/admin/links/new" component={AdminLinksEdit}/>,
+  <Route key="site.admin.links.edit" path="/admin/links/edit/:id" component={AdminLinksEdit}/>,
+  <Route key="site.admin.links.index" path="/admin/links" component={AdminLinksIndex}/>,
+  <Route key="site.admin.cards.new" path="/admin/cards/new" component={AdminCardsEdit}/>,
+  <Route key="site.admin.cards.edit" path="/admin/cards/edit/:id" component={AdminCardsEdit}/>,
+  <Route key="site.admin.cards.index" path="/admin/cards" component={AdminCardsIndex}/>,  
 
   <Route key="site.no-match" component={NoMatch}/>
 ]

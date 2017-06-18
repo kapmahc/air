@@ -4,6 +4,7 @@ import {injectIntl, intlShape, FormattedMessage} from 'react-intl'
 import { push } from 'react-router-redux'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
+import CopyToClipboard from 'react-copy-to-clipboard'
 
 import Layout from '../../../layouts/Dashboard'
 import {get, api, _delete} from '../../../ajax'
@@ -75,6 +76,9 @@ class WidgetF extends Component {
         title: <FormattedMessage id="buttons.manage"/>,
         key: 'manage',
         render: (text, record) => (<span>
+            <CopyToClipboard text={record.url}>
+              <Button shape="circle" icon="copy" />
+            </CopyToClipboard>
             <Button onClick={(e)=>push(`/attachments/edit/${record.id}`)} shape="circle" icon="edit" />
             <Popconfirm title={<FormattedMessage id="messages.are-you-sure"/>} onConfirm={(e) => this.handleRemove(record.id)}>
               <Button type="danger" shape="circle" icon="delete" />
