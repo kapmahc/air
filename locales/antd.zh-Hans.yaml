@@ -62,6 +62,7 @@ sider:
   personal-bar:
     sign-in-or-up: 注册/登录
     welcome: 欢迎你，{name}
+    sign-out: 安全退出
 site:
   install:
     title: 初始化安装
