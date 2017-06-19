@@ -45,7 +45,7 @@ class WidgetF extends Component {
         title: <FormattedMessage id="buttons.manage"/>,
         key: 'manage',
         render: (text, record) =>(<span>
-          <Button onClick={(e)=>push(record.href)} shape="circle" icon="eye" />
+          <Button onClick={(e)=>push(`/forms/apply/${record.id}`)} shape="circle" icon="eye" />
           <Button onClick={(e)=>push(`/forms/edit/${record.id}`)} shape="circle" icon="edit" />
           <Popconfirm title={<FormattedMessage id="messages.are-you-sure"/>} onConfirm={(e) => this.handleRemove(record.id)}>
             <Button type="danger" shape="circle" icon="delete" />

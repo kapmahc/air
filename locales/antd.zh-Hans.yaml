@@ -14,7 +14,8 @@ buttons:
   remove: 删除
   upload: 上传
   confirm: 确认
-  cancel: 删除
+  apply: 申请
+  cancel: 取消
   ok: 确定
   close: 关闭
   show: 展示
@@ -22,6 +23,7 @@ buttons:
 attributes:
   email: 邮箱
   username: 姓名
+  phone: 电话号码
   password: 密码
   currentPassword: 当前密码
   newPassword: 新密码
@@ -180,10 +182,14 @@ auth:
       title: 重置密码
       success: 重置密码成功
 forms:
+  cancel:
+    who: 电话号码或邮箱
   profile:
     title: 调查问卷
   manage:
     title: 问卷管理
+  index:
+    title: 调查问卷列表
   edit:
     add_field: 添加表项
     field_item: 表项-{id}

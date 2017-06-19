@@ -71,7 +71,7 @@ class WidgetF extends Component {
 
     this.props.form.validateFieldsAndScroll((err, values) => {
      if (!err) {
-       console.log(values)
+      //  console.log(values)
        var data = {
          title: values.title,
          body: values.body,
@@ -137,7 +137,7 @@ class WidgetF extends Component {
             rules:[{ required: true, message: formatMessage({id:"errors.not-empty"})}],
           })(
             <Select style={{ width: 120 }}>
-              {['text', 'radios', 'select', 'textarea'].map((t, i)=><Option key={i} value={t}>{t}</Option>)}
+              {['text', 'checkboxs', 'radios', 'select', 'textarea'].map((t, i)=><Option key={i} value={t}>{t}</Option>)}
             </Select>
           )}
           </FormItem>
