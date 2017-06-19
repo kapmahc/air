@@ -595,6 +595,9 @@ func (p *Plugin) runWorker(c *cli.Context, _ *inject.Graph) error {
 }
 
 func (p *Plugin) runServer(c *cli.Context, _ *inject.Graph) error {
+	if web.IsProduction() {
+		gin.SetMode(gin.ReleaseMode)
+	}
 	rt := gin.Default()
 	// --------------------
 	lm, err := p.I18n.Middleware()

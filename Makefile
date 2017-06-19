@@ -17,13 +17,13 @@ backend:
 	-cp -rv locales db templates $(dist)/
 
 frontend:
-	mkdir -pv $(dist)
+	mkdir -pv $(dist)	
 	cd desktop && npm run build
 	cp -rv desktop/build $(dist)/public
 
 
 clean:
-	-rm -rv $(dist) dist.tar.bz2 dashboard/dist
+	-rm -rv $(dist) dist.tar.bz2 desktop/build
 
 
 init:

@@ -16,15 +16,6 @@ gvm install go1.9beta1 -B
 gvm use go1.9beta1 --default
 ```
 
-## Usage
-
-```bash
-go get -u github.com/kapmahc/air
-cd $GOPATH/src/github.com/kapmahc/air
-make init
-make
-```
-
 ## Devleopment
 
 ```bash
@@ -34,6 +25,14 @@ cd dashboard && npm start # start frontend server
 ```
 
 will listen at <http://localhost:8080>
+
+## Deployment
+```bash
+cd $GOPATH/src/github.com/kapmahc/air
+vim desktop/.env.production.local
+make
+ls
+```
 
 ## Create database
 
@@ -97,3 +96,5 @@ GRANT ALL PRIVILEGES ON DATABASE db-name TO user-name;
 ## Documents
 
 - [gorm](http://jinzhu.me/gorm/)
+- [nginx](https://www.nginx.com/resources/deployment-guides/load-balance-apache-tomcat/)
+- [antd](https://ant.design/docs/react/introduce)

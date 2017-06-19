@@ -31,7 +31,7 @@ export const detectLocale = () => {
       }
     case 'zh-Hant':
       return {
-        id: 'zh-Hant',
+        locale: 'zh-Hant',
         antd: zhTWAntd,
         data: dataZh,
         moment: 'zh-tw',
@@ -39,7 +39,7 @@ export const detectLocale = () => {
       }
     default:
       return {
-        id: 'en-US',
+        locale: 'en-US',
         antd: enUSAntd,
         data: dataEn,
         moment: 'en',
