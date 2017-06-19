@@ -1,5 +1,7 @@
 export const TOKEN = 'token'
 
+export const DATE_FORMAT = 'YYYY/MM/DD'
+
 export const NonSignInLinks=[
   {icon: 'login', href: '/users/sign-in', label: 'auth.users.sign-in.title'},
   {icon: 'user-add', href: '/users/sign-up', label: 'auth.users.sign-up.title'},

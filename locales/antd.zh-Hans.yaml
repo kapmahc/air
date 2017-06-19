@@ -44,6 +44,8 @@ attributes:
   summary: 摘要
   action: 动作
   deadline: 截止日期
+  value: 值
+  type: 类型
 helps:
   email: 我们不会公开您的电子邮箱
   can-markdown: 支持MARKDOWN格式
@@ -182,3 +184,6 @@ forms:
     title: 调查问卷
   manage:
     title: 问卷管理
+  edit:
+    add_field: 添加表项
+    field_item: 表项-{id}

@@ -2,6 +2,13 @@
 
 A complete open source e-commerce solution by Go language and Vue(STILL IN DEVELOPMENT).
 
+## Install nodejs
+```bash
+curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh | zsh
+nvm install node
+nvm alias default node
+```
+
 ## Install go
 ```bash
 zsh < <(curl -s -S -L https://raw.githubusercontent.com/moovweb/gvm/master/binscripts/gvm-installer)
