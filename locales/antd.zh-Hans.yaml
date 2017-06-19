@@ -85,6 +85,9 @@ site:
       home: 主页
   home:
     title: 主页
+  donates:
+    title: 捐赠
+    by-paypal: 通过Paypal捐赠
   dashboard:
     title: 控制面板
   posts:

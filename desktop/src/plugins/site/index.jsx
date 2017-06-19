@@ -5,6 +5,7 @@ import Home from './Home'
 import Dashboard from './Dashboard'
 import NoMatch from './NoMatch'
 import Install from './Install'
+import Donates from './Donates'
 
 import LeaveWordsNew from './leave-words/New'
 import AdminLeaveWordsIndex from './admin/leave-words/Index'
@@ -43,6 +44,7 @@ export default [
   <Route key="site.home" exact path="/" component={Home}/>,
   <Route key="site.dashboard" path="/dashboard" component={Dashboard}/>,
   <Route key="site.install" path="/install" component={Install}/>,
+  <Route key="site.donates" path="/donates" component={Donates}/>,
 
   <Route key="site.admin.leave-words.index" path="/admin/leave-words" component={AdminLeaveWordsIndex}/>,
   <Route key="site.leave-words.new" path="/leave-words/new" component={LeaveWordsNew}/>,
