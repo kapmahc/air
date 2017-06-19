@@ -21,6 +21,7 @@ func (p *Plugin) getIntl(c *gin.Context) error {
 			intl[k[len(zone):]] = v
 		}
 	}
+	c.SetCookie(i18n.LOCALE, lang, 1<<32-1, "/", "", false, false)
 	c.JSON(http.StatusOK, intl)
 	return nil
 }

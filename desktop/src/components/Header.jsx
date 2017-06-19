@@ -26,13 +26,13 @@ class Widget extends Component {
           defaultSelectedKeys={[]}
           style={{ lineHeight: '64px' }}
         >
-          <Menu.Item key="to-/">{info.subTitle}</Menu.Item>
+          <Menu.Item key="/">{info.subTitle}</Menu.Item>
           {info.links.filter((l)=>l.loc === 'header').map((l,i)=><Menu.Item key={l.href}><FormattedMessage id={l.label}/></Menu.Item>)}
           {
             user.uid ?
               <Menu.Item key="/dashboard"><FormattedMessage id="site.dashboard.title"/></Menu.Item> :
               <Menu.Item key="/users/sign-in"><FormattedMessage id="auth.users.sign-in.title"/></Menu.Item>
-          }          
+          }
         </Menu>
       </Header>
     );
