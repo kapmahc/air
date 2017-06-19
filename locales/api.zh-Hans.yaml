@@ -3,16 +3,6 @@ errors:
   forbidden: 禁止的访问
   bad-action: 错误的操作
   not-allow: 不允许
-
-site:
-  title: 站点标题
-  sub-title: 副标题
-  keywords: 关键字
-  description: 说明信息
-  copyright: 版权信息
-  author:
-    email: author@change-me.com
-    name: who-ami-i
 auth:
   errors:
     please-sign-in: 请先登录

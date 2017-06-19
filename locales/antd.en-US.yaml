@@ -1,0 +1,198 @@
+languages:
+  en-US: English
+  zh-Hans: 简体中文
+  zh-Hant: 繁體中文
+messages:
+  are-you-sure: Are you sure?
+  success: Successful!
+  fail: Failed!
+buttons:
+  submit: Submit
+  manage: Manage
+  edit: Edit
+  new: New
+  remove: Remove
+  upload: Upload
+  confirm: Confirm
+  apply: Apply
+  cancel: Cancel
+  ok: OK
+  close: Close
+  show: Show
+  view: View
+attributes:
+  email: Email
+  username: Username
+  phone: Phone
+  password: Password
+  currentPassword: Current password
+  newPassword: New password
+  passwordConfirmation: Password confirmation
+  createdAt: Created at
+  updatedAt: Updated at
+  content: Content
+  size: Size
+  name: Name
+  host: Host
+  port: Port
+  ssl: Enable SSL?
+  title: Title
+  body: Body
+  logo: Logo
+  sortOrder: Sort order
+  loc: Location
+  href: Href
+  label: Label
+  summary: Summary
+  action: Action
+  deadline: Deadline
+  value: Value
+  type: Type
+helps:
+  email: We will not public your email address.
+  can-markdown: Support MARKDOWN
+errors:
+  no-match: No match.
+  please-sign-in-first: Please sign in at first.
+  not-empty: Must not empty.
+  password: Password length between 6 & 32 characters
+  passwordConfirmation: Password Confirmation (shall be identical)
+  not-valid-email: Not a valid email address.
+sider:
+  nav-bar:
+    title: Nav bar
+  language-bar:
+    title: Switch language
+  personal-bar:
+    sign-in-or-up: Sign in/up
+    welcome: Welcome, {name}
+    sign-out: Sign out
+site:
+  install:
+    title: Install
+  profile:
+    title: Settings
+  attributes:
+    title: Title
+    subTitle: Sub-Title
+    copyright: Copyright
+    description: Description
+    keywords: Keywords
+    locale:
+      code: Code`
+      message: Message
+    friend-link:
+      home: Home
+  home:
+    title: Home
+  donates:
+    title: Donates
+    by-paypal: By Paypal
+  dashboard:
+    title: Dashboard
+  posts:
+    index:
+      title: Documents
+  notices:
+    index:
+      title: Notices
+  leave-words:
+    new:
+      title: Leave a messsage to us
+      please-leave-contact: Please leave your email or phone.
+  friend-links:
+    index:
+      title: Friend links
+  admin:
+    posts:
+      index:
+        title: Documents
+    notices:
+      index:
+        title: Notices
+    friend-links:
+      index:
+        title: Firend links
+    leave-words:
+      index:
+        title: Leave words
+    links:
+      index:
+        title: Links
+    cards:
+      index:
+        title: Cards
+    status:
+      title: Status
+      os: OS
+      cache: Cache
+      jobs: Jobs
+      network: Network
+      routes: HTTP routes
+      database: Database
+    info:
+      title: Info
+    author:
+      title: Author
+    seo:
+      title: SEO
+      google:
+        verifyCode: Google site ID
+      baidu:
+        verifyCode: Baidu ID
+    smtp:
+      title: SMTP
+      sender: Sender
+    paypal:
+      title: Paypal
+      donate-form: Donate form
+    users:
+      index:
+        title: Users
+        lastSignIn: Last sign in
+        currentSignIn: Current sign in
+        who: Who
+    locales:
+      index:
+        title: I18N
+auth:
+  profile:
+    title: Account
+  attachments:
+    index:
+      title: Attachments
+  users:
+    logs:
+      title: Logs
+    info:
+      title: Info
+    change-password:
+      title: Change password
+    sign-in:
+      title: Sign in
+    sign-up:
+      title: Sign up
+    forgot-password:
+      title: Forgot your password？
+      success: You will receive an email to reset password.
+    confirm:
+      title: Do you receive confirmation email?
+      success: You will receive an email to confirm your account.
+    unlock:
+      title: Do you receive unlock email？
+      success: You will receive an email to unlock your account.
+    reset-password:
+      title: Reset password
+      success: Reset password successful.
+forms:
+  cancel:
+    who: Email or Phone
+  profile:
+    title: Forms
+  manage:
+    title: Forms
+  index:
+    title: Forms
+  edit:
+    add_field: Add an field
+    field_item: Field-{id}

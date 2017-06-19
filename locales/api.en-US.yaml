@@ -1,1 +1,64 @@
-
+errors:
+  in-use: In using
+  forbidden: Forbidden
+  bad-action: Bad action
+  not-allow: Not allowed
+auth:
+  errors:
+    please-sign-in: Please sign in at first.
+    user:
+      email-already-exist: Email was already exist.
+      email-password-not-match: Email and password not matched.
+      already-confirm: User already confirm.
+      not-lock: User not locked.
+      bad-password: Bad password.
+      not-confirm: User not confirmed.
+      is-lock: User is locked.
+  logs:
+    user:
+      sign-up: Create an account.
+      confirm: Confirm your account.
+      lock: Lock your account.
+      unlock: Unlock your account.
+      reset-password: Reset your password.
+      change-password: Change your password.
+      sign-out: Sign out successful.
+      sign-in:
+        failed: Sign in failed.
+        success: Sign in successful.
+  emails:
+    confirm:
+      subject: Confirm message
+      body: You can confirm your email via the following link.<br/> <a href="{{.Backend}}/users/confirm/{{.Token}}">{{.Backend}}/users/confirm/{{.Token}}</a>
+    unlock:
+      subject: unlock message
+      body: Click the following link to unlock your account <br/> <a href="{{.Backend}}/users/unlock/{{.Token}}">{{.Backend}}/users/unlock/{{.Token}}</a>
+    reset-password:
+      subject: Reset password message
+      body:  Please use the following link <br/> <a href="{{.Frontend}}/users/reset-password/{{.Token}}">{{.Frontend}}/users/reset-password/{{.Token}}</a><br/>please ignore/discard, if you don't want reset password. <br/> If you did not visit the link, your password will not be changed.
+forms:
+  emails:
+    apply:
+      subject: Apply
+      body: You apply {{.Title}}, you can click <a href="{{.Home}}{{.Cancel}}">{{.Home}}{{.Cancel}}</a> to cancel it.
+    cancel:
+      subject: Cancel
+      body: You cancel {{.Title}}
+  errors:
+    expired: Expired
+    already-apply: Already apply
+  attributes:
+    record:
+      email: Email
+      phone: Phone
+      username: Username
+ops:
+  mail:
+    errors:
+      user:
+        email-password-not-match: Email and password not matched.
+  vpn:
+    errors:
+      user:
+        not-available: User not available.
+        email-password-not-match: Email and password not matched.
