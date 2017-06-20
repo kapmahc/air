@@ -7,8 +7,10 @@ import (
 
 // Mount mount web points
 func (p *Plugin) Mount(rt *gin.Engine) {
-	rng := rt.Group("/mall")
-	rmg := rt.Group("/mall", web.Wrap(p.Jwt.MustSignInMiddleware))
+	const root = "/mall"
+	rng := rt.Group(root)
+	rmg := rt.Group(root, web.Wrap(p.Jwt.MustSignInMiddleware))
+	rag := rt.Group(root, web.Wrap(p.Jwt.MustAdminMiddleware))
 
 	rmg.GET("/addresses", web.Wrap(p.indexAddresses))
 	rmg.POST("/addresses", web.Wrap(p.createAddress))
@@ -21,4 +23,11 @@ func (p *Plugin) Mount(rt *gin.Engine) {
 	rng.GET("/stores/:id", web.Wrap(p.showStore))
 	rmg.POST("/stores/:id", web.Wrap(p.updateStore))
 	rmg.DELETE("/stores/:id", web.Wrap(p.destroyStore))
+
+	rng.GET("/tags", web.Wrap(p.indexTags))
+	rag.POST("/tags", web.Wrap(p.createTag))
+	rng.GET("/tags/:id", web.Wrap(p.showTag))
+	rag.POST("/tags/:id", web.Wrap(p.updateTag))
+	rag.DELETE("/tags/:id", web.Wrap(p.destroyTag))
+
 }

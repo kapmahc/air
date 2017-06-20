@@ -219,3 +219,6 @@ mall:
     stores:
       index:
         title: 商店管理
+    tags:
+      index:
+        title: 标签管理

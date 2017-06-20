@@ -4,11 +4,10 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
-	"github.com/kapmahc/air/plugins/auth"
 )
 
-func (p *Plugin) indexStores(c *gin.Context) error {
-	var items []Store
+func (p *Plugin) indexTags(c *gin.Context) error {
+	var items []Tag
 	if err := p.Db.Order("updated_at DESC").Find(&items).Error; err != nil {
 		return err
 	}
@@ -16,8 +15,8 @@ func (p *Plugin) indexStores(c *gin.Context) error {
 	return nil
 }
 
-func (p *Plugin) showStore(c *gin.Context) error {
-	var item Store
+func (p *Plugin) showTag(c *gin.Context) error {
+	var item Tag
 	if err := p.Db.Where("id = ?", c.Param("id")).First(&item).Error; err != nil {
 		return err
 	}
@@ -25,29 +24,23 @@ func (p *Plugin) showStore(c *gin.Context) error {
 	return nil
 }
 
-type fmStore struct {
+type fmTag struct {
 	Name        string `json:"name" binding:"required,max=255"`
 	Type        string `json:"type" binding:"required"`
 	Description string `json:"description" binding:"required"`
-	Currency    string `json:"currency" binding:"required"`
-	AddressID   uint   `json:"addressId"`
 }
 
-func (p *Plugin) createStore(c *gin.Context) error {
-	user := c.MustGet(auth.CurrentUser).(*auth.User)
-	var fm fmStore
+func (p *Plugin) createTag(c *gin.Context) error {
+	var fm fmTag
 	if err := c.BindJSON(&fm); err != nil {
 		return err
 	}
-	item := Store{
+	item := Tag{
 		Meta: Meta{
 			Name:        fm.Name,
 			Type:        fm.Type,
 			Description: fm.Description,
 		},
-		Currency:  fm.Currency,
-		AddressID: fm.AddressID,
-		OwnerID:   user.ID,
 	}
 	if err := p.Db.Create(&item).Error; err != nil {
 		return err
@@ -56,13 +49,13 @@ func (p *Plugin) createStore(c *gin.Context) error {
 	return nil
 }
 
-func (p *Plugin) updateStore(c *gin.Context) error {
-	item, err := p.getStore(c)
-	if err != nil {
+func (p *Plugin) updateTag(c *gin.Context) error {
+	var item Tag
+	if err := p.Db.Where("id = ?", c.Param("id")).First(&item).Error; err != nil {
 		return err
 	}
 
-	var fm fmStore
+	var fm fmTag
 	if err := c.BindJSON(&fm); err != nil {
 		return err
 	}
@@ -71,8 +64,6 @@ func (p *Plugin) updateStore(c *gin.Context) error {
 		"name":        fm.Name,
 		"description": fm.Description,
 		"type":        fm.Type,
-		"addressId":   fm.AddressID,
-		"currency":    fm.Currency,
 	}).Error; err != nil {
 		return err
 	}
@@ -80,23 +71,14 @@ func (p *Plugin) updateStore(c *gin.Context) error {
 	return nil
 }
 
-func (p *Plugin) destroyStore(c *gin.Context) error {
-	item, err := p.getStore(c)
-	if err != nil {
+func (p *Plugin) destroyTag(c *gin.Context) error {
+	var item Tag
+	if err := p.Db.Where("id = ?", c.Param("id")).First(&item).Error; err != nil {
 		return err
 	}
-	if err := p.Db.Delete(item).Error; err != nil {
+	if err := p.Db.Delete(&item).Error; err != nil {
 		return err
 	}
 	c.JSON(http.StatusOK, gin.H{})
 	return nil
-}
-
-func (p *Plugin) getStore(c *gin.Context) (*Store, error) {
-	user := c.MustGet(auth.CurrentUser).(*auth.User)
-	var item Store
-	if err := p.Db.Where("owner_id = ? AND id = ?", user.ID, c.Param("id")).First(&item).Error; err != nil {
-		return nil, err
-	}
-	return &item, nil
 }
