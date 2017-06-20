@@ -14,7 +14,7 @@ CREATE TABLE mall_addresses (
   created_at TIMESTAMP WITHOUT TIME ZONE NOT NULL DEFAULT now(),
   updated_at TIMESTAMP WITHOUT TIME ZONE NOT NULL
 );
-CREATE INDEX idx_mall_addresses_usersname ON mall_addresses(username); 
+CREATE INDEX idx_mall_addresses_usersname ON mall_addresses(username);
 CREATE INDEX idx_mall_addresses_zip ON mall_addresses(zip);
 CREATE INDEX idx_mall_addresses_city ON mall_addresses(city);
 CREATE INDEX idx_mall_addresses_state ON mall_addresses(state);
@@ -26,7 +26,7 @@ CREATE TABLE mall_stores (
   name VARCHAR(255) NOT NULL,
   type VARCHAR(8) NOT NULL,
   description TEXT NOT NULL,
-  address BIGINT REFERENCES mall_addresses,
+  address_id BIGINT REFERENCES mall_addresses,
   owner_id BIGINT REFERENCES users,
   currency CHAR(3) NOT NULL,
   created_at TIMESTAMP WITHOUT TIME ZONE NOT NULL DEFAULT now(),

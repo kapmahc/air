@@ -17,4 +17,8 @@ func (p *Plugin) Mount(rt *gin.Engine) {
 	rmg.DELETE("/addresses/:id", web.Wrap(p.destroyAddress))
 
 	rng.GET("/stores", web.Wrap(p.indexStores))
+	rmg.POST("/stores", web.Wrap(p.createStore))
+	rng.GET("/stores/:id", web.Wrap(p.showStore))
+	rmg.POST("/stores/:id", web.Wrap(p.updateStore))
+	rmg.DELETE("/stores/:id", web.Wrap(p.destroyStore))
 }

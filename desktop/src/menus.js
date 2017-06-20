@@ -16,6 +16,8 @@ export default (user) => {
     },
   ]
 
+  console.log()
+
   // mall
   var mall = {
     icon: 'shopping-cart',
@@ -23,6 +25,10 @@ export default (user) => {
     items: [
       {href: '/mall/self/addresses', label: 'mall.self.addresses.index.title'},
     ]
+  }
+
+  if (user.admin || process.env.REACT_MALL_MODE === 'public') {
+    mall.items.push({href: '/mall/self/stores', label: 'mall.self.stores.index.title'})    
   }
   items.push(mall)
 

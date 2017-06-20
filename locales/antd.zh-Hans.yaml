@@ -2,6 +2,9 @@ languages:
   en-US: English
   zh-Hans: 简体中文
   zh-Hant: 繁體中文
+currencies:
+  rmb: 人民币
+  usd: 美金
 messages:
   are-you-sure: 你确定么？
   success: 操作成功
@@ -30,6 +33,7 @@ attributes:
   passwordConfirmation: 密码确认
   createdAt: 创建时间
   updatedAt: 修改时间
+  description: 说明信息
   content: 内容
   size: 大小
   name: 名称
@@ -48,6 +52,8 @@ attributes:
   deadline: 截止日期
   value: 值
   type: 类型
+  currency: 货币
+  address: 地址
 helps:
   email: 我们不会公开您的电子邮箱
   can-markdown: 支持MARKDOWN格式
@@ -203,10 +209,13 @@ mall:
       street: 街道
       state: 州/省
       country: 国家/地区
-      city: 城市      
+      city: 城市
   profile:
     title: 电子商城
   self:
     addresses:
       index:
         title: 地址管理
+    stores:
+      index:
+        title: 商店管理
