@@ -64,7 +64,7 @@ export default [
   <Route key="site.admin.posts.new" path="/admin/posts/new" component={AdminPostsEdit}/>,
   <Route key="site.admin.posts.edit" path="/admin/posts/edit/:id" component={AdminPostsEdit}/>,
   <Route key="site.admin.posts.index" path="/admin/posts" component={AdminPostsIndex}/>,
-  <Route key="site.posts.show" path="/posts/:id" component={PostsShow}/>,
+  <Route key="site.posts.show" path="/posts/:name" component={PostsShow}/>,
   <Route key="site.posts.index" path="/posts" component={PostsIndex}/>,
 
   <Route key="site.admin.notices.new" path="/admin/notices/new" component={AdminNoticesEdit}/>,

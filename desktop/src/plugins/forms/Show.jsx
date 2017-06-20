@@ -20,10 +20,14 @@ const CheckboxGroup = Checkbox.Group;
 
 class WidgetF extends Component {
   state = { item: {updatedAt: '', body: '', fields: []}}
-  componentDidMount () {
-    const {id} = this.props
-    get(`/forms/${id}`).then((rst)=>this.setState({item:rst})).catch(message.error)
+  componentWillReceiveProps(newProps){
+    this.loadItem(newProps.id)
   }
+  componentDidMount () {
+    this.loadItem(this.props.id)
+  }
+  loadItem = (id) => get(`/forms/${id}`).then((rst)=>this.setState({item:rst})).catch(message.error)
+
   handleSubmit = (e) => {
     e.preventDefault();
     const {id, action} = this.props
