@@ -5,10 +5,10 @@ import (
 	"net/http"
 	"time"
 
-	log "github.com/Sirupsen/logrus"
 	"github.com/jinzhu/gorm"
 	"github.com/kapmahc/air/web/i18n"
 	"github.com/kapmahc/air/web/security"
+	log "github.com/sirupsen/logrus"
 )
 
 // Dao auth dao

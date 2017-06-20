@@ -10,10 +10,10 @@ import (
 	"strings"
 	"time"
 
-	log "github.com/Sirupsen/logrus"
 	"github.com/go-ini/ini"
 	"github.com/kapmahc/air/web"
 	"github.com/kapmahc/air/web/cache"
+	log "github.com/sirupsen/logrus"
 	"golang.org/x/text/language"
 	yaml "gopkg.in/yaml.v2"
 )

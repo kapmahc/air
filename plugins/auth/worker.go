@@ -7,9 +7,9 @@ import (
 	"time"
 
 	"github.com/SermoDigital/jose/jws"
-	log "github.com/Sirupsen/logrus"
 	"github.com/kapmahc/air/web"
 	"github.com/kapmahc/air/web/job"
+	log "github.com/sirupsen/logrus"
 	gomail "gopkg.in/gomail.v2"
 )
 

@@ -3,8 +3,8 @@ package reading
 import (
 	"path"
 
-	log "github.com/Sirupsen/logrus"
 	"github.com/kapmahc/stardict"
+	log "github.com/sirupsen/logrus"
 )
 
 var dictionaries []*stardict.Dictionary

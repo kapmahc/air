@@ -4,10 +4,10 @@ import (
 	"log/syslog"
 	"reflect"
 
-	log "github.com/Sirupsen/logrus"
-	logrus_syslog "github.com/Sirupsen/logrus/hooks/syslog"
 	"github.com/facebookgo/inject"
 	"github.com/kapmahc/air/web/job"
+	log "github.com/sirupsen/logrus"
+	logrus_syslog "github.com/sirupsen/logrus/hooks/syslog"
 	"github.com/spf13/viper"
 	"github.com/urfave/cli"
 )

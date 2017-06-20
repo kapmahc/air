@@ -7,10 +7,10 @@ import (
 	"strings"
 	"time"
 
-	log "github.com/Sirupsen/logrus"
 	"github.com/facebookgo/inject"
 	"github.com/kapmahc/air/web"
 	"github.com/kapmahc/epub"
+	log "github.com/sirupsen/logrus"
 	"github.com/urfave/cli"
 )
 

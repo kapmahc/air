@@ -6,7 +6,6 @@ import (
 	"time"
 
 	"github.com/SermoDigital/jose/crypto"
-	log "github.com/Sirupsen/logrus"
 	"github.com/facebookgo/inject"
 	_redis "github.com/garyburd/redigo/redis"
 	"github.com/jinzhu/gorm"
@@ -16,6 +15,7 @@ import (
 	"github.com/kapmahc/air/web/job/rabbitmq"
 	s_orm "github.com/kapmahc/air/web/settings/orm"
 	"github.com/kapmahc/air/web/uploader/fs"
+	log "github.com/sirupsen/logrus"
 	"github.com/spf13/viper"
 )
 

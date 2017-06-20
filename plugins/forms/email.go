@@ -3,10 +3,10 @@ package forms
 import (
 	"fmt"
 
-	log "github.com/Sirupsen/logrus"
 	"github.com/kapmahc/air/plugins/auth"
 	"github.com/kapmahc/air/web"
 	"github.com/kapmahc/air/web/job"
+	log "github.com/sirupsen/logrus"
 )
 
 const (
