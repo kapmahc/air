@@ -3,9 +3,7 @@
 
 CREATE TABLE mall_addresses (
   id BIGSERIAL PRIMARY KEY,
-  first_name VARCHAR(32) NOT NULL,
-  middle_name VARCHAR(32) NOT NULL,
-  last_name VARCHAR(32) NOT NULL,
+  username VARCHAR(255) NOT NULL,
   zip VARCHAR(12) NOT NULL,
   street VARCHAR(255) NOT NULL,
   city VARCHAR(32) NOT NULL,
@@ -16,9 +14,7 @@ CREATE TABLE mall_addresses (
   created_at TIMESTAMP WITHOUT TIME ZONE NOT NULL DEFAULT now(),
   updated_at TIMESTAMP WITHOUT TIME ZONE NOT NULL
 );
-CREATE INDEX idx_mall_addresses_first_name ON mall_addresses(first_name);
-CREATE INDEX idx_mall_addresses_middle_name ON mall_addresses(middle_name);
-CREATE INDEX idx_mall_addresses_last_name ON mall_addresses(last_name);
+CREATE INDEX idx_mall_addresses_usersname ON mall_addresses(username); 
 CREATE INDEX idx_mall_addresses_zip ON mall_addresses(zip);
 CREATE INDEX idx_mall_addresses_city ON mall_addresses(city);
 CREATE INDEX idx_mall_addresses_state ON mall_addresses(state);

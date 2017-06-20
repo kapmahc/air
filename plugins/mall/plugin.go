@@ -1,8 +1,7 @@
-package pos
+package mall
 
 import (
 	"github.com/facebookgo/inject"
-	"github.com/gin-gonic/gin"
 	"github.com/ikeikeikeike/go-sitemap-generator/stm"
 	"github.com/jinzhu/gorm"
 	"github.com/kapmahc/air/plugins/auth"
@@ -39,11 +38,6 @@ func (p *Plugin) Atom(lang string) ([]*atom.Entry, error) {
 // Sitemap sitemap.xml.gz
 func (p *Plugin) Sitemap() ([]stm.URL, error) {
 	return []stm.URL{}, nil
-}
-
-// Mount mount web points
-func (p *Plugin) Mount(rt *gin.Engine) {
-
 }
 
 // Workers job handler

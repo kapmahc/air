@@ -196,3 +196,17 @@ forms:
   edit:
     add_field: 添加表项
     field_item: 表项-{id}
+mall:
+  attributes:
+    address:
+      zip: 邮政编码
+      street: 街道
+      state: 州/省
+      country: 国家/地区
+      city: 城市      
+  profile:
+    title: 电子商城
+  self:
+    addresses:
+      index:
+        title: 地址管理

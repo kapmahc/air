@@ -2,6 +2,7 @@ export default (user) => {
   if(!user.uid){
     return []
   }
+  // user
   var items = [
     {
       icon: 'user',
@@ -15,6 +16,17 @@ export default (user) => {
     },
   ]
 
+  // mall
+  var mall = {
+    icon: 'shopping-cart',
+    label: 'mall.profile.title',
+    items: [
+      {href: '/mall/self/addresses', label: 'mall.self.addresses.index.title'},
+    ]
+  }
+  items.push(mall)
+
+  // admin
   if(user.admin){
     items.push({
       icon: 'setting',
