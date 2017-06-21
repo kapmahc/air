@@ -204,3 +204,44 @@ func (p *Dao) Allow(role, user uint, years, months, days int) error {
 		UpdateColumns(map[string]interface{}{"begin": begin, "end": end}).Error
 
 }
+
+// Users list users by resource
+func (p *Dao) Users(role, rty string, rid uint) ([]uint, error) {
+	ror, err := p.Role(role, rty, rid)
+	if err != nil {
+		return nil, err
+	}
+
+	var ids []uint
+	var policies []Policy
+	if err := p.Db.Where("role_id = ?", ror.ID).Find(&policies).Error; err != nil {
+		return nil, err
+	}
+	for _, pm := range policies {
+		if pm.Enable() {
+			ids = append(ids, pm.UserID)
+		}
+	}
+	return ids, nil
+}
+
+// Resources list resource ids by user and role
+func (p *Dao) Resources(user uint, role, rty string) ([]uint, error) {
+	var ids []uint
+	var policies []Policy
+	if err := p.Db.Where("user_id = ?", user).Find(&policies).Error; err != nil {
+		return nil, err
+	}
+	for _, pm := range policies {
+		if pm.Enable() {
+			var ror Role
+			if err := p.Db.Where("id = ?", pm.RoleID).First(&ror).Error; err != nil {
+				return nil, err
+			}
+			if ror.Name == role && ror.ResourceType == rty {
+				ids = append(ids, ror.ResourceID)
+			}
+		}
+	}
+	return ids, nil
+}

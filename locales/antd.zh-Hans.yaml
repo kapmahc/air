@@ -13,7 +13,8 @@ buttons:
   submit: 提交
   manage: 管理
   edit: 编辑
-  new: 添加
+  new: 新建
+  add: 添加
   remove: 删除
   upload: 上传
   confirm: 确认
@@ -25,6 +26,7 @@ buttons:
   view: 查看
 attributes:
   email: 邮箱
+  user: 用户
   username: 姓名
   phone: 电话号码
   password: 密码
@@ -219,6 +221,8 @@ mall:
     stores:
       index:
         title: 商店管理
+      managers:
+        title: 管理员
     tags:
       index:
         title: 标签管理

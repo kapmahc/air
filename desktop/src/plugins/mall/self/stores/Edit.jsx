@@ -21,7 +21,7 @@ class WidgetF extends Component {
     const {id} = this.props.match.params
     get('/mall/addresses').then((rst)=> this.setState({addresses:rst})).catch(message.error)
     if (id) {
-      get(`/mall/stores/${id}`).then((rst)=>setFieldsValue({
+      get(`/mall/stores/info/${id}`).then((rst)=>setFieldsValue({
         name: rst.name,
         description: rst.description,
         addressId: rst.addressId.toString(),
@@ -39,7 +39,7 @@ class WidgetF extends Component {
 
     this.props.form.validateFieldsAndScroll((err, values) => {
      if (!err) {
-       post(id ? `/mall/stores/${id}` : '/mall/stores', Object.assign({}, values, {type: 'markdown'}, {addressId: parseInt(values.addressId, 10)}))
+       post(id ? `/mall/stores/info/${id}` : '/mall/stores', Object.assign({}, values, {type: 'markdown'}, {addressId: parseInt(values.addressId, 10)}))
         .then((rst) => {
           message.success(formatMessage({id: 'messages.success'}))
           push('/mall/self/stores')

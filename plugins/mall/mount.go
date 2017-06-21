@@ -20,8 +20,11 @@ func (p *Plugin) Mount(rt *gin.Engine) {
 
 	rng.GET("/stores", web.Wrap(p.indexStores))
 	rmg.POST("/stores", web.Wrap(p.createStore))
-	rng.GET("/stores/:id", web.Wrap(p.showStore))
-	rmg.POST("/stores/:id", web.Wrap(p.updateStore))
+	rmg.GET("/stores/my", web.Wrap(p.myStores))
+	rng.GET("/stores/info/:id", web.Wrap(p.showStore))
+	rmg.POST("/stores/info/:id", web.Wrap(p.updateStore))
+	rmg.GET("/stores/managers/:id", web.Wrap(p.getStoreManagers))
+	rmg.POST("/stores/managers/:id", web.Wrap(p.postStoreManagers))
 	rmg.DELETE("/stores/:id", web.Wrap(p.destroyStore))
 
 	rng.GET("/tags", web.Wrap(p.indexTags))

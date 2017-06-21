@@ -62,3 +62,7 @@ ops:
       user:
         not-available: 用户不可用
         email-password-not-match: 邮箱和密码不匹配
+mall:
+  logs:
+    apply-manager: 添加管理员[%s]@商店[%d]
+    deny-manager: 删除管理员[%s]@商店[%d]

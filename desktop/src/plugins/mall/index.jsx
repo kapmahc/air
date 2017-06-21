@@ -6,6 +6,7 @@ import SelfAddressesEdit from './self/addresses/Edit'
 
 import SelfStoresIndex from './self/stores/Index'
 import SelfStoresEdit from './self/stores/Edit'
+import SelfStoresManagers from './self/stores/Managers'
 
 import SelfTagsIndex from './self/tags/Index'
 import SelfTagsEdit from './self/tags/Edit'
@@ -17,6 +18,7 @@ export default [
 
   <Route key="mall.self.stores.new" path="/mall/self/stores/new" component={SelfStoresEdit}/>,
   <Route key="mall.self.stores.edit" path="/mall/self/stores/edit/:id" component={SelfStoresEdit}/>,
+  <Route key="mall.self.stores.managers" path="/mall/self/stores/managers/:id" component={SelfStoresManagers}/>,
   <Route key="mall.self.stores.index" path="/mall/self/stores" component={SelfStoresIndex}/>,
 
   <Route key="mall.self.tags.new" path="/mall/self/tags/new" component={SelfTagsEdit}/>,

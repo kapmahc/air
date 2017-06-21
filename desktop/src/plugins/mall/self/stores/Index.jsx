@@ -12,7 +12,7 @@ import {get, _delete} from '../../../../ajax'
 class WidgetF extends Component {
   state = { items: []}
   componentDidMount () {
-    get('/mall/stores').then(
+    get('/mall/stores/my').then(
       function (rst){
         this.setState({items: rst})
       }.bind(this)
@@ -49,6 +49,7 @@ class WidgetF extends Component {
         title: <FormattedMessage id="buttons.manage"/>,
         key: 'manage',
         render: (text, record) =>(<span>
+          <Button onClick={(e)=>push(`/mall/self/stores/managers/${record.id}`)} shape="circle" icon="user" />
           <Button onClick={(e)=>push(`/mall/self/stores/edit/${record.id}`)} shape="circle" icon="edit" />
           <Popconfirm title={<FormattedMessage id="messages.are-you-sure"/>} onConfirm={(e) => this.handleRemove(record.id)}>
             <Button type="danger" shape="circle" icon="delete" />
@@ -75,11 +76,12 @@ class WidgetF extends Component {
 WidgetF.propTypes = {
   intl: intlShape.isRequired,
   push: PropTypes.func.isRequired,
+  user: PropTypes.object.isRequired,
 }
 
 const Widget = injectIntl(WidgetF)
 
 export default connect(
-  state => ({}),
+  state => ({user: state.currentUser}),
   {push},
 )(Widget)

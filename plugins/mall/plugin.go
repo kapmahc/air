@@ -15,6 +15,7 @@ import (
 
 // Plugin plugin
 type Plugin struct {
+	Dao      *auth.Dao          `inject:""`
 	Db       *gorm.DB           `inject:""`
 	Jwt      *auth.Jwt          `inject:""`
 	I18n     *i18n.I18n         `inject:""`
