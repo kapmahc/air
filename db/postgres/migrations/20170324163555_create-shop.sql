@@ -49,6 +49,7 @@ CREATE TABLE mall_vendors (
   name VARCHAR(255) NOT NULL,
   type VARCHAR(8) NOT NULL,
   description TEXT NOT NULL,
+  stores_id BIGINT REFERENCES mall_stores,
   created_at TIMESTAMP WITHOUT TIME ZONE NOT NULL DEFAULT now(),
   updated_at TIMESTAMP WITHOUT TIME ZONE NOT NULL
 );
@@ -59,6 +60,7 @@ CREATE TABLE mall_products (
   type VARCHAR(8) NOT NULL,
   description TEXT NOT NULL,
   vendor_id BIGINT REFERENCES mall_vendors,
+  stores_id BIGINT REFERENCES mall_stores,
   created_at TIMESTAMP WITHOUT TIME ZONE NOT NULL DEFAULT now(),
   updated_at TIMESTAMP WITHOUT TIME ZONE NOT NULL
 );
@@ -79,6 +81,7 @@ CREATE TABLE mall_variants(
   height NUMERIC(12,2) NOT NULL,
   width NUMERIC(12,2) NOT NULL,
   length NUMERIC(12,2) NOT NULL,
+  stores_id BIGINT REFERENCES mall_stores,
   created_at TIMESTAMP WITHOUT TIME ZONE NOT NULL DEFAULT now(),
   updated_at TIMESTAMP WITHOUT TIME ZONE NOT NULL
 );

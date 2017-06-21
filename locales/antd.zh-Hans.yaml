@@ -218,11 +218,16 @@ mall:
     addresses:
       index:
         title: 地址管理
+      new:
+        title: 添加新地址
     stores:
       index:
         title: 商店管理
       managers:
         title: 管理员
+    products:
+      index:
+        title: 产品管理
     tags:
       index:
         title: 标签管理

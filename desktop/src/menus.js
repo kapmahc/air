@@ -29,9 +29,10 @@ export default (user) => {
   if (user.admin){
     mall.items.push({href: '/mall/self/tags', label: 'mall.self.tags.index.title'})
   }
-  
+
   if (user.admin || process.env.REACT_APP_MALL_MODE === 'public') {
     mall.items.push({href: '/mall/self/stores', label: 'mall.self.stores.index.title'})
+    mall.items.push({href: '/mall/self/products', label: 'mall.self.products.index.title'})
   }
   items.push(mall)
 
