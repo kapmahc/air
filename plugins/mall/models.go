@@ -55,9 +55,6 @@ func (Store) TableName() string {
 type Tag struct {
 	web.Model
 	Meta
-
-	StoreID uint  `json:"storeId"`
-	Store   Store `json:"store"`
 }
 
 // TableName table name
@@ -111,6 +108,8 @@ type Variant struct {
 
 	ProductID uint    `json:"productId"`
 	Product   Product `json:"product"`
+	StoreID   uint    `json:"storeId"`
+	Store     Store   `json:"store"`
 }
 
 // TableName table name

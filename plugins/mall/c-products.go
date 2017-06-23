@@ -9,8 +9,8 @@ package mall
 // 	return nil
 // }
 //
-// func (p *Plugin) showTag(c *gin.Context) error {
-// 	var item Tag
+// func (p *Plugin) showProduct(c *gin.Context) error {
+// 	var item Product
 // 	if err := p.Db.Where("id = ?", c.Param("id")).First(&item).Error; err != nil {
 // 		return err
 // 	}
@@ -18,12 +18,14 @@ package mall
 // 	return nil
 // }
 //
-// type fmTag struct {
+// type fmProduct struct {
 // 	Name        string `json:"name" binding:"required,max=255"`
 // 	Type        string `json:"type" binding:"required"`
 // 	Description string `json:"description" binding:"required"`
+// 	StoreID     uint   `json:"storeID"`
+// 	Tags        []int  `json:"tags"`
 // }
-//
+
 // func (p *Plugin) createTag(c *gin.Context) error {
 // 	var fm fmTag
 // 	if err := c.BindJSON(&fm); err != nil {
